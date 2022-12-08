@@ -1,0 +1,56 @@
+import 'package:flutter/material.dart';
+import 'package:new_trip_start/components/app_text.dart';
+import 'package:new_trip_start/constants.dart';
+import 'package:new_trip_start/size_config.dart';
+
+class AppOutlineButton extends StatelessWidget {
+  const AppOutlineButton(
+      {Key? key,
+      required this.text,
+      required this.press,
+      this.width,
+      this.color,
+      this.appText,
+      required this.showLoader})
+      : super(key: key);
+  final String text;
+  final VoidCallback press;
+  final double? width;
+  final bool showLoader;
+  final Color? color;
+  final AppText? appText;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        width: width ?? SizeConfig.screenWidth,
+        height: 55,
+        decoration: BoxDecoration(
+          color: kBgLightColor,
+          borderRadius: BorderRadius.circular(15.0),
+          border: Border.all(width: 1, color: kPrimaryColor),
+        ),
+        child: ElevatedButton(
+          onPressed: showLoader ? null : press,
+          style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.transparent,
+              shadowColor: Colors.transparent),
+          child: showLoader
+              ? const SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                    strokeWidth: 3,
+                  ),
+                )
+              : appText ??
+                  AppText(
+                    text: text,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    color: kPrimaryColor,
+                  ),
+        ));
+  }
+}

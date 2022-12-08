@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "592385846462",
+    "project_id": "car-app-5b455",
+    "storage_bucket": "car-app-5b455.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:592385846462:android:c05ed334c8976de1b382ef",
+        "android_client_info": {
+          "package_name": "com.kadodata.journeycost"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "592385846462-koarolihitsb2ajvgbab8ijhbkv46n9u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kadodata.journeycost",
+            "certificate_hash": "32c770df2d72909baa3a3148e2cdfd00cc0a27ef"
+          }
+        },
+        {
+          "client_id": "592385846462-ujcubk9bsg7sfqnjuh11e0vf7onu97mt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kadodata.journeycost",
+            "certificate_hash": "6a33cb64781b62ec078b5aea44281fe602f310cc"
+          }
+        },
+        {
+          "client_id": "592385846462-fc6dlurvl1p113rbvsr7dtgqb7e5onds.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBH1ciOuOLVHKjgfaxLempr30PfblTdVEg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "592385846462-fc6dlurvl1p113rbvsr7dtgqb7e5onds.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "592385846462-4kk7jjctp9ifq5rvgda50ssmcivccsb4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.kadodata.journeycost"
+              }
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-3165620212348966~4400278118"
+    }
+  ],
+  "configuration_version": "1"
+}

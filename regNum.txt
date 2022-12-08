@@ -1,0 +1,16 @@
+regNum
+brand
+consumption
+length // in cm should convert to meters
+weight
+euro class
+fuel type
+
+3.5 tons sy nechy hai
+ - 
+
+
+
+3.5 tons sy zyada hai
+
+
