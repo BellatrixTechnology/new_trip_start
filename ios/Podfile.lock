@@ -92,6 +92,8 @@ PODS:
     - AppAuth/Core (~> 1.6)
     - GTMSessionFetcher/Core (< 3.0, >= 1.5)
   - GTMSessionFetcher/Core (2.3.0)
+  - here_sdk (4.12.11.0.10052.release):
+    - Flutter
   - nanopb (2.30909.0):
     - nanopb/decode (= 2.30909.0)
     - nanopb/encode (= 2.30909.0)
@@ -111,6 +113,7 @@ DEPENDENCIES:
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
   - google_maps_flutter_ios (from `.symlinks/plugins/google_maps_flutter_ios/ios`)
   - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/ios`)
+  - here_sdk (from `.symlinks/plugins/here_sdk/ios`)
   - path_provider_ios (from `.symlinks/plugins/path_provider_ios/ios`)
 
 SPEC REPOS:
@@ -152,6 +155,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/google_maps_flutter_ios/ios"
   google_sign_in_ios:
     :path: ".symlinks/plugins/google_sign_in_ios/ios"
+  here_sdk:
+    :path: ".symlinks/plugins/here_sdk/ios"
   path_provider_ios:
     :path: ".symlinks/plugins/path_provider_ios/ios"
 
@@ -173,7 +178,7 @@ SPEC CHECKSUMS:
   FirebaseAuth: 08e7739244eeae5216d0a3f8d9f16a76be9c252e
   FirebaseCore: 813838072b797b64f529f3c2ee35e696e5641dd1
   FirebaseCoreInternal: 091bde13e47bb1c5e9fe397634f3593dc390430f
-  FirebaseFirestore: e122d1d2c9311ada51d8282e0053bb3700f0680e
+  FirebaseFirestore: 8efd95c87f0210125fbd50d1a894e2693053c9c9
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_facebook_auth: c69f4e643b1d9cc9063ec87c9411bd9ec268108f
   flutter_secure_storage: 23fc622d89d073675f2eaa109381aefbcf5a49be
@@ -184,10 +189,11 @@ SPEC CHECKSUMS:
   GoogleUtilities: bad72cb363809015b1f7f19beb1f1cd23c589f95
   GTMAppAuth: 0ff230db599948a9ad7470ca667337803b3fc4dd
   GTMSessionFetcher: 3a63d75eecd6aa32c2fc79f578064e1214dfdec2
+  here_sdk: bb28b51a7864ce5e7e3dc7314e61bcf092252767
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   path_provider_ios: 14f3d2fd28c4fdb42f44e0f751d12861c43cee02
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
 
-PODFILE CHECKSUM: d129e655c04bd0049cde8581353313599a5a0b7e
+PODFILE CHECKSUM: a307f78587abf739e4fbfd2814e33c7dc42647ad
 
 COCOAPODS: 1.11.3
