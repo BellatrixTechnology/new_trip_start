@@ -11,8 +11,11 @@ import 'package:new_trip_start/components/custom_spacer.dart';
 import 'package:new_trip_start/components/custom_surfix_icon.dart';
 import 'package:new_trip_start/constants.dart';
 import 'package:new_trip_start/controllers/add_vehicle.controller.dart';
+import 'package:new_trip_start/controllers/places.controller.dart';
 import 'package:new_trip_start/controllers/tab_ctrl.dart';
+import 'package:new_trip_start/models/places.model.dart';
 import 'package:new_trip_start/models/vehicle.model.dart';
+import 'package:new_trip_start/screens/tab_navigator/home/availableRoutes/available_routes.dart';
 import 'package:new_trip_start/services/index.dart';
 import 'package:new_trip_start/size_config.dart';
 
@@ -163,7 +166,6 @@ class AppBottomModal {
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      // transitionAnimationController: ,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20), topRight: Radius.circular(20)),
@@ -580,5 +582,114 @@ class AppBottomModal {
         ));
       },
     );
+  }
+
+  searchModal(BuildContext context, String heading, bool isDestination) {
+    PlaceController placeCtrl = Get.find();
+    showModalBottomSheet<void>(
+        context: context,
+        isScrollControlled: true,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+        ),
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        builder: (BuildContext context) {
+          return GetBuilder<PlaceController>(
+            builder: (controller) => AnimatedContainer(
+                height: SizeConfig.screenHeight - (kToolbarHeight),
+                duration: const Duration(milliseconds: 3),
+                padding: EdgeInsets.only(
+                    top: 20,
+                    left: 20,
+                    right: 20,
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: Column(
+                  children: [
+                    AppText(
+                      text: heading,
+                    ),
+                    const CustomSpacer(spaceValue: 10),
+                    AppInput(
+                      hintText: "Search Place Here...",
+                      onChanged: (e) async {
+                        if (e.length > 1) {
+                          controller.getSearchResult(e);
+                        }
+                        if (e.isEmpty) {
+                          controller.places = RxList([]);
+                          controller.places.refresh();
+                        }
+                      },
+                      // textInputType: TextInputType.none,
+                      controller: controller.placeSearch,
+                      icon: const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        child: Icon(
+                          Icons.search,
+                          color: kPrimaryColor,
+                        ),
+                      ),
+                    ),
+                    const CustomSpacer(spaceValue: 10),
+                    Expanded(
+                      child: controller.places.isEmpty
+                          ? const Center(
+                              child: AppText(text: "No search Found..."),
+                            )
+                          : ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: controller.places.length,
+                              itemBuilder: (context, index) {
+                                Place place = controller.places[index];
+                                return GestureDetector(
+                                  behavior: HitTestBehavior.opaque,
+                                  onTap: () {
+                                    // isDestination
+                                    //     ? controller.endPlace = place
+                                    //     : controller.startPlace = place;
+                                    placeCtrl.onPlaceSelect(
+                                        place, isDestination);
+
+                                    srvPageRoute.goBack(context);
+                                    if (isDestination) {
+                                      // placeCtrl.findRoutesAndData();
+                                      // srvPageRoute.goToNext(
+                                      //     context, const AvailableRoutes());
+                                    }
+                                  },
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Image.asset(
+                                            'assets/images/dest-icon.png',
+                                            width: 30,
+                                            height: 30,
+                                            fit: BoxFit.contain,
+                                          ),
+                                          const CustomSpacer(spaceValue: 5),
+                                          AppText(text: place.title)
+                                        ],
+                                      ),
+                                      const Divider(
+                                        height: 20,
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
+                    )
+                  ],
+                )),
+          );
+        }).whenComplete(() {
+      placeCtrl.isSearching.value = false;
+      placeCtrl.places = RxList([]);
+      placeCtrl.placeSearch.text = '';
+      placeCtrl.update();
+      placeCtrl.places.refresh();
+    });
   }
 }

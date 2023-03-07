@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:new_trip_start/components/app_input.dart';
 import 'package:new_trip_start/components/app_text.dart';
 import 'package:new_trip_start/components/custom_spacer.dart';
 import 'package:new_trip_start/components/custom_surfix_icon.dart';
 import 'package:new_trip_start/constants.dart';
+import 'package:new_trip_start/controllers/places.controller.dart';
+import 'package:new_trip_start/modals/bottom_modal.dart';
+import 'package:new_trip_start/models/places.model.dart';
 
 class HomeUpperView extends StatelessWidget {
   const HomeUpperView({super.key});
@@ -22,9 +26,9 @@ class HomeUpperView extends StatelessWidget {
         children: [
           leftView(),
           const CustomSpacer(spaceValue: 5),
-          middleView(),
-          const CustomSpacer(spaceValue: 10),
-          rightView()
+          middleView(context),
+          // const CustomSpacer(spaceValue: 10),
+          // rightView()
         ],
       )),
     );
@@ -56,32 +60,46 @@ class HomeUpperView extends StatelessWidget {
     ));
   }
 
-  Widget middleView() {
+  Widget middleView(BuildContext context) {
+    PlaceController placeController = Get.put(PlaceController());
     return Expanded(
-        flex: 10,
-        child: Column(
-          children: [
-            SizedBox(
-              height: 45,
-              child: AppInput(
-                hintText: 'OSLO',
-                borderRaidus: 10,
-                textColor: kBgLightColor,
-                color: kBgLightColor.withOpacity(0.24),
-              ),
+      flex: 10,
+      child: Column(
+        children: [
+          SizedBox(
+            height: 45,
+            child: AppInput(
+              onPress: () {
+                AppBottomModal().searchModal(
+                    context, "Enter from where you wanna start?", false);
+              },
+              readOnly: true,
+              controller: placeController.startPlaceCtrl,
+              hintText: 'OSLO',
+              borderRaidus: 10,
+              textColor: kBgLightColor,
+              color: kBgLightColor.withOpacity(0.24),
             ),
-            const CustomSpacer(spaceValue: 10),
-            SizedBox(
-              height: 45,
-              child: AppInput(
-                hintText: 'TORP',
-                borderRaidus: 10,
-                textColor: kBgLightColor,
-                color: kBgLightColor.withOpacity(0.24),
-              ),
+          ),
+          const CustomSpacer(spaceValue: 10),
+          SizedBox(
+            height: 45,
+            child: AppInput(
+              onPress: () {
+                AppBottomModal()
+                    .searchModal(context, "Enter your destination", true);
+              },
+              controller: placeController.endPlaceCtrl,
+              readOnly: true,
+              hintText: 'TORP',
+              borderRaidus: 10,
+              textColor: kBgLightColor,
+              color: kBgLightColor.withOpacity(0.24),
             ),
-          ],
-        ));
+          ),
+        ],
+      ),
+    );
   }
 
   Widget rightView() {

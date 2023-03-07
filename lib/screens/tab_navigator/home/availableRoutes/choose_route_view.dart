@@ -12,34 +12,34 @@ class ChooseRouteView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        const AppText(
+      children: const [
+        AppText(
           text: 'Choose a Route',
           fontWeight: FontWeight.w700,
           fontSize: 18,
         ),
-        Container(
-          // width: getProportionateScreenWidth(120),
-          height: getProportionateScreenHeight(40),
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          decoration: BoxDecoration(
-              color: kPrimaryColor.withOpacity(0.12),
-              borderRadius: BorderRadius.circular(10)),
-          child: Row(
-            // crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              CustomSurffixIcon(svgIcon: 'assets/icons/avoid.svg'),
-              CustomSpacer(spaceValue: 5),
-              AppText(text: 'Avoid'),
-              CustomSpacer(spaceValue: 10),
-              CustomSurffixIcon(
-                svgIcon: 'assets/icons/arrow_down.svg',
-                size: 10,
-              ),
-            ],
-          ),
-        )
+        // Container(
+        //   // width: getProportionateScreenWidth(120),
+        //   height: getProportionateScreenHeight(40),
+        //   padding: const EdgeInsets.symmetric(horizontal: 10),
+        //   decoration: BoxDecoration(
+        //       color: kPrimaryColor.withOpacity(0.12),
+        //       borderRadius: BorderRadius.circular(10)),
+        //   child: Row(
+        //     // crossAxisAlignment: CrossAxisAlignment.center,
+        //     mainAxisAlignment: MainAxisAlignment.center,
+        //     children: const [
+        //       CustomSurffixIcon(svgIcon: 'assets/icons/avoid.svg'),
+        //       CustomSpacer(spaceValue: 5),
+        //       AppText(text: 'Avoid'),
+        //       CustomSpacer(spaceValue: 10),
+        //       CustomSurffixIcon(
+        //         svgIcon: 'assets/icons/arrow_down.svg',
+        //         size: 10,
+        //       ),
+        //     ],
+        //   ),
+        // )
       ],
     );
   }

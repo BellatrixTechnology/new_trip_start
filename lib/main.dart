@@ -5,12 +5,13 @@ import 'package:here_sdk/core.dart';
 import 'package:here_sdk/core.engine.dart';
 import 'package:here_sdk/core.errors.dart';
 import 'package:new_trip_start/controllers/auth_ctrl.dart';
+import 'package:new_trip_start/controllers/map_ctrl.dart';
 import 'package:new_trip_start/firebase_options.dart';
 import 'package:new_trip_start/screens/splash/splash.dart';
 
-
 void main() async {
   Get.lazyPut(() => AuthController());
+  Get.lazyPut(() => MapController());
   WidgetsFlutterBinding.ensureInitialized();
   _initializeHERESDK();
   await Firebase.initializeApp(
@@ -25,7 +26,8 @@ void _initializeHERESDK() async {
 
   // Set your credentials for the HERE SDK.
   String accessKeyId = "wtwzmWpiLelM_6syxvMqFQ";
-  String accessKeySecret = "b7WrYeLusbcUzJNJcmp_aGvBlZmmmR7vB18otH5J9Sn0ybOT_IZpMNKQeND9QUpeHAHH2F8CipHCPMblacg6dw";
+  String accessKeySecret =
+      "b7WrYeLusbcUzJNJcmp_aGvBlZmmmR7vB18otH5J9Sn0ybOT_IZpMNKQeND9QUpeHAHH2F8CipHCPMblacg6dw";
   SDKOptions sdkOptions =
       SDKOptions.withAccessKeySecret(accessKeyId, accessKeySecret);
 

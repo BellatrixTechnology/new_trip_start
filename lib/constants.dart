@@ -31,6 +31,7 @@ bool isDev = false;
 List riderTotalBadges = [];
 
 const mapApiKey = 'AIzaSyBH1ciOuOLVHKjgfaxLempr30PfblTdVEg';
+const hereApiKey = '8ZI4V33ffRb_xelYDekkMJL4pAVM47fCa2eb82sog6s';
 
 const kPrimaryGradientColor = LinearGradient(
   begin: Alignment.topRight,

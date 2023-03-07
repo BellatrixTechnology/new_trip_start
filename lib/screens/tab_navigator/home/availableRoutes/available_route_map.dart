@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:new_trip_start/constants.dart';
+import 'package:new_trip_start/controllers/places.controller.dart';
 import 'package:new_trip_start/screens/tab_navigator/home/map_view.dart';
+import 'package:new_trip_start/services/index.dart';
 import 'package:new_trip_start/size_config.dart';
 
 class AvailRouteMaps extends StatelessWidget {
@@ -8,8 +11,10 @@ class AvailRouteMaps extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // srvRouting.addRoute();
+
     return Container(
-      height: getProportionateScreenHeight(320),
+      height: getProportionateScreenHeight(220),
       // padding: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
         boxShadow: boxShadow(),
@@ -18,8 +23,8 @@ class AvailRouteMaps extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(20)),
         child: Align(
           alignment: Alignment.bottomRight,
-          heightFactor: 0.3,
-          widthFactor: 2.5,
+          // heightFactor: 0.3,
+          // widthFactor: 2.5,
           child: HomeMapView(),
         ),
       ),

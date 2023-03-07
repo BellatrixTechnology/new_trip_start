@@ -1,8 +1,13 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:here_sdk/core.dart';
 import 'package:here_sdk/mapview.dart';
 import 'package:new_trip_start/components/app_button.dart';
 import 'package:new_trip_start/constants.dart';
+import 'package:new_trip_start/controllers/places.controller.dart';
+import 'package:new_trip_start/models/places.model.dart';
 import 'package:new_trip_start/screens/tab_navigator/home/availableRoutes/available_routes.dart';
 import 'package:new_trip_start/screens/tab_navigator/home/map_view.dart';
 import 'package:new_trip_start/screens/tab_navigator/home/upper_view.dart';
@@ -14,49 +19,40 @@ class HomePage extends StatelessWidget {
   const HomePage({super.key});
   @override
   Widget build(BuildContext context) {
+    PlaceController placeController = Get.put(PlaceController());
+    // srvApi.getData();
+    // srvOsGridConverter.yourFunction(59.892365, 10.790427);
+    // srvOsGridConverter.utmConverter(59.892365, 10.790427);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: AppGradientBg(
         padding: 0,
         child: Column(
           children: [
             const HomeUpperView(),
-            Expanded(
-                child: HereMap(
-              onMapCreated: _onMapCreated,
-            ) //HomeMapView(),
-                ),
+            const Expanded(
+              child: HomeMapView(),
+            ),
             Padding(
               padding: const EdgeInsets.all(20),
-              child: AppButton(
-                  text: 'See Available Route',
-                  press: () {
-                    // srvPageRoute.goToNext(context, const AvailableRoutes());
-                    srvRouting.clearMap();
-                    srvRouting.addRoute();
-                  },
-                  showLoader: false),
+              child: Obx(
+                () => AppButton(
+                    text: 'See Available Route',
+                    press: () {
+                      // inspect(placeController.startPlace.position);
+                      // inspect(placeController.endPlace.position);
+                      srvPageRoute.goToNext(context, const AvailableRoutes());
+                      // srvRouting.clearMap();
+                      // srvRouting.addRoute();
+                      // srvRouting.showAllRouteOnMap(
+                      //     "BGw22w3Do0iqOge0jB8L0FsJTgKzFwH3IkhQj_fkkWj0sBgFjX8BnVoB_2B");
+                    },
+                    showLoader: placeController.isFindigRoutes.value),
+              ),
             ),
           ],
         ),
       ),
     );
   }
-
-  void _onMapCreated(HereMapController hereMapController) {
-    hereMapController.mapScene.loadSceneForMapScheme(MapScheme.normalDay,
-        (MapError? error) {
-      if (error != null) {
-        print('Map scene not loaded. MapError: ${error.toString()}');
-        return;
-      }
-      srvRouting.init(hereMapController);
-      // _routingExample = RoutingExample(_showDialog, hereMapController);
-      // const double distanceToEarthInMeters = 8000;
-      // MapMeasure mapMeasureZoom =
-      //     MapMeasure(MapMeasureKind.distance, distanceToEarthInMeters);
-      // hereMapController.camera.lookAtPointWithMeasure(
-      //     GeoCoordinates(52.530932, 13.384915), mapMeasureZoom);
-    });
-  }
-
 }

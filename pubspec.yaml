@@ -48,6 +48,10 @@ dependencies:
   firebase_core: ^2.3.0
   dio: ^4.0.6
   cloud_firestore: ^4.1.0
+  tuple: ^2.0.1
+  xml: ^6.0.1
+  latlong_to_osgrid: ^1.3.2
+  utm: ^0.1.3-nullsafety.1
   here_sdk:
     path: plugins/here_sdk
 

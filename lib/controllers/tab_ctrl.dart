@@ -1,8 +1,7 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:new_trip_start/models/places.model.dart';
 import 'package:new_trip_start/models/vehicle.model.dart';
 import 'package:new_trip_start/screens/profile/profile.dart';
 import 'package:new_trip_start/screens/tab_navigator/home/home.dart';
@@ -10,7 +9,6 @@ import 'package:new_trip_start/screens/tab_navigator/my-vehicles/my_vehicles.dar
 import 'package:new_trip_start/services/index.dart';
 
 class BottomTabController extends GetxController {
-  final selectedTabIndex = 0.obs;
   List<Widget> page = const <Widget>[HomePage(), MyVehicles(), ProfilePage()];
 
   RxList languages = RxList([
@@ -26,8 +24,7 @@ class BottomTabController extends GetxController {
     getVehicles();
   }
 
-  var switchToNext = false.obs;
-  var availRoutetitle = 'Available Route'.obs;
+  final selectedTabIndex = 0.obs;
 
   onTabChange(int index) {
     selectedTabIndex.value = index;

@@ -24,6 +24,7 @@ class VechicleItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
               height: 60,
@@ -39,54 +40,52 @@ class VechicleItem extends StatelessWidget {
               ),
             ),
             const CustomSpacer(spaceValue: 5),
-            // Flexible(
-            //   fit: FlexFit.loose,
-            //   flex: 3,
-            //   child:
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                RichText(
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
-                  text: TextSpan(
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: '${vehicle.regNum!.toUpperCase()} - ',
-                        style: const TextStyle(
-                            fontFamily: 'Avenir',
-                            // fontSize: 32,
-                            fontWeight: FontWeight.w600,
-                            color: kBlackColor),
-                      ),
-                      TextSpan(
-                        text: vehicle.vehBrand,
-                        style: const TextStyle(
-                          color: kTextColor,
-                          fontFamily: 'Avenir',
+            Flexible(
+              flex: 5,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  RichText(
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                    text: TextSpan(
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: '${vehicle.regNum!.toUpperCase()} - ',
+                          style: const TextStyle(
+                              fontFamily: 'Avenir',
+                              // fontSize: 32,
+                              fontWeight: FontWeight.w600,
+                              color: kBlackColor),
                         ),
-                      ),
-                    ],
+                        TextSpan(
+                          text: vehicle.vehBrand,
+                          style: const TextStyle(
+                            color: kTextColor,
+                            fontFamily: 'Avenir',
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 5),
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
-                  decoration: BoxDecoration(
-                      color: const Color(0xFFDDFFE2),
-                      borderRadius: BorderRadius.circular(50)),
-                  child: AppText(
-                    text:
-                        '${double.parse(vehicle.vehFuelCmp!) / 10} Liter per 10 km',
-                    fontSize: 12,
-                    color: const Color(0xFF387C37),
-                  ),
-                )
-              ],
+                  Container(
+                    margin: const EdgeInsets.only(top: 5),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+                    decoration: BoxDecoration(
+                        color: const Color(0xFFDDFFE2),
+                        borderRadius: BorderRadius.circular(50)),
+                    child: AppText(
+                      text:
+                          '${double.parse(vehicle.vehFuelCmp!) / 10} Liter per 10 km',
+                      fontSize: 12,
+                      color: const Color(0xFF387C37),
+                    ),
+                  )
+                ],
+              ),
             ),
-            // ),
             const Spacer(),
             Row(
               children: [

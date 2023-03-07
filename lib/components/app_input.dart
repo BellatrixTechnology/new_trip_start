@@ -41,10 +41,9 @@ class AppInput extends StatelessWidget {
       obscureText: obscureText ?? false,
       validator: validator,
       onTap: onPress,
-      onChanged: (a) {
-        print(a);
-      },
+      onChanged: onChanged,
       readOnly: readOnly ?? false,
+      cursorColor: kPrimaryColor,
       decoration: InputDecoration(
         fillColor: color ?? kPrimaryColor.withOpacity(0.1),
         filled: true,

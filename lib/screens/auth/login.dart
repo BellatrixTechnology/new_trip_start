@@ -20,6 +20,8 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // print(srvOsGridConverter.fromLatLon(60.004438, 11.0273592, 33)); //home
+    // print(srvOsGridConverter.fromLatLon(62.0965849, 7.2083712, 33));
     return GetBuilder<AuthController>(
         builder: (controller) => SingleChildScrollView(
               child: Column(
