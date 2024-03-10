@@ -42,9 +42,12 @@ class AuthController extends GetxController {
     } else if (password.text != confirmPassword.text) {
       srvToastAlert.toast('Passwords are not matched');
     } else {
+      updateLoader();
       srvFirebase.signUpWithEmailPass(emailCtrl.text, password.text, (resp) {
+        updateLoader();
         if (resp != null) {
           UserCredential user = resp;
+          srvFirebase.saveUserInFirestore(user.user!);
           user.user?.updateDisplayName(nameCtrl.text);
           srvPageRoute.goToNextAndRemoved(context, const OnBoarding());
         }
@@ -59,28 +62,41 @@ class AuthController extends GetxController {
     } else if (password.text.length < 6) {
       srvToastAlert.toast('Password must be larger than 6 characters');
     } else {
+      updateLoader();
       srvFirebase.signInWithEmailPass(emailCtrl.text, password.text, (resp) {
+        updateLoader();
         if (resp != null) {
+          // srvFirebase.saveUserInFirestore(resp.user!);
+          srvFirebase.getUserFromFirestore(resp.user);
           srvPageRoute.goToNextAndRemoved(context, const OnBoarding());
-          // UserCredential user = resp;
-          // user.user?.updateDisplayName(nameCtrl.text);
-
         } else {}
       });
     }
   }
 
-  facebookLogin() {
-    srvFirebase.signInWithFacebook();
+  facebookLogin(BuildContext context) {
+    srvFirebase.signInWithFacebook().then((value) {
+      print(value.user!);
+      srvFirebase.getUserFromFirestore(value.user!);
+      srvPageRoute.goToNextAndRemoved(context, const OnBoarding());
+    }).catchError((e) {
+      print(e);
+    });
   }
 
-  googleLogin() {
-    srvFirebase.signInWithGoogle();
+  googleLogin(BuildContext context) {
+    srvFirebase.signInWithGoogle().then((value) {
+      print(value.user!);
+      srvFirebase.getUserFromFirestore(value.user!);
+      srvPageRoute.goToNextAndRemoved(context, const OnBoarding());
+    });
   }
 
-  appleLogin() {
+  appleLogin(BuildContext context) {
     srvFirebase.signInWithApple().then((value) {
-      print(value);
+      print(value.user!);
+      srvFirebase.getUserFromFirestore(value.user!);
+      srvPageRoute.goToNextAndRemoved(context, const OnBoarding());
     });
   }
 

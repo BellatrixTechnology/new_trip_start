@@ -5,14 +5,13 @@ import 'package:new_trip_start/size_config.dart';
 
 class AppOutlineButton extends StatelessWidget {
   const AppOutlineButton(
-      {Key? key,
+      {super.key,
       required this.text,
       required this.press,
       this.width,
       this.color,
       this.appText,
-      required this.showLoader})
-      : super(key: key);
+      required this.showLoader});
   final String text;
   final VoidCallback press;
   final double? width;

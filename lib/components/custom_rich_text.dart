@@ -4,8 +4,7 @@ import 'package:new_trip_start/size_config.dart';
 
 class CustomRichText extends StatelessWidget {
   const CustomRichText(
-      {Key? key, required this.text1, required this.text2, this.padding})
-      : super(key: key);
+      {super.key, required this.text1, required this.text2, this.padding});
 
   final String text1;
   final String text2;

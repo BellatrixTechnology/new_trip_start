@@ -1,0 +1,21 @@
+{
+  "identifier" : "C9215A41",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+
+  ],
+  "settings" : {
+    "_applicationInternalID" : "1572605386",
+    "_developerTeamID" : "AQJWW9JQ9X",
+    "_lastSynchronizedDate" : 712181030.72254503
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 2,
+    "minor" : 0
+  }
+}

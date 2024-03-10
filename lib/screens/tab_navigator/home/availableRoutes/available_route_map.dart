@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:new_trip_start/constants.dart';
-import 'package:new_trip_start/controllers/places.controller.dart';
 import 'package:new_trip_start/screens/tab_navigator/home/map_view.dart';
-import 'package:new_trip_start/services/index.dart';
 import 'package:new_trip_start/size_config.dart';
 
 class AvailRouteMaps extends StatelessWidget {

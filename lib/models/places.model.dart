@@ -68,3 +68,21 @@ class Position {
     return Position(lat: json['lat'], lng: json['lng']);
   }
 }
+
+class GooglePlacesModel {
+  String description;
+  String placeId; //place_id
+  Position? position;
+  GooglePlacesModel({
+    required this.description,
+    required this.placeId,
+    this.position,
+  });
+
+  factory GooglePlacesModel.fromJson(Map<String, dynamic> json) {
+    return GooglePlacesModel(
+        description: json['description'],
+        placeId: json['place_id'],
+        position: json['position']);
+  }
+}

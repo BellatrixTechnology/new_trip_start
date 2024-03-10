@@ -1,0 +1,4192 @@
+{
+    "directions": [
+      {
+        "features": [
+          {
+            "attributes": {
+              "ETA": 0,
+              "length": 0.132,
+              "maneuverType": "esriDMTDepart",
+              "roadFeatures": [
+                
+              ],
+              "text": "{P24067} Start on Rønneberg",
+              "time": 34
+            },
+            "compressedGeometry": "+34+8oudo+kkdg8g+27s+34+404-9c+s4+0+p0+68+1bo+v8+fk+18k+io+p0+v8+0"
+          },
+          {
+            "attributes": {
+              "ETA": 0,
+              "length": 0.438,
+              "maneuverType": "esriDMTSharpRight",
+              "roadFeatures": [
+                {
+                  "attributeType": "length",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "MaxLength",
+                      "value": "19.5"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "weight",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "type",
+                      "value": "50"
+                    }
+                  ]
+                }
+              ],
+              "text": "{K24067} Make a sharp right on to Rønneberg",
+              "time": 41
+            },
+            "compressedGeometry": "+34+8p9o8+kkdj9c-34-1bo-fk-404-1bo-4p4-2ng-6ts-ls-2e4-9c-1ug-34-1i0+0-5l8+9c-6nk+0-3a8-68-340"
+          },
+          {
+            "attributes": {
+              "ETA": 0,
+              "length": 1.179,
+              "maneuverType": "esriDMTStraight",
+              "roadFeatures": [
+                
+              ],
+              "text": "{P24067} Continue on Rønneberg",
+              "time": 108
+            },
+            "compressedGeometry": "+34+8p430+kkc9co-cg-3mo-s4-7t4-p0-58o-p0-46c-p0-3a8-12c-2kc-1es-1ug-3t0-2to-cg-p0-cg-v8-fk-2b0-s4-3t0-io-3ps-34-46c+0-fak-ls-i58+9c-5bs+ls-404+s4-374+2h8-5i4+1rc-3dc+1es-21k+ls-io+18k-io+2ng-cg"
+          },
+          {
+            "attributes": {
+              "ETA": 0,
+              "length": 2.823,
+              "maneuverType": "esriDMTSharpLeft",
+              "roadFeatures": [
+                {
+                  "attributeType": "length",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "MaxLength",
+                      "value": "19.5"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "nvdb:turistveg",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "Navn",
+                      "value": "Geiranger - Trollstigen"
+                    },
+                    {
+                      "key": "Url",
+                      "value": "https://www.nasjonaleturistveger.no/no/turistvegene/geiranger-trollstigen"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "nvdb:vegtype",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "type",
+                      "value": "TURIST"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "weight",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "type",
+                      "value": "50"
+                    }
+                  ]
+                }
+              ],
+              "text": "{F63} Make a sharp left on to Eidsdalsvegen",
+              "time": 292
+            },
+            "compressedGeometry": "+34+8p2tg+kk8uo8+68+cg+ls+68+9c+0+ls-cg+64s-7q0+io-cg+p0+68+68+9c+34+p0-9c+ls-1ug+3dc-1l4+58o-ls+1rc-12c+1bo-3ps+30s-v8+v8-12c+1rc-p0+3dc-9c+24o+0+340+1bo+kjc+fk+4m0+s4+3t0+2kc+ahg+34+1o8-io+374-34+15g+34+p0+9c+s4+12c+1l4+46c+4fo+1l4+2b0+21k+4m0+27s+438+778+d5s+6nk+aec+5bs+710+5f0+6e8+21k+2qk+1i0+2e4+6kg+d2o+1l4+3jk+2to+710+18k+30s+fk+2ng+9c+18k+fk+fk+cg+34+cg-68+9c-ls+0-ls-18k-6e8-340-hrs-34-12c+68-io+cg-fk+io-9c+15g+cg+1i0+18k+1l4+24o+15g+1rc+15g+374+12c+438+s4+3ps+9c+2h8+18k+er0+cg+30s+12c+4m0+34+68"
+          },
+          {
+            "attributes": {
+              "ETA": 0,
+              "length": 3.163,
+              "maneuverType": "esriDMTStraight",
+              "roadFeatures": [
+                {
+                  "attributeType": "length",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "MaxLength",
+                      "value": "19.5"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "nvdb:turistveg",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "Navn",
+                      "value": "Geiranger - Trollstigen"
+                    },
+                    {
+                      "key": "Url",
+                      "value": "https://www.nasjonaleturistveger.no/no/turistvegene/geiranger-trollstigen"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "nvdb:vegtype",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "type",
+                      "value": "TURIST"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "weight",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "type",
+                      "value": "50"
+                    }
+                  ]
+                }
+              ],
+              "text": "{F63} Continue on Eidsdalsvegen",
+              "time": 185
+            },
+            "compressedGeometry": "+34+8r450+kkebgc+ls+1o8+s4+1i0+v8+12c+1bo+12c+34+34+p0+fk+1l4+1bo+io+s4+s4+1es+v8+2e4+24o+55k+15g+2e4+2e4+3mo+1l4+1rc+21k+1ug+61o+4vc+21k+27s+24o+374+1o8+404+438+dok+1ug+6qo+1i0+bgo+p0+404+1i0+4ck+30s+744+io+1rc+io+21k+68+24o+34+1ug-9c+5uk-34+404+fk+4is+p0+3gg+io+21k+v8+2e4+12c+2e4+1rc+3gg+30s+4s8+49g+5uk+2ng+3jk+27s+340+340+5bs+3mo+7gk+ls+12c+1i0+1o8+438+3ps+v8+15g+18k+1o8+p0+1l4+cg+1bo+15g+6ts+s4+1ug+1l4+374+374+5bs+ls+v8+49g+5bs+18k+21k+p0+1rc+fk+12c+cg+18k+9c+p0+1i0+52g+v8+1ug+s4+18k+p0+12c+1es+15g+46c+374+1es+1o8+ls+1es+9c+io+1bo+5i4+v8+3dc+ls+1bo+io+ls+1es+18k+1l4+s4+5bs+2b0+1ug+15g+ls+p0+18k+1bo+15g+1es+68+68+30s+404+1bo+21k+1es+2kc+1i0+374+1bo+3ps+ls+1l4+68+fk+12c+24o+24o+2ng+3a8+30s"
+          },
+          {
+            "attributes": {
+              "ETA": 0,
+              "length": 0.025,
+              "maneuverType": "esriDMTStraight",
+              "roadFeatures": [
+                {
+                  "attributeType": "length",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "MaxLength",
+                      "value": "19.5"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "nvdb:turistveg",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "Navn",
+                      "value": "Geiranger - Trollstigen"
+                    },
+                    {
+                      "key": "Url",
+                      "value": "https://www.nasjonaleturistveger.no/no/turistvegene/geiranger-trollstigen"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "nvdb:vegtype",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "type",
+                      "value": "TURIST"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "weight",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "type",
+                      "value": "50"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "vegloggen:Trafikkmelding",
+                  "distanceAlongSegment": 12.5,
+                  "id": "NPRA_HBT_08-03-2023.35915",
+                  "location": [
+                    {
+                      "easting": 94221,
+                      "northing": 6928015.5,
+                      "srs": "EPSG:25833"
+                    }
+                  ],
+                  "values": [
+                    {
+                      "key": "RECORD_ID",
+                      "value": "ef6bf9c4-10d6-40f4-b496-e48fd7572a20_1"
+                    },
+                    {
+                      "key": "SITUATION_ID",
+                      "value": "NPRA_HBT_08-03-2023.35915"
+                    },
+                    {
+                      "key": "COUNTY_NUMBER",
+                      "value": "15"
+                    },
+                    {
+                      "key": "ROAD_NUMBER",
+                      "value": "F63"
+                    },
+                    {
+                      "key": "OVERALL_START_TIME",
+                      "value": "2023-03-12T23:00:00Z"
+                    },
+                    {
+                      "key": "OVERALL_END_TIME",
+                      "value": "2023-04-21T22:00:00Z"
+                    },
+                    {
+                      "key": "DESCRIPTION",
+                      "value": "Vegarbeid, gyldig mellom 07:00 og 19:00 mandag, tirsdag, onsdag, torsdag og fredag fra 13.03.2023 til 21.04.2023."
+                    },
+                    {
+                      "key": "LOCATION_DESCRIPTION",
+                      "value": "Fv. 63 Eidsdal ferjekai (ferjekai) i Fjord, Møre og Romsdal - fv. 63 Eidsdal ferjekai (ferjekai) i Fjord, Møre og Romsdal, i retning mot Eidsdal"
+                    },
+                    {
+                      "key": "RECORD_SECONDARY_TYPE",
+                      "value": "roadworks"
+                    },
+                    {
+                      "key": "NUMPERIODS",
+                      "value": "30"
+                    },
+                    {
+                      "key": "ISACTIVEINPERIOD",
+                      "value": "0"
+                    },
+                    {
+                      "key": "NvdbReferenceId",
+                      "value": "248994"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "datex3:trafikkmelding",
+                  "distanceAlongSegment": 12.5,
+                  "id": "NPRA_HBT_08-03-2023.35915",
+                  "location": [
+                    {
+                      "easting": 94221,
+                      "northing": 6928015.5,
+                      "srs": "EPSG:25833"
+                    }
+                  ],
+                  "values": [
+                    {
+                      "key": "SituationId",
+                      "value": "NPRA_HBT_08-03-2023.35915"
+                    },
+                    {
+                      "key": "RecordId",
+                      "value": "ef6bf9c4-10d6-40f4-b496-e48fd7572a20_1"
+                    },
+                    {
+                      "key": "SituationRecordType",
+                      "value": "MaintenanceWorks"
+                    },
+                    {
+                      "key": "SituationRecordTypeEnum",
+                      "value": "[\"roadworks\"]"
+                    },
+                    {
+                      "key": "OverallStartTime",
+                      "value": "2023-03-13T00:00:00.000+01:00"
+                    },
+                    {
+                      "key": "OverallEndTime",
+                      "value": "2023-04-22T00:00:00.000+02:00"
+                    },
+                    {
+                      "key": "LocationDescription",
+                      "value": "Fv. 63 Eidsdal ferjekai (ferjekai) i Fjord, Møre og Romsdal - fv. 63 Eidsdal ferjekai (ferjekai) i Fjord, Møre og Romsdal, i retning mot Eidsdal"
+                    },
+                    {
+                      "key": "GeneralPublicCommentDescription",
+                      "value": ""
+                    },
+                    {
+                      "key": "GeneralPublicCommentDataProcessingNote",
+                      "value": "Vegarbeid, gyldig mellom 07:00 og 19:00 mandag, tirsdag, onsdag, torsdag og fredag fra 13.03.2023 til 21.04.2023."
+                    },
+                    {
+                      "key": "CountyNumber",
+                      "value": "15"
+                    },
+                    {
+                      "key": "ValidPeriod",
+                      "value": "[{\"startOfPeriod\":\"2023-03-13T07:00:00.000+01:00\",\"endOfPeriod\":\"2023-04-21T19:00:00.000+02:00\",\"recurringDayWeekMonthPeriod\":[{\"applicableDay\":[{\"value\":\"monday\"},{\"value\":\"tuesday\"},{\"value\":\"wednesday\"},{\"value\":\"thursday\"},{\"value\":\"friday\"}]}],\"recurringTimePeriodOfDay\":[{\"endTimeOfPeriod\":\"19:00:00+01:00\",\"startTimeOfPeriod\":\"07:00:00+01:00\"}]}]"
+                    },
+                    {
+                      "key": "RoadNumber",
+                      "value": "F63"
+                    },
+                    {
+                      "key": "SubRecords",
+                      "value": "[]"
+                    }
+                  ]
+                }
+              ],
+              "text": "{F63} Continue on Ytterdalsgata",
+              "time": 2
+            },
+            "compressedGeometry": "+34+8vg9c+kkmj90+1ug+1es"
+          },
+          {
+            "attributes": {
+              "ETA": 0,
+              "length": 0.01,
+              "maneuverType": "esriDMTStraight",
+              "roadFeatures": [
+                {
+                  "attributeType": "length",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "MaxLength",
+                      "value": "19.5"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "nvdb:turistveg",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "Navn",
+                      "value": "Geiranger - Trollstigen"
+                    },
+                    {
+                      "key": "Url",
+                      "value": "https://www.nasjonaleturistveger.no/no/turistvegene/geiranger-trollstigen"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "nvdb:vegtype",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "type",
+                      "value": "TURIST"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "weight",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "type",
+                      "value": "50"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "vegloggen:Trafikkmelding",
+                  "distanceAlongSegment": 4.949747468305833,
+                  "id": "NPRA_HBT_08-03-2023.35915",
+                  "location": [
+                    {
+                      "easting": 94234.5,
+                      "northing": 6928026.5,
+                      "srs": "EPSG:25833"
+                    }
+                  ],
+                  "values": [
+                    {
+                      "key": "RECORD_ID",
+                      "value": "ef6bf9c4-10d6-40f4-b496-e48fd7572a20_1"
+                    },
+                    {
+                      "key": "SITUATION_ID",
+                      "value": "NPRA_HBT_08-03-2023.35915"
+                    },
+                    {
+                      "key": "COUNTY_NUMBER",
+                      "value": "15"
+                    },
+                    {
+                      "key": "ROAD_NUMBER",
+                      "value": "F63"
+                    },
+                    {
+                      "key": "OVERALL_START_TIME",
+                      "value": "2023-03-12T23:00:00Z"
+                    },
+                    {
+                      "key": "OVERALL_END_TIME",
+                      "value": "2023-04-21T22:00:00Z"
+                    },
+                    {
+                      "key": "DESCRIPTION",
+                      "value": "Vegarbeid, gyldig mellom 07:00 og 19:00 mandag, tirsdag, onsdag, torsdag og fredag fra 13.03.2023 til 21.04.2023."
+                    },
+                    {
+                      "key": "LOCATION_DESCRIPTION",
+                      "value": "Fv. 63 Eidsdal ferjekai (ferjekai) i Fjord, Møre og Romsdal - fv. 63 Eidsdal ferjekai (ferjekai) i Fjord, Møre og Romsdal, i retning mot Eidsdal"
+                    },
+                    {
+                      "key": "RECORD_SECONDARY_TYPE",
+                      "value": "roadworks"
+                    },
+                    {
+                      "key": "NUMPERIODS",
+                      "value": "30"
+                    },
+                    {
+                      "key": "ISACTIVEINPERIOD",
+                      "value": "0"
+                    },
+                    {
+                      "key": "NvdbReferenceId",
+                      "value": "248994"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "vegloggen:Trafikkmelding",
+                  "distanceAlongSegment": 4.949747468305833,
+                  "id": "NPRA_HBT_12-01-2023.91607",
+                  "location": [
+                    {
+                      "easting": 94234.5,
+                      "northing": 6928026.5,
+                      "srs": "EPSG:25833"
+                    }
+                  ],
+                  "values": [
+                    {
+                      "key": "RECORD_ID",
+                      "value": "33552950-a09d-4414-bdd6-a74aa28ebcc9_1"
+                    },
+                    {
+                      "key": "SITUATION_ID",
+                      "value": "NPRA_HBT_12-01-2023.91607"
+                    },
+                    {
+                      "key": "COUNTY_NUMBER",
+                      "value": "15"
+                    },
+                    {
+                      "key": "ROAD_NUMBER",
+                      "value": "F63"
+                    },
+                    {
+                      "key": "OVERALL_START_TIME",
+                      "value": "2023-01-15T23:00:00Z"
+                    },
+                    {
+                      "key": "OVERALL_END_TIME",
+                      "value": "2024-01-08T23:00:00Z"
+                    },
+                    {
+                      "key": "DESCRIPTION",
+                      "value": "Vegarbeid, gyldig mellom 07:00 og 19:00 mandag, tirsdag, onsdag, torsdag, fredag og lørdag fra 16.01.2023 til 08.01.2024."
+                    },
+                    {
+                      "key": "LOCATION_DESCRIPTION",
+                      "value": "Fv. 63 Eidsdal i Fjord, Møre og Romsdal"
+                    },
+                    {
+                      "key": "RECORD_SECONDARY_TYPE",
+                      "value": "roadworks"
+                    },
+                    {
+                      "key": "NUMPERIODS",
+                      "value": "307"
+                    },
+                    {
+                      "key": "ISACTIVEINPERIOD",
+                      "value": "0"
+                    },
+                    {
+                      "key": "NvdbReferenceId",
+                      "value": "248995"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "datex3:trafikkmelding",
+                  "distanceAlongSegment": 4.949747468305833,
+                  "id": "NPRA_HBT_12-01-2023.91607",
+                  "location": [
+                    {
+                      "easting": 94234.5,
+                      "northing": 6928026.5,
+                      "srs": "EPSG:25833"
+                    }
+                  ],
+                  "values": [
+                    {
+                      "key": "SituationId",
+                      "value": "NPRA_HBT_12-01-2023.91607"
+                    },
+                    {
+                      "key": "RecordId",
+                      "value": "33552950-a09d-4414-bdd6-a74aa28ebcc9_1"
+                    },
+                    {
+                      "key": "SituationRecordType",
+                      "value": "MaintenanceWorks"
+                    },
+                    {
+                      "key": "SituationRecordTypeEnum",
+                      "value": "[\"roadworks\"]"
+                    },
+                    {
+                      "key": "OverallStartTime",
+                      "value": "2023-01-16T00:00:00.000+01:00"
+                    },
+                    {
+                      "key": "OverallEndTime",
+                      "value": "2024-01-09T00:00:00.000+01:00"
+                    },
+                    {
+                      "key": "LocationDescription",
+                      "value": "Fv. 63 Eidsdal i Fjord, Møre og Romsdal"
+                    },
+                    {
+                      "key": "GeneralPublicCommentDescription",
+                      "value": ""
+                    },
+                    {
+                      "key": "GeneralPublicCommentDataProcessingNote",
+                      "value": "Vegarbeid, gyldig mellom 07:00 og 19:00 mandag, tirsdag, onsdag, torsdag, fredag og lørdag fra 16.01.2023 til 08.01.2024."
+                    },
+                    {
+                      "key": "CountyNumber",
+                      "value": "15"
+                    },
+                    {
+                      "key": "ValidPeriod",
+                      "value": "[{\"startOfPeriod\":\"2023-01-16T07:00:00.000+01:00\",\"endOfPeriod\":\"2024-01-08T19:00:00.000+01:00\",\"recurringDayWeekMonthPeriod\":[{\"applicableDay\":[{\"value\":\"monday\"},{\"value\":\"tuesday\"},{\"value\":\"wednesday\"},{\"value\":\"thursday\"},{\"value\":\"friday\"},{\"value\":\"saturday\"}]}],\"recurringTimePeriodOfDay\":[{\"endTimeOfPeriod\":\"19:00:00+01:00\",\"startTimeOfPeriod\":\"07:00:00+01:00\"}]}]"
+                    },
+                    {
+                      "key": "RoadNumber",
+                      "value": "F63"
+                    },
+                    {
+                      "key": "SubRecords",
+                      "value": "[]"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "datex3:trafikkmelding",
+                  "distanceAlongSegment": 4.949747468305833,
+                  "id": "NPRA_HBT_08-03-2023.35915",
+                  "location": [
+                    {
+                      "easting": 94234.5,
+                      "northing": 6928026.5,
+                      "srs": "EPSG:25833"
+                    }
+                  ],
+                  "values": [
+                    {
+                      "key": "SituationId",
+                      "value": "NPRA_HBT_08-03-2023.35915"
+                    },
+                    {
+                      "key": "RecordId",
+                      "value": "ef6bf9c4-10d6-40f4-b496-e48fd7572a20_1"
+                    },
+                    {
+                      "key": "SituationRecordType",
+                      "value": "MaintenanceWorks"
+                    },
+                    {
+                      "key": "SituationRecordTypeEnum",
+                      "value": "[\"roadworks\"]"
+                    },
+                    {
+                      "key": "OverallStartTime",
+                      "value": "2023-03-13T00:00:00.000+01:00"
+                    },
+                    {
+                      "key": "OverallEndTime",
+                      "value": "2023-04-22T00:00:00.000+02:00"
+                    },
+                    {
+                      "key": "LocationDescription",
+                      "value": "Fv. 63 Eidsdal ferjekai (ferjekai) i Fjord, Møre og Romsdal - fv. 63 Eidsdal ferjekai (ferjekai) i Fjord, Møre og Romsdal, i retning mot Eidsdal"
+                    },
+                    {
+                      "key": "GeneralPublicCommentDescription",
+                      "value": ""
+                    },
+                    {
+                      "key": "GeneralPublicCommentDataProcessingNote",
+                      "value": "Vegarbeid, gyldig mellom 07:00 og 19:00 mandag, tirsdag, onsdag, torsdag og fredag fra 13.03.2023 til 21.04.2023."
+                    },
+                    {
+                      "key": "CountyNumber",
+                      "value": "15"
+                    },
+                    {
+                      "key": "ValidPeriod",
+                      "value": "[{\"startOfPeriod\":\"2023-03-13T07:00:00.000+01:00\",\"endOfPeriod\":\"2023-04-21T19:00:00.000+02:00\",\"recurringDayWeekMonthPeriod\":[{\"applicableDay\":[{\"value\":\"monday\"},{\"value\":\"tuesday\"},{\"value\":\"wednesday\"},{\"value\":\"thursday\"},{\"value\":\"friday\"}]}],\"recurringTimePeriodOfDay\":[{\"endTimeOfPeriod\":\"19:00:00+01:00\",\"startTimeOfPeriod\":\"07:00:00+01:00\"}]}]"
+                    },
+                    {
+                      "key": "RoadNumber",
+                      "value": "F63"
+                    },
+                    {
+                      "key": "SubRecords",
+                      "value": "[]"
+                    }
+                  ]
+                }
+              ],
+              "text": "{F63} Continue on Ytterdalsgata",
+              "time": 1
+            },
+            "compressedGeometry": "+34+8vi7s+kkmkns+ls+ls"
+          },
+          {
+            "attributes": {
+              "ETA": 0,
+              "length": 0.016,
+              "maneuverType": "esriDMTStraight",
+              "roadFeatures": [
+                {
+                  "attributeType": "length",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "MaxLength",
+                      "value": "19.5"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "nvdb:turistveg",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "Navn",
+                      "value": "Geiranger - Trollstigen"
+                    },
+                    {
+                      "key": "Url",
+                      "value": "https://www.nasjonaleturistveger.no/no/turistvegene/geiranger-trollstigen"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "nvdb:vegtype",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "type",
+                      "value": "TURIST"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "weight",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "type",
+                      "value": "50"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "vegloggen:Trafikkmelding",
+                  "distanceAlongSegment": 8.0156097709407,
+                  "id": "NPRA_HBT_08-03-2023.35915",
+                  "location": [
+                    {
+                      "easting": 94238.5,
+                      "northing": 6928038,
+                      "srs": "EPSG:25833"
+                    }
+                  ],
+                  "values": [
+                    {
+                      "key": "RECORD_ID",
+                      "value": "ef6bf9c4-10d6-40f4-b496-e48fd7572a20_1"
+                    },
+                    {
+                      "key": "SITUATION_ID",
+                      "value": "NPRA_HBT_08-03-2023.35915"
+                    },
+                    {
+                      "key": "COUNTY_NUMBER",
+                      "value": "15"
+                    },
+                    {
+                      "key": "ROAD_NUMBER",
+                      "value": "F63"
+                    },
+                    {
+                      "key": "OVERALL_START_TIME",
+                      "value": "2023-03-12T23:00:00Z"
+                    },
+                    {
+                      "key": "OVERALL_END_TIME",
+                      "value": "2023-04-21T22:00:00Z"
+                    },
+                    {
+                      "key": "DESCRIPTION",
+                      "value": "Vegarbeid, gyldig mellom 07:00 og 19:00 mandag, tirsdag, onsdag, torsdag og fredag fra 13.03.2023 til 21.04.2023."
+                    },
+                    {
+                      "key": "LOCATION_DESCRIPTION",
+                      "value": "Fv. 63 Eidsdal ferjekai (ferjekai) i Fjord, Møre og Romsdal - fv. 63 Eidsdal ferjekai (ferjekai) i Fjord, Møre og Romsdal, i retning mot Eidsdal"
+                    },
+                    {
+                      "key": "RECORD_SECONDARY_TYPE",
+                      "value": "roadworks"
+                    },
+                    {
+                      "key": "NUMPERIODS",
+                      "value": "30"
+                    },
+                    {
+                      "key": "ISACTIVEINPERIOD",
+                      "value": "0"
+                    },
+                    {
+                      "key": "NvdbReferenceId",
+                      "value": "248994"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "datex3:trafikkmelding",
+                  "distanceAlongSegment": 8.0156097709407,
+                  "id": "NPRA_HBT_08-03-2023.35915",
+                  "location": [
+                    {
+                      "easting": 94238.5,
+                      "northing": 6928038,
+                      "srs": "EPSG:25833"
+                    }
+                  ],
+                  "values": [
+                    {
+                      "key": "SituationId",
+                      "value": "NPRA_HBT_08-03-2023.35915"
+                    },
+                    {
+                      "key": "RecordId",
+                      "value": "ef6bf9c4-10d6-40f4-b496-e48fd7572a20_1"
+                    },
+                    {
+                      "key": "SituationRecordType",
+                      "value": "MaintenanceWorks"
+                    },
+                    {
+                      "key": "SituationRecordTypeEnum",
+                      "value": "[\"roadworks\"]"
+                    },
+                    {
+                      "key": "OverallStartTime",
+                      "value": "2023-03-13T00:00:00.000+01:00"
+                    },
+                    {
+                      "key": "OverallEndTime",
+                      "value": "2023-04-22T00:00:00.000+02:00"
+                    },
+                    {
+                      "key": "LocationDescription",
+                      "value": "Fv. 63 Eidsdal ferjekai (ferjekai) i Fjord, Møre og Romsdal - fv. 63 Eidsdal ferjekai (ferjekai) i Fjord, Møre og Romsdal, i retning mot Eidsdal"
+                    },
+                    {
+                      "key": "GeneralPublicCommentDescription",
+                      "value": ""
+                    },
+                    {
+                      "key": "GeneralPublicCommentDataProcessingNote",
+                      "value": "Vegarbeid, gyldig mellom 07:00 og 19:00 mandag, tirsdag, onsdag, torsdag og fredag fra 13.03.2023 til 21.04.2023."
+                    },
+                    {
+                      "key": "CountyNumber",
+                      "value": "15"
+                    },
+                    {
+                      "key": "ValidPeriod",
+                      "value": "[{\"startOfPeriod\":\"2023-03-13T07:00:00.000+01:00\",\"endOfPeriod\":\"2023-04-21T19:00:00.000+02:00\",\"recurringDayWeekMonthPeriod\":[{\"applicableDay\":[{\"value\":\"monday\"},{\"value\":\"tuesday\"},{\"value\":\"wednesday\"},{\"value\":\"thursday\"},{\"value\":\"friday\"}]}],\"recurringTimePeriodOfDay\":[{\"endTimeOfPeriod\":\"19:00:00+01:00\",\"startTimeOfPeriod\":\"07:00:00+01:00\"}]}]"
+                    },
+                    {
+                      "key": "RoadNumber",
+                      "value": "F63"
+                    },
+                    {
+                      "key": "SubRecords",
+                      "value": "[]"
+                    }
+                  ]
+                }
+              ],
+              "text": "{F63} Continue on Fv63",
+              "time": 1
+            },
+            "compressedGeometry": "+34+8vito+kkmldo+9c+p0-68+p0"
+          },
+          {
+            "attributes": {
+              "ETA": 0,
+              "length": 2.705,
+              "maneuverType": "esriDMTStraight",
+              "roadFeatures": [
+                {
+                  "attributeType": "nvdb:turistveg",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "Navn",
+                      "value": "Geiranger - Trollstigen"
+                    },
+                    {
+                      "key": "Url",
+                      "value": "https://www.nasjonaleturistveger.no/no/turistvegene/geiranger-trollstigen"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "nvdb:vegtype",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "type",
+                      "value": "FERJE"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "nvdb:ferge",
+                  "distanceAlongSegment": 0,
+                  "id": "NSR:StopPlace:58772-NSR:StopPlace:58656",
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "Navn",
+                      "value": "Eidsdal ferjekai-Linge ferjekai"
+                    },
+                    {
+                      "key": "Url",
+                      "value": "https://www.vegvesen.no/ruteplan/routingservice_v2_0/ferry/?nsrStopPlaces=NSR:StopPlace:58772,NSR:StopPlace:58656&routingRequest=true&dateTime=20230315212931"
+                    },
+                    {
+                      "key": "NvdbReferenceId",
+                      "value": "248995,248995"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "vegloggen:Trafikkmelding",
+                  "distanceAlongSegment": 1350.222083375839,
+                  "id": "NPRA_HBT_12-01-2023.91607",
+                  "location": [
+                    {
+                      "easting": 94579.66009601831,
+                      "northing": 6929282.301343633,
+                      "srs": "EPSG:25833"
+                    }
+                  ],
+                  "values": [
+                    {
+                      "key": "RECORD_ID",
+                      "value": "33552950-a09d-4414-bdd6-a74aa28ebcc9_1"
+                    },
+                    {
+                      "key": "SITUATION_ID",
+                      "value": "NPRA_HBT_12-01-2023.91607"
+                    },
+                    {
+                      "key": "COUNTY_NUMBER",
+                      "value": "15"
+                    },
+                    {
+                      "key": "ROAD_NUMBER",
+                      "value": "F63"
+                    },
+                    {
+                      "key": "OVERALL_START_TIME",
+                      "value": "2023-01-15T23:00:00Z"
+                    },
+                    {
+                      "key": "OVERALL_END_TIME",
+                      "value": "2024-01-08T23:00:00Z"
+                    },
+                    {
+                      "key": "DESCRIPTION",
+                      "value": "Vegarbeid, gyldig mellom 07:00 og 19:00 mandag, tirsdag, onsdag, torsdag, fredag og lørdag fra 16.01.2023 til 08.01.2024."
+                    },
+                    {
+                      "key": "LOCATION_DESCRIPTION",
+                      "value": "Fv. 63 Eidsdal i Fjord, Møre og Romsdal"
+                    },
+                    {
+                      "key": "RECORD_SECONDARY_TYPE",
+                      "value": "roadworks"
+                    },
+                    {
+                      "key": "NUMPERIODS",
+                      "value": "307"
+                    },
+                    {
+                      "key": "ISACTIVEINPERIOD",
+                      "value": "0"
+                    },
+                    {
+                      "key": "NvdbReferenceId",
+                      "value": "248995"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "vegloggen:Trafikkmelding",
+                  "distanceAlongSegment": 1350.222083375839,
+                  "id": "NPRA_HBT_19-08-2022.17235",
+                  "location": [
+                    {
+                      "easting": 94579.66009601831,
+                      "northing": 6929282.301343633,
+                      "srs": "EPSG:25833"
+                    }
+                  ],
+                  "values": [
+                    {
+                      "key": "RECORD_ID",
+                      "value": "45c9ee8d-5fe0-4e53-9bea-0d3b8aed2ce7_2"
+                    },
+                    {
+                      "key": "SITUATION_ID",
+                      "value": "NPRA_HBT_19-08-2022.17235"
+                    },
+                    {
+                      "key": "COUNTY_NUMBER",
+                      "value": "15"
+                    },
+                    {
+                      "key": "ROAD_NUMBER",
+                      "value": "F63"
+                    },
+                    {
+                      "key": "OVERALL_START_TIME",
+                      "value": "2022-08-22T11:23:11Z"
+                    },
+                    {
+                      "key": "OVERALL_END_TIME",
+                      "value": "2023-08-21T22:00:00Z"
+                    },
+                    {
+                      "key": "DESCRIPTION",
+                      "value": "Vegarbeid.|Manuell dirigering.|Fartsgrense 50 km/t."
+                    },
+                    {
+                      "key": "LOCATION_DESCRIPTION",
+                      "value": "Fv. 63 Linge i Fjord, Møre og Romsdal - fv. 63 Linge ferjekai i Fjord, Møre og Romsdal, i retning mot Eidsdal"
+                    },
+                    {
+                      "key": "RECORD_SECONDARY_TYPE",
+                      "value": "trafficBeingManuallyDirected"
+                    },
+                    {
+                      "key": "NUMPERIODS",
+                      "value": "0"
+                    },
+                    {
+                      "key": "ISACTIVEINPERIOD",
+                      "value": "0"
+                    },
+                    {
+                      "key": "NvdbReferenceId",
+                      "value": "249569"
+                    }
+                  ]
+                }
+              ],
+              "text": "{F63} Continue on Eidsdal-Linge",
+              "time": 706
+            },
+            "compressedGeometry": "+34+8vj0s+kkmmvo-6hc+7dg-12c+1ug-v8+2b0-9c+1bo-34+1i0+27s+bjs+3jk+bn0+165s+2mq4+10ms+1uj4+ls0+tvc+3gg+46c+21k+21k+1es+12c+2b0+s4+v8+34+3mo+0+2b0-io"
+          },
+          {
+            "attributes": {
+              "ETA": 0,
+              "length": 0.015,
+              "maneuverType": "esriDMTStraight",
+              "roadFeatures": [
+                {
+                  "attributeType": "length",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "MaxLength",
+                      "value": "19.5"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "nvdb:turistveg",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "Navn",
+                      "value": "Geiranger - Trollstigen"
+                    },
+                    {
+                      "key": "Url",
+                      "value": "https://www.nasjonaleturistveger.no/no/turistvegene/geiranger-trollstigen"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "nvdb:vegtype",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "type",
+                      "value": "TURIST"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "weight",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "type",
+                      "value": "50"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "vegloggen:Trafikkmelding",
+                  "distanceAlongSegment": 7.762087348130012,
+                  "id": "NPRA_HBT_19-08-2022.17235",
+                  "location": [
+                    {
+                      "easting": 95332.5,
+                      "northing": 6930349,
+                      "srs": "EPSG:25833"
+                    }
+                  ],
+                  "values": [
+                    {
+                      "key": "RECORD_ID",
+                      "value": "45c9ee8d-5fe0-4e53-9bea-0d3b8aed2ce7_2"
+                    },
+                    {
+                      "key": "SITUATION_ID",
+                      "value": "NPRA_HBT_19-08-2022.17235"
+                    },
+                    {
+                      "key": "COUNTY_NUMBER",
+                      "value": "15"
+                    },
+                    {
+                      "key": "ROAD_NUMBER",
+                      "value": "F63"
+                    },
+                    {
+                      "key": "OVERALL_START_TIME",
+                      "value": "2022-08-22T11:23:11Z"
+                    },
+                    {
+                      "key": "OVERALL_END_TIME",
+                      "value": "2023-08-21T22:00:00Z"
+                    },
+                    {
+                      "key": "DESCRIPTION",
+                      "value": "Vegarbeid.|Manuell dirigering.|Fartsgrense 50 km/t."
+                    },
+                    {
+                      "key": "LOCATION_DESCRIPTION",
+                      "value": "Fv. 63 Linge i Fjord, Møre og Romsdal - fv. 63 Linge ferjekai i Fjord, Møre og Romsdal, i retning mot Eidsdal"
+                    },
+                    {
+                      "key": "RECORD_SECONDARY_TYPE",
+                      "value": "trafficBeingManuallyDirected"
+                    },
+                    {
+                      "key": "NUMPERIODS",
+                      "value": "0"
+                    },
+                    {
+                      "key": "ISACTIVEINPERIOD",
+                      "value": "0"
+                    },
+                    {
+                      "key": "NvdbReferenceId",
+                      "value": "249569"
+                    }
+                  ]
+                }
+              ],
+              "text": "{F63} Continue on Fv63",
+              "time": 1
+            },
+            "compressedGeometry": "+34+92t2k+kkto2s+1es-cg"
+          },
+          {
+            "attributes": {
+              "ETA": 0,
+              "length": 0.077,
+              "maneuverType": "esriDMTStraight",
+              "roadFeatures": [
+                {
+                  "attributeType": "length",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "MaxLength",
+                      "value": "19.5"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "nvdb:turistveg",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "Navn",
+                      "value": "Geiranger - Trollstigen"
+                    },
+                    {
+                      "key": "Url",
+                      "value": "https://www.nasjonaleturistveger.no/no/turistvegene/geiranger-trollstigen"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "nvdb:vegtype",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "type",
+                      "value": "TURIST"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "weight",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "type",
+                      "value": "50"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "vegloggen:Trafikkmelding",
+                  "distanceAlongSegment": 38.62641583165593,
+                  "id": "NPRA_HBT_19-08-2022.17235",
+                  "location": [
+                    {
+                      "easting": 95376,
+                      "northing": 6930333,
+                      "srs": "EPSG:25833"
+                    }
+                  ],
+                  "values": [
+                    {
+                      "key": "RECORD_ID",
+                      "value": "45c9ee8d-5fe0-4e53-9bea-0d3b8aed2ce7_2"
+                    },
+                    {
+                      "key": "SITUATION_ID",
+                      "value": "NPRA_HBT_19-08-2022.17235"
+                    },
+                    {
+                      "key": "COUNTY_NUMBER",
+                      "value": "15"
+                    },
+                    {
+                      "key": "ROAD_NUMBER",
+                      "value": "F63"
+                    },
+                    {
+                      "key": "OVERALL_START_TIME",
+                      "value": "2022-08-22T11:23:11Z"
+                    },
+                    {
+                      "key": "OVERALL_END_TIME",
+                      "value": "2023-08-21T22:00:00Z"
+                    },
+                    {
+                      "key": "DESCRIPTION",
+                      "value": "Vegarbeid.|Manuell dirigering.|Fartsgrense 50 km/t."
+                    },
+                    {
+                      "key": "LOCATION_DESCRIPTION",
+                      "value": "Fv. 63 Linge i Fjord, Møre og Romsdal - fv. 63 Linge ferjekai i Fjord, Møre og Romsdal, i retning mot Eidsdal"
+                    },
+                    {
+                      "key": "RECORD_SECONDARY_TYPE",
+                      "value": "trafficBeingManuallyDirected"
+                    },
+                    {
+                      "key": "NUMPERIODS",
+                      "value": "0"
+                    },
+                    {
+                      "key": "ISACTIVEINPERIOD",
+                      "value": "0"
+                    },
+                    {
+                      "key": "NvdbReferenceId",
+                      "value": "249569"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "datex3:trafikkmelding",
+                  "distanceAlongSegment": 38.62641583165593,
+                  "id": "NPRA_HBT_19-08-2022.17235",
+                  "location": [
+                    {
+                      "easting": 95376,
+                      "northing": 6930333,
+                      "srs": "EPSG:25833"
+                    }
+                  ],
+                  "values": [
+                    {
+                      "key": "SituationId",
+                      "value": "NPRA_HBT_19-08-2022.17235"
+                    },
+                    {
+                      "key": "RecordId",
+                      "value": "81611383-c211-4c2b-9ed6-b0b375c41c1d_1"
+                    },
+                    {
+                      "key": "SituationRecordType",
+                      "value": "MaintenanceWorks"
+                    },
+                    {
+                      "key": "SituationRecordTypeEnum",
+                      "value": "[\"roadworks\"]"
+                    },
+                    {
+                      "key": "OverallStartTime",
+                      "value": "2022-08-22T13:23:11.000+02:00"
+                    },
+                    {
+                      "key": "OverallEndTime",
+                      "value": "2023-08-22T00:00:00.000+02:00"
+                    },
+                    {
+                      "key": "LocationDescription",
+                      "value": "Fv. 63 Linge i Fjord, Møre og Romsdal - fv. 63 Linge ferjekai i Fjord, Møre og Romsdal, i retning mot Eidsdal"
+                    },
+                    {
+                      "key": "GeneralPublicCommentDescription",
+                      "value": ""
+                    },
+                    {
+                      "key": "GeneralPublicCommentDataProcessingNote",
+                      "value": "Vegarbeid.|Manuell dirigering.|Fartsgrense 50 km/t."
+                    },
+                    {
+                      "key": "CountyNumber",
+                      "value": "15"
+                    },
+                    {
+                      "key": "ValidPeriod",
+                      "value": ""
+                    },
+                    {
+                      "key": "RoadNumber",
+                      "value": "F63"
+                    },
+                    {
+                      "key": "SubRecords",
+                      "value": "[{\"SituationId\":\"NPRA_HBT_19-08-2022.17235\",\"RecordId\":\"45c9ee8d-5fe0-4e53-9bea-0d3b8aed2ce7_2\",\"OverallStartTime\":\"2022-08-22T13:23:11.000+02:00\",\"OverallEndTime\":\"2023-08-22T00:00:00.000+02:00\",\"IsActiveNow\":\"0\",\"CountyNumber\":\"15\",\"RoadNumber\":\"F63\",\"SituationRecordType\":\"GeneralNetworkManagement\",\"SituationRecordTypeEnum\":\"[\"mandatory\",\"trafficBeingManuallyDirected\"]\",\"GeneralPublicCommentDescription\":\"\",\"GeneralPubliccommentDataProcessingNote\":\"Vegarbeid.|Manuell dirigering.|Fartsgrense 50 km/t.\",\"LocationDescription\":\"Fv. 63 Linge i Fjord, Møre og Romsdal - fv. 63 Linge ferjekai i Fjord, Møre og Romsdal, i retning mot Eidsdal\",\"ValidPeriod\":\"\",\"IsMainRecordForPosition\":\"0\"},{\"SituationId\":\"NPRA_HBT_19-08-2022.17235\",\"RecordId\":\"db3711e7-9510-4780-bb0c-8bd70dee73d8_3\",\"OverallStartTime\":\"2022-08-22T13:23:11.000+02:00\",\"OverallEndTime\":\"2023-08-22T00:00:00.000+02:00\",\"IsActiveNow\":\"0\",\"CountyNumber\":\"15\",\"RoadNumber\":\"F63\",\"SituationRecordType\":\"SpeedManagement\",\"SituationRecordTypeEnum\":\"[\"mandatory\",\"speedRestrictionInOperation\"]\",\"GeneralPublicCommentDescription\":\"\",\"GeneralPubliccommentDataProcessingNote\":\"Vegarbeid.|Manuell dirigering.|Fartsgrense 50 km/t.\",\"LocationDescription\":\"Fv. 63 Linge i Fjord, Møre og Romsdal - fv. 63 Linge ferjekai i Fjord, Møre og Romsdal, i retning mot Eidsdal\",\"ValidPeriod\":\"\",\"IsMainRecordForPosition\":\"0\"}]"
+                    }
+                  ]
+                }
+              ],
+              "text": "{F63} Continue on Fv63",
+              "time": 4
+            },
+            "compressedGeometry": "+34+92uhg+kktnmc+3dc-18k+fk-34+ls-9c+p0-9c+1l4-p0"
+          },
+          {
+            "attributes": {
+              "ETA": 0,
+              "length": 0.054,
+              "maneuverType": "esriDMTStraight",
+              "roadFeatures": [
+                {
+                  "attributeType": "length",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "MaxLength",
+                      "value": "19.5"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "nvdb:turistveg",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "Navn",
+                      "value": "Geiranger - Trollstigen"
+                    },
+                    {
+                      "key": "Url",
+                      "value": "https://www.nasjonaleturistveger.no/no/turistvegene/geiranger-trollstigen"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "nvdb:vegtype",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "type",
+                      "value": "TURIST"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "weight",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "type",
+                      "value": "50"
+                    }
+                  ]
+                }
+              ],
+              "text": "{F63} Continue on Fv63",
+              "time": 39
+            },
+            "compressedGeometry": "+34+935ig+kktkus+io-fk+v8-9c+io+34+s4+cg+p0+p0+34+s4"
+          },
+          {
+            "attributes": {
+              "ETA": 0,
+              "length": 3.65,
+              "maneuverType": "esriDMTSharpRight",
+              "roadFeatures": [
+                {
+                  "attributeType": "length",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "MaxLength",
+                      "value": "19.5"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "nvdb:turistveg",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "Navn",
+                      "value": "Geiranger - Trollstigen"
+                    },
+                    {
+                      "key": "Url",
+                      "value": "https://www.nasjonaleturistveger.no/no/turistvegene/geiranger-trollstigen"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "nvdb:vegtype",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "type",
+                      "value": "TURIST"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "weight",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "type",
+                      "value": "50"
+                    }
+                  ]
+                }
+              ],
+              "text": "{F63} Make a sharp right on to Lingestranda",
+              "time": 181
+            },
+            "compressedGeometry": "+34+939fg+kktmak+12c-9c+3ps-v8+6nk-1i0+dok-340+7ms-1i0+5i4-io+30s-34+24o+68+24o+68+30s+ls+3mo+12c+8p8+3dc+ls+68+2to+18k+5uk+2to+2qk+1i0+7gk+4fo+1i0+ls+21k+ls+1rc+9c+1l4+34+86g-fk+1ug+0+3a8+fk+4p4+1bo+p0+9c+6b4+24o+1es+cg+21k+68+374-fk+374-18k+5uk-3a8+30s-1es+2qk-s4+2to-68+1rc+34+2ng+p0+9uo+4is+374+1bo+340+s4+340+io+4fo+s4+3ps+15g+3a8+1l4+3gg+2h8+9c+68+4p4+3ps+404+3gg+2ng+2qk+3t0+4ck+v8+15g+s4+s4+68+68+34+34+34+68+15g+18k+3jk+3a8+15g+12c+4is+3t0+7q0+6qo+1l4+v8+374+1es+9c0+2b0+2h8+s4+9c0+49g+fk0+64s+1es+p0+18k+12c+5bs+4vc+6ts+4vc+7jo+55k+bt8+6nk+aec+7dg+374+1i0+2qk+v8+3dc+ls+30s+68+5rg+0"
+          },
+          {
+            "attributes": {
+              "ETA": 0,
+              "length": 0.459,
+              "maneuverType": "esriDMTStraight",
+              "roadFeatures": [
+                {
+                  "attributeType": "length",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "MaxLength",
+                      "value": "19.5"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "weight",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "type",
+                      "value": "50"
+                    }
+                  ]
+                }
+              ],
+              "text": "{K24009} Continue on Åsevegen",
+              "time": 42
+            },
+            "compressedGeometry": "+34+9d8q8+kl0vjc+9c+2e4+ls+1o8+18k+1ug+2to+3jk+12c+24o+1l4+4fo+2ng+8j0+fk+ls+18k+18k+340+21k+15g+12c+p0+15g+fk+18k+cg+1i0+0+374-cg+1l4"
+          },
+          {
+            "attributes": {
+              "ETA": 0,
+              "length": 0.711,
+              "maneuverType": "esriDMTStraight",
+              "roadFeatures": [
+                {
+                  "attributeType": "length",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "MaxLength",
+                      "value": "12.4"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "weight",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "type",
+                      "value": "40"
+                    }
+                  ]
+                }
+              ],
+              "text": "{K24013} Continue on Vollane",
+              "time": 65
+            },
+            "compressedGeometry": "+34+9dqp8+kl26i8+io+io+9c+io-fk+3jk-34+5l8+cg+3a8+2e4+f18+9c+4m0-9c+5rg+0+3ps+cg+4m0+0+2e4+34+18k+1bo+52g+21k+58o+15g+374+fk+15g+cg+io+io+68+9c-34"
+          },
+          {
+            "attributes": {
+              "ETA": 0,
+              "length": 0.267,
+              "maneuverType": "esriDMTSharpRight",
+              "roadFeatures": [
+                {
+                  "attributeType": "length",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "MaxLength",
+                      "value": "12.4"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "weight",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "type",
+                      "value": "40"
+                    }
+                  ]
+                }
+              ],
+              "text": "{K24022} Make a sharp right on to Grendavegen",
+              "time": 24
+            },
+            "compressedGeometry": "+34+9e4o0+kl49i0-fk-15g-cg-15g-ls-5rg-fk-5i4-34-4is+68-15g+9c-fk+io-68+p0-34+3gg+68+p0+0"
+          },
+          {
+            "attributes": {
+              "ETA": 0,
+              "length": 2.381,
+              "maneuverType": "esriDMTStraight",
+              "roadFeatures": [
+                {
+                  "attributeType": "length",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "MaxLength",
+                      "value": "19.5"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "nvdb:turistveg",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "Navn",
+                      "value": "Geiranger - Trollstigen"
+                    },
+                    {
+                      "key": "Url",
+                      "value": "https://www.nasjonaleturistveger.no/no/turistvegene/geiranger-trollstigen"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "nvdb:vegtype",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "type",
+                      "value": "TURIST"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "weight",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "type",
+                      "value": "50"
+                    }
+                  ]
+                }
+              ],
+              "text": "{F63} Continue on Valldalsvegen",
+              "time": 131
+            },
+            "compressedGeometry": "+34+9e8o4+kl3le8-12c+4m0-68+1bo+9c+1o8+io+12c+fk+io+1bo+12c+1i0+s4+340+18k+2b0+io+4s8+fk+3jk+ls+bq4+30s+p0+0+4fo+1o8+3ps+24o+3jk+1rc+3dc+1i0+7ms+2to+21k+s4+1i0+12c+5f0+4vc+2b0+1rc+438+2kc+2qk+1es+30s+15g+340+ls+3gg+9c+4fo+68+1bo+68+1bo+fk+2e4+1bo+3t0+2ng+1i0+1es+1bo+1i0+52g+8sc+21k+2qk+2b0+1o8+2kc+1bo+55k+1es+2to+12c+3jk+1l4+4m0+21k+3gg+v8+3jk+68+4ck-ls+9c0-1o8+1rc-p0+4s8-3dc+dic-7ms+2b0-1rc+4ck-438+2kc-1i0+1l4-ls+1rc-cg+2ng-68+2ng+68+18k+9c+1ug+ls+21k+12c+2b0+1i0+15g+1bo+9c+v8"
+          },
+          {
+            "attributes": {
+              "ETA": 0,
+              "length": 0.002,
+              "maneuverType": "esriDMTStraight",
+              "roadFeatures": [
+                {
+                  "attributeType": "length",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "MaxLength",
+                      "value": "19.5"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "nvdb:turistveg",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "Navn",
+                      "value": "Geiranger - Trollstigen"
+                    },
+                    {
+                      "key": "Url",
+                      "value": "https://www.nasjonaleturistveger.no/no/turistvegene/geiranger-trollstigen"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "nvdb:vegtype",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "type",
+                      "value": "TURIST"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "weight",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "type",
+                      "value": "50"
+                    }
+                  ]
+                }
+              ],
+              "text": "{F63} Continue on Valldalsvegen",
+              "time": 0
+            },
+            "compressedGeometry": "+34+9kb2s+kl5dg0+0+68"
+          },
+          {
+            "attributes": {
+              "ETA": 0,
+              "length": 6.309,
+              "maneuverType": "esriDMTStraight",
+              "roadFeatures": [
+                {
+                  "attributeType": "length",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "MaxLength",
+                      "value": "19.5"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "nvdb:turistveg",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "Navn",
+                      "value": "Geiranger - Trollstigen"
+                    },
+                    {
+                      "key": "Url",
+                      "value": "https://www.nasjonaleturistveger.no/no/turistvegene/geiranger-trollstigen"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "nvdb:vegtype",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "type",
+                      "value": "TURIST"
+                    }
+                  ]
+                },
+                {
+                  "attributeType": "weight",
+                  "distanceAlongSegment": 0,
+                  "id": null,
+                  "location": null,
+                  "values": [
+                    {
+                      "key": "type",
+                      "value": "50"
+                    }
+                  ]
+                }
+              ],
+              "text": "{F63} Continue on Valldalsvegen",
+              "time": 396
+            },
+            "compressedGeometry": "+34+9kb2s+kl5dm8-34+cg-io+s4-1es+1rc-ls+v8-fk+18k-9c+1es-9c+3gg+io+55k+12c+4is+1es+438+340+61o+1i0+2h8+1rc+2e4+12c+15g+2ng+2e4+2kc+1ug+24o+18k+2ng+18k+2qk+12c+5l8+1l4+5uk+1o8+8sc+2qk+bn0+3mo+4p4+18k+csg+30s+9f4+2h8+4p4+1bo+30s+v8+6nk+2to+ls0+9i8+7q0+374+808+30s+5uk+21k+2qk+12c+2e4+1i0+1i0+1i0+1bo+1rc+1i0+2kc+1bo+2qk+3jk+7jo+24o+3ps+1i0+21k+18k+18k+4s8+4is+12c+12c+c0c+b7c+d2o+c9o+ens+dic+2h8+1o8+2h8+15g+2b0+ls+4fo+p0+680+fk+l30+0+12c+0+2h8+0+8fs+34+1rc+34+30s+io+cg+34+2b0+ls+2e4+12c+2ng+1l4+7q0+5f0+1i0+p0+2b0+p0+27s+cg+fk+0+1l4+34+3a8+68+1ug+cg+3mo+v8+1rc+p0+9f4+4is+404+1rc+61o+2h8+4ck+15g+46c+s4+akk+1bo+3gg+fk+8j0+p0+6b4+68+6b4-cg+4m0-v8+374-15g+9rk-4ck+3mo-12c+8sc-1o8+8m4-1o8+2ng-ls+g9s-4ck+3t0-12c+83c-24o+374-ls+5f0-p0+64s-cg+52g+34+5bs+io+bag+2h8+7ms+1o8+18k+68+ano+2e4+680+1l4+6kg+2b0+6ts+2to+1o8+12c+27s+1es+1l4+1l4+12c+1bo+1es+2ng+4m0+ab8+18k+1o8+12c+s4"
+          },
+          {
+            "attributes": {
+              "ETA": 0,
+              "length": 0.947,
+              "maneuverType": "esriDMTStraight",
+              "roadFeatures": [
+                
+              ],
+              "text": "{P24033} Continue on Berlia",
+              "time": 90
+            },
+            "compressedGeometry": "+34+a4iag+klbm5s-68+9c+0+15g+ls+3jk+9c+3gg+2to+fq8+v8+340+ls+18k+1o8+2h8+18k+18k+2e4+1o8+6e8+3ps+86g+61o+1o8+1es+2h8+2e4+4p4+58o+1i0+v8+1l4+io+374+cg+6ts+3gg+2e4+18k+2h8+fk+4fo+cg"
+          },
+          {
+            "attributes": {
+              "ETA": 0,
+              "length": 0,
+              "maneuverType": "esriDMTStop",
+              "roadFeatures": null,
+              "text": "{P24033} Arrive on Berlia",
+              "time": 0
+            },
+            "compressedGeometry": "+34+a6bo0+kldj70"
+          }
+        ],
+        "routeId": 0,
+        "routeName": "Eidsdalsvegen/Valldalsvegen",
+        "summary": {
+          "envelope": {
+            "xmax": 106944,
+            "xmin": 91981,
+            "ymax": 6935544,
+            "ymin": 6923456
+          },
+          "statistics": [
+            {
+              "key": "MeterFerry",
+              "value": 2705
+            },
+            {
+              "key": "toll_small",
+              "value": 0
+            },
+            {
+              "key": "toll_large",
+              "value": 0
+            },
+            {
+              "key": "toll_small_no_discount",
+              "value": 0
+            },
+            {
+              "key": "toll_large_no_discount",
+              "value": 0
+            },
+            {
+              "key": "FerryCount",
+              "value": 1
+            },
+            {
+              "key": "TollCount",
+              "value": 0
+            },
+            {
+              "key": "DistanceInZeroEmissionZone",
+              "value": 0
+            }
+          ],
+          "totalDriveTime": 39.05,
+          "totalLength": 25366,
+          "totalTime": 39.05
+        }
+      }
+    ],
+    "error": null,
+    "routes": {
+      "features": [
+        {
+          "attributes": {
+            "Name": null,
+            "ObjectID": 0,
+            "Shape_Length": 25366,
+            "Total_DriveTime tourist": 0,
+            "Total_Meters": 25366,
+            "Total_Minutes": 39.05,
+            "Total_Toll_Without_Discount large": 0,
+            "Total_Toll_Without_Discount small": 0,
+            "Total_Toll large": 0,
+            "Total_Toll small": 0,
+            "attributes": [
+              {
+                "key": "MeterFerry",
+                "value": 2705
+              },
+              {
+                "key": "FerryCount",
+                "value": 1
+              },
+              {
+                "key": "TollCount",
+                "value": 0
+              },
+              {
+                "key": "DistanceInZeroEmissionZone",
+                "value": 0
+              }
+            ]
+          },
+          "geometry": {
+            "paths": [
+              [
+                [
+                  92062,
+                  6925028
+                ],
+                [
+                  92085,
+                  6925029
+                ],
+                [
+                  92126,
+                  6925026
+                ],
+                [
+                  92135,
+                  6925026
+                ],
+                [
+                  92143,
+                  6925028
+                ],
+                [
+                  92157,
+                  6925038
+                ],
+                [
+                  92162,
+                  6925051
+                ],
+                [
+                  92168,
+                  6925059
+                ],
+                [
+                  92178,
+                  6925059
+                ],
+                [
+                  92177,
+                  6925045
+                ],
+                [
+                  92172,
+                  6925004
+                ],
+                [
+                  92158,
+                  6924955
+                ],
+                [
+                  92130,
+                  6924884
+                ],
+                [
+                  92123,
+                  6924859
+                ],
+                [
+                  92120,
+                  6924839
+                ],
+                [
+                  92119,
+                  6924823
+                ],
+                [
+                  92119,
+                  6924765
+                ],
+                [
+                  92122,
+                  6924696
+                ],
+                [
+                  92122,
+                  6924662
+                ],
+                [
+                  92120,
+                  6924630
+                ],
+                [
+                  92116,
+                  6924592
+                ],
+                [
+                  92107,
+                  6924511
+                ],
+                [
+                  92099,
+                  6924457
+                ],
+                [
+                  92091,
+                  6924414
+                ],
+                [
+                  92083,
+                  6924380
+                ],
+                [
+                  92072,
+                  6924353
+                ],
+                [
+                  92057,
+                  6924333
+                ],
+                [
+                  92017,
+                  6924303
+                ],
+                [
+                  92013,
+                  6924295
+                ],
+                [
+                  92009,
+                  6924285
+                ],
+                [
+                  92004,
+                  6924261
+                ],
+                [
+                  91995,
+                  6924221
+                ],
+                [
+                  91989,
+                  6924182
+                ],
+                [
+                  91988,
+                  6924139
+                ],
+                [
+                  91988,
+                  6923982
+                ],
+                [
+                  91981,
+                  6923796
+                ],
+                [
+                  91984,
+                  6923741
+                ],
+                [
+                  91991,
+                  6923700
+                ],
+                [
+                  92000,
+                  6923667
+                ],
+                [
+                  92026,
+                  6923610
+                ],
+                [
+                  92045,
+                  6923575
+                ],
+                [
+                  92060,
+                  6923554
+                ],
+                [
+                  92067,
+                  6923548
+                ],
+                [
+                  92080,
+                  6923542
+                ],
+                [
+                  92108,
+                  6923538
+                ],
+                [
+                  92110,
+                  6923542
+                ],
+                [
+                  92117,
+                  6923544
+                ],
+                [
+                  92120,
+                  6923544
+                ],
+                [
+                  92127,
+                  6923540
+                ],
+                [
+                  92190,
+                  6923460
+                ],
+                [
+                  92196,
+                  6923456
+                ],
+                [
+                  92204,
+                  6923458
+                ],
+                [
+                  92206,
+                  6923461
+                ],
+                [
+                  92207,
+                  6923469
+                ],
+                [
+                  92204,
+                  6923476
+                ],
+                [
+                  92184,
+                  6923511
+                ],
+                [
+                  92167,
+                  6923565
+                ],
+                [
+                  92160,
+                  6923584
+                ],
+                [
+                  92149,
+                  6923598
+                ],
+                [
+                  92110,
+                  6923629
+                ],
+                [
+                  92100,
+                  6923639
+                ],
+                [
+                  92089,
+                  6923658
+                ],
+                [
+                  92081,
+                  6923693
+                ],
+                [
+                  92078,
+                  6923715
+                ],
+                [
+                  92078,
+                  6923747
+                ],
+                [
+                  92092,
+                  6923958
+                ],
+                [
+                  92097,
+                  6924006
+                ],
+                [
+                  92106,
+                  6924046
+                ],
+                [
+                  92133,
+                  6924154
+                ],
+                [
+                  92134,
+                  6924172
+                ],
+                [
+                  92128,
+                  6924205
+                ],
+                [
+                  92127,
+                  6924217
+                ],
+                [
+                  92128,
+                  6924225
+                ],
+                [
+                  92131,
+                  6924234
+                ],
+                [
+                  92142,
+                  6924251
+                ],
+                [
+                  92185,
+                  6924297
+                ],
+                [
+                  92202,
+                  6924321
+                ],
+                [
+                  92223,
+                  6924369
+                ],
+                [
+                  92246,
+                  6924411
+                ],
+                [
+                  92320,
+                  6924546
+                ],
+                [
+                  92389,
+                  6924653
+                ],
+                [
+                  92444,
+                  6924725
+                ],
+                [
+                  92500,
+                  6924791
+                ],
+                [
+                  92521,
+                  6924820
+                ],
+                [
+                  92537,
+                  6924845
+                ],
+                [
+                  92605,
+                  6924979
+                ],
+                [
+                  92622,
+                  6925016
+                ],
+                [
+                  92652,
+                  6925088
+                ],
+                [
+                  92665,
+                  6925119
+                ],
+                [
+                  92670,
+                  6925147
+                ],
+                [
+                  92673,
+                  6925160
+                ],
+                [
+                  92678,
+                  6925165
+                ],
+                [
+                  92682,
+                  6925166
+                ],
+                [
+                  92686,
+                  6925164
+                ],
+                [
+                  92689,
+                  6925157
+                ],
+                [
+                  92689,
+                  6925150
+                ],
+                [
+                  92676,
+                  6925084
+                ],
+                [
+                  92644,
+                  6924901
+                ],
+                [
+                  92643,
+                  6924890
+                ],
+                [
+                  92645,
+                  6924884
+                ],
+                [
+                  92649,
+                  6924879
+                ],
+                [
+                  92655,
+                  6924876
+                ],
+                [
+                  92667,
+                  6924880
+                ],
+                [
+                  92683,
+                  6924893
+                ],
+                [
+                  92700,
+                  6924915
+                ],
+                [
+                  92712,
+                  6924934
+                ],
+                [
+                  92724,
+                  6924967
+                ],
+                [
+                  92735,
+                  6925009
+                ],
+                [
+                  92744,
+                  6925048
+                ],
+                [
+                  92747,
+                  6925074
+                ],
+                [
+                  92760,
+                  6925226
+                ],
+                [
+                  92764,
+                  6925257
+                ],
+                [
+                  92775,
+                  6925305
+                ],
+                [
+                  92776,
+                  6925307
+                ],
+                [
+                  92783,
+                  6925325
+                ],
+                [
+                  92792,
+                  6925341
+                ],
+                [
+                  92802,
+                  6925352
+                ],
+                [
+                  92816,
+                  6925363
+                ],
+                [
+                  92817,
+                  6925364
+                ],
+                [
+                  92825,
+                  6925369
+                ],
+                [
+                  92842,
+                  6925383
+                ],
+                [
+                  92848,
+                  6925392
+                ],
+                [
+                  92857,
+                  6925407
+                ],
+                [
+                  92867,
+                  6925432
+                ],
+                [
+                  92889,
+                  6925485
+                ],
+                [
+                  92901,
+                  6925510
+                ],
+                [
+                  92926,
+                  6925548
+                ],
+                [
+                  92943,
+                  6925567
+                ],
+                [
+                  92964,
+                  6925587
+                ],
+                [
+                  93026,
+                  6925638
+                ],
+                [
+                  93047,
+                  6925661
+                ],
+                [
+                  93069,
+                  6925694
+                ],
+                [
+                  93087,
+                  6925735
+                ],
+                [
+                  93129,
+                  6925876
+                ],
+                [
+                  93149,
+                  6925946
+                ],
+                [
+                  93165,
+                  6926064
+                ],
+                [
+                  93173,
+                  6926105
+                ],
+                [
+                  93189,
+                  6926150
+                ],
+                [
+                  93220,
+                  6926223
+                ],
+                [
+                  93226,
+                  6926242
+                ],
+                [
+                  93232,
+                  6926263
+                ],
+                [
+                  93234,
+                  6926285
+                ],
+                [
+                  93235,
+                  6926305
+                ],
+                [
+                  93232,
+                  6926366
+                ],
+                [
+                  93231,
+                  6926407
+                ],
+                [
+                  93236,
+                  6926454
+                ],
+                [
+                  93244,
+                  6926490
+                ],
+                [
+                  93250,
+                  6926511
+                ],
+                [
+                  93260,
+                  6926536
+                ],
+                [
+                  93271,
+                  6926561
+                ],
+                [
+                  93290,
+                  6926597
+                ],
+                [
+                  93321,
+                  6926647
+                ],
+                [
+                  93365,
+                  6926708
+                ],
+                [
+                  93393,
+                  6926745
+                ],
+                [
+                  93416,
+                  6926777
+                ],
+                [
+                  93448,
+                  6926832
+                ],
+                [
+                  93486,
+                  6926909
+                ],
+                [
+                  93493,
+                  6926920
+                ],
+                [
+                  93509,
+                  6926938
+                ],
+                [
+                  93551,
+                  6926977
+                ],
+                [
+                  93561,
+                  6926989
+                ],
+                [
+                  93574,
+                  6927007
+                ],
+                [
+                  93582,
+                  6927024
+                ],
+                [
+                  93586,
+                  6927038
+                ],
+                [
+                  93598,
+                  6927109
+                ],
+                [
+                  93607,
+                  6927129
+                ],
+                [
+                  93624,
+                  6927162
+                ],
+                [
+                  93657,
+                  6927217
+                ],
+                [
+                  93664,
+                  6927227
+                ],
+                [
+                  93708,
+                  6927282
+                ],
+                [
+                  93721,
+                  6927303
+                ],
+                [
+                  93729,
+                  6927322
+                ],
+                [
+                  93734,
+                  6927333
+                ],
+                [
+                  93738,
+                  6927346
+                ],
+                [
+                  93741,
+                  6927354
+                ],
+                [
+                  93757,
+                  6927406
+                ],
+                [
+                  93767,
+                  6927426
+                ],
+                [
+                  93776,
+                  6927439
+                ],
+                [
+                  93784,
+                  6927450
+                ],
+                [
+                  93799,
+                  6927462
+                ],
+                [
+                  93842,
+                  6927495
+                ],
+                [
+                  93857,
+                  6927513
+                ],
+                [
+                  93864,
+                  6927528
+                ],
+                [
+                  93867,
+                  6927534
+                ],
+                [
+                  93881,
+                  6927591
+                ],
+                [
+                  93891,
+                  6927626
+                ],
+                [
+                  93898,
+                  6927640
+                ],
+                [
+                  93904,
+                  6927647
+                ],
+                [
+                  93919,
+                  6927660
+                ],
+                [
+                  93936,
+                  6927669
+                ],
+                [
+                  93991,
+                  6927693
+                ],
+                [
+                  94011,
+                  6927705
+                ],
+                [
+                  94018,
+                  6927713
+                ],
+                [
+                  94031,
+                  6927727
+                ],
+                [
+                  94043,
+                  6927742
+                ],
+                [
+                  94045,
+                  6927744
+                ],
+                [
+                  94076,
+                  6927785
+                ],
+                [
+                  94090,
+                  6927806
+                ],
+                [
+                  94105,
+                  6927833
+                ],
+                [
+                  94121,
+                  6927866
+                ],
+                [
+                  94135,
+                  6927905
+                ],
+                [
+                  94142,
+                  6927922
+                ],
+                [
+                  94144,
+                  6927927
+                ],
+                [
+                  94155,
+                  6927949
+                ],
+                [
+                  94177,
+                  6927977
+                ],
+                [
+                  94211,
+                  6928008
+                ],
+                [
+                  94231,
+                  6928023
+                ],
+                [
+                  94238,
+                  6928030
+                ],
+                [
+                  94241,
+                  6928038
+                ],
+                [
+                  94239,
+                  6928046
+                ],
+                [
+                  94172,
+                  6928122
+                ],
+                [
+                  94161,
+                  6928142
+                ],
+                [
+                  94151,
+                  6928166
+                ],
+                [
+                  94148,
+                  6928180
+                ],
+                [
+                  94147,
+                  6928196
+                ],
+                [
+                  94170,
+                  6928315
+                ],
+                [
+                  94207,
+                  6928435
+                ],
+                [
+                  94598,
+                  6929324
+                ],
+                [
+                  94933,
+                  6929965
+                ],
+                [
+                  95157,
+                  6930272
+                ],
+                [
+                  95193,
+                  6930315
+                ],
+                [
+                  95214,
+                  6930336
+                ],
+                [
+                  95229,
+                  6930347
+                ],
+                [
+                  95253,
+                  6930356
+                ],
+                [
+                  95263,
+                  6930357
+                ],
+                [
+                  95301,
+                  6930357
+                ],
+                [
+                  95325,
+                  6930351
+                ],
+                [
+                  95340,
+                  6930347
+                ],
+                [
+                  95375,
+                  6930334
+                ],
+                [
+                  95380,
+                  6930333
+                ],
+                [
+                  95387,
+                  6930330
+                ],
+                [
+                  95395,
+                  6930327
+                ],
+                [
+                  95412,
+                  6930319
+                ],
+                [
+                  95418,
+                  6930314
+                ],
+                [
+                  95428,
+                  6930311
+                ],
+                [
+                  95434,
+                  6930312
+                ],
+                [
+                  95443,
+                  6930316
+                ],
+                [
+                  95451,
+                  6930324
+                ],
+                [
+                  95452,
+                  6930333
+                ],
+                [
+                  95463,
+                  6930330
+                ],
+                [
+                  95502,
+                  6930320
+                ],
+                [
+                  95571,
+                  6930304
+                ],
+                [
+                  95712,
+                  6930272
+                ],
+                [
+                  95791,
+                  6930256
+                ],
+                [
+                  95848,
+                  6930250
+                ],
+                [
+                  95879,
+                  6930249
+                ],
+                [
+                  95901,
+                  6930251
+                ],
+                [
+                  95923,
+                  6930253
+                ],
+                [
+                  95954,
+                  6930260
+                ],
+                [
+                  95992,
+                  6930271
+                ],
+                [
+                  96082,
+                  6930306
+                ],
+                [
+                  96089,
+                  6930308
+                ],
+                [
+                  96119,
+                  6930321
+                ],
+                [
+                  96180,
+                  6930351
+                ],
+                [
+                  96209,
+                  6930367
+                ],
+                [
+                  96286,
+                  6930413
+                ],
+                [
+                  96302,
+                  6930420
+                ],
+                [
+                  96323,
+                  6930427
+                ],
+                [
+                  96342,
+                  6930430
+                ],
+                [
+                  96359,
+                  6930431
+                ],
+                [
+                  96443,
+                  6930426
+                ],
+                [
+                  96463,
+                  6930426
+                ],
+                [
+                  96497,
+                  6930431
+                ],
+                [
+                  96546,
+                  6930445
+                ],
+                [
+                  96554,
+                  6930448
+                ],
+                [
+                  96619,
+                  6930470
+                ],
+                [
+                  96634,
+                  6930474
+                ],
+                [
+                  96655,
+                  6930476
+                ],
+                [
+                  96688,
+                  6930471
+                ],
+                [
+                  96721,
+                  6930458
+                ],
+                [
+                  96782,
+                  6930424
+                ],
+                [
+                  96813,
+                  6930409
+                ],
+                [
+                  96842,
+                  6930400
+                ],
+                [
+                  96872,
+                  6930398
+                ],
+                [
+                  96891,
+                  6930399
+                ],
+                [
+                  96919,
+                  6930407
+                ],
+                [
+                  97021,
+                  6930454
+                ],
+                [
+                  97054,
+                  6930468
+                ],
+                [
+                  97086,
+                  6930477
+                ],
+                [
+                  97118,
+                  6930483
+                ],
+                [
+                  97164,
+                  6930492
+                ],
+                [
+                  97203,
+                  6930504
+                ],
+                [
+                  97237,
+                  6930521
+                ],
+                [
+                  97273,
+                  6930547
+                ],
+                [
+                  97276,
+                  6930549
+                ],
+                [
+                  97325,
+                  6930588
+                ],
+                [
+                  97366,
+                  6930624
+                ],
+                [
+                  97394,
+                  6930653
+                ],
+                [
+                  97434,
+                  6930698
+                ],
+                [
+                  97444,
+                  6930710
+                ],
+                [
+                  97453,
+                  6930719
+                ],
+                [
+                  97455,
+                  6930721
+                ],
+                [
+                  97456,
+                  6930722
+                ],
+                [
+                  97457,
+                  6930724
+                ],
+                [
+                  97469,
+                  6930737
+                ],
+                [
+                  97506,
+                  6930771
+                ],
+                [
+                  97518,
+                  6930782
+                ],
+                [
+                  97565,
+                  6930822
+                ],
+                [
+                  97645,
+                  6930892
+                ],
+                [
+                  97662,
+                  6930902
+                ],
+                [
+                  97695,
+                  6930917
+                ],
+                [
+                  97791,
+                  6930941
+                ],
+                [
+                  97817,
+                  6930950
+                ],
+                [
+                  97913,
+                  6930994
+                ],
+                [
+                  98073,
+                  6931057
+                ],
+                [
+                  98088,
+                  6931065
+                ],
+                [
+                  98101,
+                  6931076
+                ],
+                [
+                  98156,
+                  6931127
+                ],
+                [
+                  98227,
+                  6931178
+                ],
+                [
+                  98305,
+                  6931231
+                ],
+                [
+                  98427,
+                  6931300
+                ],
+                [
+                  98534,
+                  6931376
+                ],
+                [
+                  98567,
+                  6931392
+                ],
+                [
+                  98596,
+                  6931402
+                ],
+                [
+                  98631,
+                  6931409
+                ],
+                [
+                  98662,
+                  6931411
+                ],
+                [
+                  98722,
+                  6931411
+                ],
+                [
+                  98725,
+                  6931436
+                ],
+                [
+                  98732,
+                  6931454
+                ],
+                [
+                  98745,
+                  6931474
+                ],
+                [
+                  98775,
+                  6931511
+                ],
+                [
+                  98786,
+                  6931533
+                ],
+                [
+                  98803,
+                  6931579
+                ],
+                [
+                  98831,
+                  6931667
+                ],
+                [
+                  98836,
+                  6931674
+                ],
+                [
+                  98849,
+                  6931687
+                ],
+                [
+                  98881,
+                  6931708
+                ],
+                [
+                  98893,
+                  6931719
+                ],
+                [
+                  98901,
+                  6931731
+                ],
+                [
+                  98906,
+                  6931744
+                ],
+                [
+                  98910,
+                  6931760
+                ],
+                [
+                  98910,
+                  6931793
+                ],
+                [
+                  98906,
+                  6931810
+                ],
+                [
+                  98912,
+                  6931816
+                ],
+                [
+                  98915,
+                  6931822
+                ],
+                [
+                  98910,
+                  6931859
+                ],
+                [
+                  98909,
+                  6931917
+                ],
+                [
+                  98913,
+                  6931951
+                ],
+                [
+                  98938,
+                  6932105
+                ],
+                [
+                  98941,
+                  6932153
+                ],
+                [
+                  98938,
+                  6932213
+                ],
+                [
+                  98938,
+                  6932252
+                ],
+                [
+                  98942,
+                  6932300
+                ],
+                [
+                  98942,
+                  6932325
+                ],
+                [
+                  98943,
+                  6932338
+                ],
+                [
+                  98957,
+                  6932390
+                ],
+                [
+                  98978,
+                  6932444
+                ],
+                [
+                  98990,
+                  6932477
+                ],
+                [
+                  98995,
+                  6932489
+                ],
+                [
+                  98999,
+                  6932495
+                ],
+                [
+                  99005,
+                  6932497
+                ],
+                [
+                  99008,
+                  6932496
+                ],
+                [
+                  99003,
+                  6932484
+                ],
+                [
+                  98999,
+                  6932472
+                ],
+                [
+                  98992,
+                  6932412
+                ],
+                [
+                  98987,
+                  6932355
+                ],
+                [
+                  98986,
+                  6932308
+                ],
+                [
+                  98988,
+                  6932296
+                ],
+                [
+                  98991,
+                  6932291
+                ],
+                [
+                  98997,
+                  6932289
+                ],
+                [
+                  99005,
+                  6932288
+                ],
+                [
+                  99041,
+                  6932290
+                ],
+                [
+                  99049,
+                  6932290
+                ],
+                [
+                  99038,
+                  6932338
+                ],
+                [
+                  99036,
+                  6932352
+                ],
+                [
+                  99039,
+                  6932370
+                ],
+                [
+                  99045,
+                  6932381
+                ],
+                [
+                  99050,
+                  6932387
+                ],
+                [
+                  99064,
+                  6932398
+                ],
+                [
+                  99080,
+                  6932407
+                ],
+                [
+                  99112,
+                  6932420
+                ],
+                [
+                  99136,
+                  6932426
+                ],
+                [
+                  99186,
+                  6932431
+                ],
+                [
+                  99223,
+                  6932438
+                ],
+                [
+                  99344,
+                  6932469
+                ],
+                [
+                  99352,
+                  6932469
+                ],
+                [
+                  99398,
+                  6932487
+                ],
+                [
+                  99437,
+                  6932509
+                ],
+                [
+                  99474,
+                  6932528
+                ],
+                [
+                  99509,
+                  6932544
+                ],
+                [
+                  99588,
+                  6932574
+                ],
+                [
+                  99609,
+                  6932583
+                ],
+                [
+                  99625,
+                  6932594
+                ],
+                [
+                  99681,
+                  6932645
+                ],
+                [
+                  99705,
+                  6932664
+                ],
+                [
+                  99747,
+                  6932691
+                ],
+                [
+                  99776,
+                  6932706
+                ],
+                [
+                  99807,
+                  6932718
+                ],
+                [
+                  99839,
+                  6932725
+                ],
+                [
+                  99875,
+                  6932728
+                ],
+                [
+                  99921,
+                  6932730
+                ],
+                [
+                  99935,
+                  6932732
+                ],
+                [
+                  99949,
+                  6932737
+                ],
+                [
+                  99974,
+                  6932751
+                ],
+                [
+                  100014,
+                  6932779
+                ],
+                [
+                  100030,
+                  6932794
+                ],
+                [
+                  100044,
+                  6932810
+                ],
+                [
+                  100096,
+                  6932901
+                ],
+                [
+                  100117,
+                  6932930
+                ],
+                [
+                  100141,
+                  6932948
+                ],
+                [
+                  100168,
+                  6932962
+                ],
+                [
+                  100221,
+                  6932977
+                ],
+                [
+                  100251,
+                  6932988
+                ],
+                [
+                  100288,
+                  6933005
+                ],
+                [
+                  100336,
+                  6933026
+                ],
+                [
+                  100372,
+                  6933036
+                ],
+                [
+                  100409,
+                  6933038
+                ],
+                [
+                  100454,
+                  6933031
+                ],
+                [
+                  100550,
+                  6933013
+                ],
+                [
+                  100569,
+                  6933005
+                ],
+                [
+                  100619,
+                  6932970
+                ],
+                [
+                  100758,
+                  6932891
+                ],
+                [
+                  100782,
+                  6932872
+                ],
+                [
+                  100827,
+                  6932830
+                ],
+                [
+                  100854,
+                  6932814
+                ],
+                [
+                  100871,
+                  6932807
+                ],
+                [
+                  100890,
+                  6932803
+                ],
+                [
+                  100918,
+                  6932801
+                ],
+                [
+                  100946,
+                  6932803
+                ],
+                [
+                  100959,
+                  6932806
+                ],
+                [
+                  100979,
+                  6932813
+                ],
+                [
+                  101000,
+                  6932824
+                ],
+                [
+                  101024,
+                  6932840
+                ],
+                [
+                  101036,
+                  6932854
+                ],
+                [
+                  101039,
+                  6932864
+                ],
+                [
+                  101039,
+                  6932866
+                ],
+                [
+                  101038,
+                  6932870
+                ],
+                [
+                  101032,
+                  6932879
+                ],
+                [
+                  101017,
+                  6932898
+                ],
+                [
+                  101010,
+                  6932908
+                ],
+                [
+                  101005,
+                  6932921
+                ],
+                [
+                  101002,
+                  6932936
+                ],
+                [
+                  100999,
+                  6932972
+                ],
+                [
+                  101005,
+                  6933025
+                ],
+                [
+                  101016,
+                  6933072
+                ],
+                [
+                  101031,
+                  6933114
+                ],
+                [
+                  101063,
+                  6933176
+                ],
+                [
+                  101079,
+                  6933202
+                ],
+                [
+                  101098,
+                  6933227
+                ],
+                [
+                  101109,
+                  6933239
+                ],
+                [
+                  101137,
+                  6933264
+                ],
+                [
+                  101164,
+                  6933284
+                ],
+                [
+                  101186,
+                  6933297
+                ],
+                [
+                  101214,
+                  6933310
+                ],
+                [
+                  101243,
+                  6933321
+                ],
+                [
+                  101301,
+                  6933338
+                ],
+                [
+                  101362,
+                  6933356
+                ],
+                [
+                  101453,
+                  6933385
+                ],
+                [
+                  101573,
+                  6933423
+                ],
+                [
+                  101622,
+                  6933436
+                ],
+                [
+                  101754,
+                  6933467
+                ],
+                [
+                  101851,
+                  6933493
+                ],
+                [
+                  101900,
+                  6933507
+                ],
+                [
+                  101931,
+                  6933517
+                ],
+                [
+                  102000,
+                  6933547
+                ],
+                [
+                  102224,
+                  6933645
+                ],
+                [
+                  102304,
+                  6933678
+                ],
+                [
+                  102386,
+                  6933709
+                ],
+                [
+                  102447,
+                  6933730
+                ],
+                [
+                  102476,
+                  6933741
+                ],
+                [
+                  102501,
+                  6933757
+                ],
+                [
+                  102517,
+                  6933773
+                ],
+                [
+                  102531,
+                  6933792
+                ],
+                [
+                  102547,
+                  6933819
+                ],
+                [
+                  102561,
+                  6933848
+                ],
+                [
+                  102598,
+                  6933926
+                ],
+                [
+                  102620,
+                  6933965
+                ],
+                [
+                  102636,
+                  6933986
+                ],
+                [
+                  102649,
+                  6933999
+                ],
+                [
+                  102699,
+                  6934046
+                ],
+                [
+                  102710,
+                  6934057
+                ],
+                [
+                  102833,
+                  6934172
+                ],
+                [
+                  102967,
+                  6934298
+                ],
+                [
+                  103118,
+                  6934437
+                ],
+                [
+                  103144,
+                  6934455
+                ],
+                [
+                  103170,
+                  6934467
+                ],
+                [
+                  103194,
+                  6934474
+                ],
+                [
+                  103240,
+                  6934482
+                ],
+                [
+                  103304,
+                  6934487
+                ],
+                [
+                  103520,
+                  6934487
+                ],
+                [
+                  103531,
+                  6934487
+                ],
+                [
+                  103557,
+                  6934487
+                ],
+                [
+                  103644,
+                  6934488
+                ],
+                [
+                  103663,
+                  6934489
+                ],
+                [
+                  103694,
+                  6934495
+                ],
+                [
+                  103698,
+                  6934496
+                ],
+                [
+                  103722,
+                  6934503
+                ],
+                [
+                  103747,
+                  6934514
+                ],
+                [
+                  103775,
+                  6934531
+                ],
+                [
+                  103855,
+                  6934587
+                ],
+                [
+                  103871,
+                  6934595
+                ],
+                [
+                  103895,
+                  6934603
+                ],
+                [
+                  103918,
+                  6934607
+                ],
+                [
+                  103923,
+                  6934607
+                ],
+                [
+                  103940,
+                  6934608
+                ],
+                [
+                  103974,
+                  6934610
+                ],
+                [
+                  103994,
+                  6934614
+                ],
+                [
+                  104032,
+                  6934624
+                ],
+                [
+                  104051,
+                  6934632
+                ],
+                [
+                  104148,
+                  6934679
+                ],
+                [
+                  104189,
+                  6934698
+                ],
+                [
+                  104251,
+                  6934724
+                ],
+                [
+                  104296,
+                  6934736
+                ],
+                [
+                  104339,
+                  6934745
+                ],
+                [
+                  104448,
+                  6934759
+                ],
+                [
+                  104484,
+                  6934764
+                ],
+                [
+                  104572,
+                  6934772
+                ],
+                [
+                  104637,
+                  6934774
+                ],
+                [
+                  104702,
+                  6934770
+                ],
+                [
+                  104750,
+                  6934760
+                ],
+                [
+                  104783,
+                  6934748
+                ],
+                [
+                  104884,
+                  6934703
+                ],
+                [
+                  104922,
+                  6934692
+                ],
+                [
+                  105013,
+                  6934674
+                ],
+                [
+                  105102,
+                  6934656
+                ],
+                [
+                  105130,
+                  6934649
+                ],
+                [
+                  105297,
+                  6934604
+                ],
+                [
+                  105337,
+                  6934593
+                ],
+                [
+                  105420,
+                  6934571
+                ],
+                [
+                  105453,
+                  6934564
+                ],
+                [
+                  105509,
+                  6934556
+                ],
+                [
+                  105572,
+                  6934552
+                ],
+                [
+                  105624,
+                  6934553
+                ],
+                [
+                  105679,
+                  6934559
+                ],
+                [
+                  105795,
+                  6934585
+                ],
+                [
+                  105874,
+                  6934603
+                ],
+                [
+                  105887,
+                  6934605
+                ],
+                [
+                  105997,
+                  6934630
+                ],
+                [
+                  106061,
+                  6934647
+                ],
+                [
+                  106129,
+                  6934671
+                ],
+                [
+                  106200,
+                  6934701
+                ],
+                [
+                  106218,
+                  6934712
+                ],
+                [
+                  106241,
+                  6934727
+                ],
+                [
+                  106258,
+                  6934744
+                ],
+                [
+                  106269,
+                  6934758
+                ],
+                [
+                  106284,
+                  6934786
+                ],
+                [
+                  106332,
+                  6934892
+                ],
+                [
+                  106345,
+                  6934910
+                ],
+                [
+                  106356,
+                  6934919
+                ],
+                [
+                  106354,
+                  6934922
+                ],
+                [
+                  106354,
+                  6934934
+                ],
+                [
+                  106361,
+                  6934971
+                ],
+                [
+                  106364,
+                  6935007
+                ],
+                [
+                  106394,
+                  6935169
+                ],
+                [
+                  106404,
+                  6935201
+                ],
+                [
+                  106411,
+                  6935214
+                ],
+                [
+                  106429,
+                  6935240
+                ],
+                [
+                  106442,
+                  6935253
+                ],
+                [
+                  106467,
+                  6935271
+                ],
+                [
+                  106533,
+                  6935310
+                ],
+                [
+                  106617,
+                  6935372
+                ],
+                [
+                  106635,
+                  6935387
+                ],
+                [
+                  106661,
+                  6935412
+                ],
+                [
+                  106710,
+                  6935466
+                ],
+                [
+                  106726,
+                  6935476
+                ],
+                [
+                  106743,
+                  6935482
+                ],
+                [
+                  106776,
+                  6935486
+                ],
+                [
+                  106847,
+                  6935522
+                ],
+                [
+                  106872,
+                  6935535
+                ],
+                [
+                  106898,
+                  6935540
+                ],
+                [
+                  106944,
+                  6935544
+                ]
+              ]
+            ]
+          },
+          "geometrysimple": null,
+          "nvdbreferences": null
+        }
+      ]
+    }
+  }

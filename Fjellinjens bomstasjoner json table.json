@@ -1,0 +1,90 @@
+{
+    "Tariff Group 1": {
+        "Without AutoPASS": {
+            "Petrol/rechargeable hybrid": {
+                "Except rush hour": "NOK 29",
+                "During rush hour": "NOK 35"
+            },
+            "Diesel": {
+                "Except rush hour": "NOK 33",
+                "During rush hour": "NOK 38"
+            },
+            "Electric car": {
+                "Except rush hour": "NOK 14",
+                "During rush hour": "NOK 17"
+            }
+        },
+        "With AutoPASS": {
+            "Petrol/rechargeable hybrid": {
+                "Except rush hour": "NOK 23.20",
+                "During rush hour": "NOK 28"
+            },
+            "Diesel": {
+                "Except rush hour": "NOK 26.40",
+                "During rush hour": "NOK 30.40"
+            },
+            "Electric car": {
+                "Except rush hour": "NOK 11.20",
+                "During rush hour": "NOK 13.60"
+            }
+        }
+    },
+    "Tariff Group 2": {
+        "Without AutoPASS": {
+            "Euro 5 and older": {
+                "Except rush hour": "NOK 91",
+                "During rush hour": "NOK 108"
+            },
+            "Euro 6": {
+                "Except rush hour": "NOK 51",
+                "During rush hour": "NOK 68"
+            },
+            "Zero emissions and gas": {
+                "Except rush hour": "NOK 0",
+                "During rush hour": "NOK 0"
+            }
+        },
+        "With AutoPASS": {
+            "Euro 5 and older": {
+                "Except rush hour": "NOK 91",
+                "During rush hour": "NOK 108"
+            },
+            "Euro 6": {
+                "Except rush hour": "NOK 51",
+                "During rush hour": "NOK 68"
+            },
+            "Zero emissions and gas": {
+                "Except rush hour": "NOK 0",
+                "During rush hour": "NOK 0"
+            }
+        }
+    },
+    "AutoPASS Discount": {
+        "Rate Group 1": "20%",
+        "Rate Group 2": "None"
+    },
+    "Passing in Rush Hour": {
+        "Time Periods": [
+            "06.30 - 09.00",
+            "15.00 - 17.00"
+        ],
+        "Surcharges not Charged": [
+            "Saturdays",
+            "Sundays",
+            "Official Holidays",
+            "July"
+        ]
+    },
+    "Exceptions": {
+        "Plug-in hybrids in rate group 1": "Charged as petrol cars",
+        "Plug-in hybrids in tariff group 2": "Charged as Euro VI",
+        "Hydrogen cars in both tariff groups": "Exempt from payment",
+        "All electric vans in rate group 1 with a valid AutoPASS agreement": "Drive for free from 1 January 2021"
+    },
+    "Toll Stations": {
+        "Price": "The price is the same in all Fjellinjen's toll stations",
+        "Collection Direction": "Only collection at toll stations in the direction towards Oslo, and in Oslo",
+        "Inner Ring and Oslo Ring": "Two-way payment",
+        "Bygrensen": "One-way payment (into Oslo)"
+    }
+}

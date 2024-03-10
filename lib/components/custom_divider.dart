@@ -3,7 +3,7 @@ import 'package:new_trip_start/constants.dart';
 
 
 class CustomDivider extends StatelessWidget {
-  const CustomDivider({Key? key}) : super(key: key);
+  const CustomDivider({super.key});
 
   @override
   Widget build(BuildContext context) {

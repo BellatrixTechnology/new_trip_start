@@ -15,6 +15,7 @@ class Vehicle {
   final String? docId;
   final String? fuelTypeid;
   final String? vehicleGroup;
+  bool? isSelected;
 
   Vehicle(
       {this.regNum,
@@ -30,7 +31,8 @@ class Vehicle {
       this.docId,
       this.fuelTypeid,
       this.userId,
-      this.vehicleGroup});
+      this.vehicleGroup,
+      this.isSelected});
 
   factory Vehicle.fromFirestore(
     DocumentSnapshot<Map<String, dynamic>> snapshot,
@@ -52,7 +54,8 @@ class Vehicle {
         userId: data?['userId'],
         fuelTypeid: data?['fuelTypeid'],
         docId: snapshot.id,
-        vehicleGroup: data?['vehicleGroup']);
+        vehicleGroup: data?['vehicleGroup'],
+        isSelected: data?['isSelected']);
   }
 
   Map<String, dynamic> toFirestore() {
@@ -70,6 +73,26 @@ class Vehicle {
       if (userId != null) "userId": userId,
       if (fuelTypeid != null) "fuelTypeid": fuelTypeid,
       if (vehicleGroup != null) "vehicleGroup": vehicleGroup,
+      if (isSelected != null) "isSelected": isSelected
     };
+  }
+
+  factory Vehicle.fromJson(Map<String, dynamic> json) {
+    return Vehicle(
+        regNum: json['regNum'],
+        vehBrand: json['vehBrand'],
+        vehFuelCmp: json['vehFuelCmp'],
+        vehLength: json['vehLength'],
+        vehWeight: json['vehWeight'],
+        vehClass: json['vehClass'],
+        vehFuelType: json['vehFuelType'],
+        color: json['color'],
+        createdAt: json['createdAt'],
+        updatedAt: json['updatedAt'],
+        userId: json['userId'],
+        fuelTypeid: json['fuelTypeid'],
+
+        vehicleGroup: json['vehicleGroup'],
+        isSelected: json['isSelected']);
   }
 }

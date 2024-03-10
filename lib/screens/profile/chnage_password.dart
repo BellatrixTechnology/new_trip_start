@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:new_trip_start/components/app_button.dart';
 import 'package:new_trip_start/components/app_input.dart';
 import 'package:new_trip_start/components/app_underline_text.dart';
@@ -32,29 +33,29 @@ class ChangePasswordScreen extends StatelessWidget {
                     logoWidthHeight: 70,
                   ),
                   const CustomSpacer(spaceValue: 30),
-                  const UnderlineText(text: 'Chnage Password'),
+                  UnderlineText(text: 'Chnage Password'.tr),
                   const CustomSpacer(spaceValue: 30),
-                  const AppInput(
-                      hintText: 'Old Password',
-                      icon: Center(
+                  AppInput(
+                      hintText: 'Old Password'.tr,
+                      icon: const Center(
                         child: CustomSurffixIcon(
                           svgIcon: 'assets/icons/password.svg',
                           size: 15,
                         ),
                       ),
-                      suffixicon: Icon(CupertinoIcons.eye)
+                      suffixicon: const Icon(CupertinoIcons.eye)
                       // CustomSurffixIcon(svgIcon: 'assets/icons/eye-off.svg'),
                       ),
                   const CustomSpacer(spaceValue: 10),
-                  const AppInput(
-                      hintText: 'New Password',
-                      icon: Center(
+                  AppInput(
+                      hintText: 'New Password'.tr,
+                      icon: const Center(
                         child: CustomSurffixIcon(
                           svgIcon: 'assets/icons/password.svg',
                           size: 15,
                         ),
                       ),
-                      suffixicon: Icon(CupertinoIcons.eye)),
+                      suffixicon: const Icon(CupertinoIcons.eye)),
                   const CustomSpacer(spaceValue: 10),
                   const AppInput(
                       hintText: 'Confirm New Password',
@@ -72,9 +73,9 @@ class ChangePasswordScreen extends StatelessWidget {
                       AppBottomModal().bottomSheet(
                         context,
                         null,
-                        'Password Chnaged',
-                        'Your password has been changed successfully. Please login into your account again.',
-                        'Ok',
+                        'Password Changed'.tr,
+                        'Your password has been changed successfully. Please login into your account again.'.tr,
+                        'OK'.tr,
                       );
                     },
                     showLoader: false,

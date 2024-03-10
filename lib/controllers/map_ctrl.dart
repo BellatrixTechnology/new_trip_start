@@ -1,26 +1,39 @@
-import 'dart:async';
-import 'dart:developer';
-import 'dart:ui';
-
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:latlong_to_osgrid/latlong_to_osgrid.dart';
+
 import 'package:new_trip_start/constants.dart';
+
+import 'package:new_trip_start/controllers/tab_ctrl.dart';
 import 'package:new_trip_start/models/places.model.dart';
+import 'package:new_trip_start/models/vehicle.model.dart';
 import 'package:new_trip_start/services/index.dart';
-import 'package:utm/utm.dart';
+// import 'package:new_trip_start/utils/polyline_decoder.dart';
+
 import 'package:xml/xml.dart';
+// import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapController extends GetxController {
-  RxList<Marker> markersList = RxList([]);
-  List<LatLng> polylineCoordinates = [];
+  // RxList<Marker> markersList = RxList([]);
+  RxSet<Marker> markersList = RxSet({});
+  // List<LatLng> polylineCoordinates = [];
   RxSet<Polyline> polylines = RxSet({});
-  late PolylinePoints polylinePoints;
+
+  PolylinePoints polylinePoints = PolylinePoints();
+  // var da =
+  // {
+  //   "origin": "59.9138688,10.7522454",
+  //   "destination": "63.4305149,10.3950528",
+  //   "vehicleGroup": "M1",
+  //   "vehFuelType": "petrol",
+  //   "vehFuelCmp": 0.385,
+  //   "cache": true,
+  //   "vehLength": 3.91,
+  //   "type": "gas",
+  //   "travelMode": "driving"
+  // };
 
   late BitmapDescriptor destIcon;
   late BitmapDescriptor startIcon;
@@ -31,303 +44,441 @@ class MapController extends GetxController {
   List<dynamic> directions = [];
   List<dynamic> tolls = [];
   RxList<Map> summary = RxList([]);
-  Place startPlace = Place();
-  Place endPlace = Place();
-  late GoogleMapController controller;
+  List<LatLng> polylineCoordinates = [];
+
+  GooglePlacesModel startPlace =
+      GooglePlacesModel(description: "", placeId: "");
+  GooglePlacesModel endPlace = GooglePlacesModel(description: "", placeId: "");
 
   var autopass = true.obs;
+  var rushHour = true.obs;
 
-  @override
-  void onInit() async {
-    super.onInit();
+  late GoogleMapController controller;
+  GoogleMapController? mapController;
+  BottomTabController tabController = Get.put(BottomTabController());
+
+  var isFetching = false.obs;
+
+  var routeData = [].obs;
+
+  List rr = [];
+  // var tolls = [0];
+  Rx<Vehicle> carData = Vehicle().obs;
+
+  toggleisFetching() {
+    isFetching.toggle();
+    update();
   }
 
-  getData(String stops) async {
-    var response = await srvApi.getRouteData(stops);
-    // "278533.80079608515,6658558.8728278065;93895.00050445361,6909396.81459309");
-    //  .then((response) async {
-    polylineCoordinates = [];
+  // Future<void> getDateAndManipulateHere() async {
+  //   debugPrint("api called");
+  //   var response = await srvApi.getRouteData(
+  //       startPlace.position!, endPlace.position!, carData.value);
+  //   debugPrint("api called 2");
+  //   if (response.statusCode == 200) {
+  //     routeData.value = response.data['data'];
+  //     debugPrint("api called 3 ${routeData.isNotEmpty}");
+  //     if (routeData.isNotEmpty) {
+  //       for (var element in routeData) {
+  //         polylineCoordinates = [];
+  //         polylineCoordinates.clear();
+  //         debugPrint("api called 4 ${element['coordinates'].length}");
+  //         for (var point in element['coordinates']) {
+  //           polylineCoordinates
+  //               .add(LatLng(point['latitude'], point['longitude']));
+  //         }
+  //         debugPrint("api called 5 ${polylineCoordinates.length}");
+  //         PolylineId id =
+  //             PolylineId('${DateTime.now().millisecondsSinceEpoch}');
+  //         polylines.add(Polyline(
+  //             polylineId: id,
+  //             color: kPrimaryColor,
+  //             points: polylineCoordinates,
+  //             width: 3,
+  //             consumeTapEvents: true,
+  //             onTap: () {}));
+  //       }
+  //     } else {
+  //       srvToastAlert.toast("No Route Found");
+  //     }
+  //   }
+  // }
+
+  getData() async {
+    // if (kReleaseMode)
+    // Future.delayed(const Duration(seconds: 5), () {
+    //   srvToastAlert.loaderPopup();
+    // });
+    // toggleisFetching();
+    // srvLoader.showLoader();
+    srvToastAlert.loaderPopup(globalContext);
+
     polylines = RxSet({});
-    update();
-    refresh();
+    polylineCoordinates = [];
+    markersList.clear();
+    markersList = RxSet({});
 
-    features = response.data['routes']['features'];
-    directions = response.data['directions'];
+    // Future.delayed(const Duration(seconds: 10), () {
+    //   print("called");
+    //   srvToastAlert.closePopup();
+    // });
+    // return;
+    var response = await srvApi.getRouteData(
+        startPlace.position!, endPlace.position!, carData.value);
 
-    for (var i = 0; i < features.length; i++) {
-      var feature = features[i];
-      Map<String, dynamic> direction = directions[i];
+    // ignore: use_build_context_synchronously
+    Navigator.of(globalContext, rootNavigator: true).pop();
 
-      var summary = await getFuelPrice(
-          feature['attributes']['Total_Meters'].toDouble(),
-          feature['attributes']['Total_Toll small'].toString(),
-          i);
+    // toggleisFetching();
+    // srvLoader.hideLoader();
+    // print("response $response");
+    // if (kReleaseMode)
+    // srvPageRoute.goBack(globalContext);
+    // Get.back(closeOverlays: true);
 
-      feature['attributes']['summary'] = summary;
+    if (response.statusCode == 200) {
+      if (response.data['data'] == null) {
+        srvToastAlert.toast("No Route Found");
+        return;
+      }
+      if (response.data['data'].length > 0) {
+        routeData = RxList(response.data['data']);
+        addPolylines();
+      } else {
+        srvToastAlert.toast("No Route Found");
+      }
+    }
+  }
 
-      // Convert the UTM coordinates to WGS84 lat/long coordinates
-      var path = feature['geometry']['paths'][0];
-      List<dynamic> latLngList = path.map((point) {
-        int easting = point[0];
-        int northing = point[1];
-        UtmCoordinate coordinate =
-            srvOsGridConverter.utmToLatlong(easting, northing);
-        double latitude = coordinate.lat;
-        double longitude =
-            coordinate.lon; // convert UTM easting/northing to WGS84 longitude
-        return [latitude, longitude];
+  addPolylines() async {
+    List<Map> tollsCount = [];
+    // print(routeData.length);
+    for (var i = 0; i < routeData.length; i++) {
+      // names.add(routeData[i]['coordinates']['data']);
+      // print(routeData[i]['coordinates']);
+      if (routeData[i]['coordinates'] == null) {
+        decodeAndShowPolylines();
+        break;
+      }
+
+      // data['tolls'].length
+      tollsCount.add({
+        "routeName": routeData[i]['summary'],
+        "tollCount": routeData[i]['tolls'].length,
+      });
+      List<LatLng> points =
+          (routeData[i]['coordinates']['data'] as List<dynamic>)
+              .map<LatLng>((dynamic e) {
+        if (e is Map<String, dynamic> &&
+            e.containsKey('latitude') &&
+            e.containsKey('longitude')) {
+          return LatLng(srvShared.anyTypeToDouble(e['latitude']),
+              srvShared.anyTypeToDouble(e['longitude']));
+        } else {
+          throw FormatException('Invalid coordinate format: $e');
+        }
       }).toList();
 
-      polylineCoordinates = [];
-      polylineCoordinates.clear();
-      for (var point in latLngList) {
-        polylineCoordinates.add(LatLng(point[0], point[1]));
-      }
-
-      PolylineId id = PolylineId(direction['routeName']);
-      Polyline polyline = Polyline(
-        polylineId: id,
-        color: kPrimaryColor,
-        points: polylineCoordinates,
-        width: 3,
-      );
-
-      polylines.add(polyline);
-
-      List<dynamic> dirfeatures = direction['features'];
-      for (var attributes in dirfeatures) {
-        if (attributes['attributes']['roadFeatures'] != null) {
-          List<dynamic> att = attributes['attributes']['roadFeatures'];
-          for (var i = 0; i < att.length; i++) {
-            if (att[i]['attributeType'] == 'nvdb:bomstasjon') {
-              UtmCoordinate coordinate = srvOsGridConverter.utmToLatlong(
-                  att[i]['location'][0]['easting'],
-                  att[i]['location'][0]['northing']);
-              tolls.add({
-                "latLng": LatLng(coordinate.lat, coordinate.lon),
-                "att": att[i]
-              });
-            }
-          }
-        }
-      }
+      PolylineId id = PolylineId('${DateTime.now().millisecondsSinceEpoch}');
+      polylines.add(Polyline(
+          polylineId: id,
+          color: kPrimaryColor,
+          points: points,
+          width: 3,
+          consumeTapEvents: true,
+          onTap: () {}));
     }
-    // });
+    print("polylines.length ${polylines.length}");
     polylines.refresh();
     update();
-    refresh();
     addMarkerstoMap();
+    addLog(tollsCount);
   }
 
-  addMarkerstoMap() async {
-    Uint8List tollIcon = await toMarkerIcon(
-        '<svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><linearGradient id="paint0_linear_302_20" x1="25" y1="0" x2="25" y2="50" gradientUnits="userSpaceOnUse"><stop stop-color="#149BD7"/><stop offset="1" stop-color="#2F4D99"/></linearGradient><path d="M0 9.09091C0 4.07014 4.07014 0 9.09091 0H40.9091C45.9299 0 50 4.07014 50 9.09091V40.9091C50 45.9299 45.9299 50 40.9091 50H9.09091C4.07014 50 0 45.9299 0 40.9091V9.09091Z" fill="url(#paint0_linear_302_20)"/><path d="M43.1818 25C43.1818 35.0415 35.0415 43.1818 25 43.1818C14.9585 43.1818 6.81818 35.0415 6.81818 25C6.81818 14.9585 14.9585 6.81818 25 6.81818C35.0415 6.81818 43.1818 14.9585 43.1818 25Z" fill="white"/><path d="M24.8545 31.8182L21.0182 25.6727L19.2727 27.8V31.8182H17.2909V19.0909H19.2727V25.1636L24.1455 19.0909H26.4545L22.3273 24.1091L27.0364 31.8182H24.8545Z" fill="#0146AB"/><path d="M28.3649 24.9455C28.3649 23.9152 28.3467 23.1758 28.3104 22.7273H30.0013C30.0498 23.2121 30.074 23.7455 30.074 24.3273V24.5091H30.1285C30.371 23.8909 30.7528 23.4121 31.274 23.0727C31.8073 22.7212 32.4316 22.5455 33.1467 22.5455C33.3407 22.5455 33.5164 22.5636 33.674 22.6V24.0545C33.5892 24.0303 33.4013 24.0182 33.1104 24.0182C32.577 24.0182 32.0801 24.1758 31.6195 24.4909C31.171 24.7939 30.8134 25.2121 30.5467 25.7455C30.2922 26.2667 30.1649 26.8424 30.1649 27.4727V31.8182H28.3649V24.9455Z" fill="#0146AB"/><defs></defs></svg>',
-        60,
-        60);
+  addLog(List name) {
+    srvAnalytics.addLog("request", {
+      "routeData": name.toString(),
+      "start": startPlace.description,
+      "end": endPlace.description,
+      "start_lat": startPlace.position!.lat,
+      "start_lng": startPlace.position!.lng
+    });
+  }
 
-    final BitmapDescriptor svgMarker = BitmapDescriptor.fromBytes(tollIcon);
-    markersList.clear();
-    markersList = RxList([]);
-    markersList.refresh();
-    update();
-    refresh();
-    for (var element in tolls) {
-      markersList.add(
-        Marker(
-            markerId:
-                MarkerId(element['att']['distanceAlongSegment'].toString()),
-            icon: svgMarker,
-            position: element['latLng']),
-      );
+  decodeAndShowPolylines() {
+    List<Map> tollsCount = [];
+    for (var route in routeData) {
+      // print("object");
+      List<LatLng> points = [];
+      for (var i = 0; i < route['geometry'].length; i++) {
+        points.addAll(polylinePoints
+            .decodePolyline(route['geometry'][i].toString())
+            .map((e) => LatLng(e.latitude, e.longitude))
+            .toList());
+      }
+      PolylineId id = PolylineId('${DateTime.now().millisecondsSinceEpoch}');
+      polylines.add(Polyline(
+          polylineId: id,
+          color: kPrimaryColor,
+          points: points,
+          width: 3,
+          consumeTapEvents: true,
+          onTap: () {}));
+
+      tollsCount.add({
+        "routeName": route['summary'],
+        "tollCount": route['tolls'].length,
+      });
     }
+    polylines.refresh();
+    update();
+    addMarkerstoMap();
+    addLog(tollsCount);
+  }
+
+  removeAllMarkers(Function onCallback) {
+    markersList.clear();
+    markersList = RxSet({});
     markersList.refresh();
-    addStartMarker(startPlace.position!);
-    endStartMarker(endPlace.position!);
     update();
     refresh();
+    onCallback();
   }
 
-  Future<Uint8List> toMarkerIcon(
-      String svgString, double width, double height) async {
-    final DrawableRoot svgDrawableRoot = await svg.fromSvgString(svgString, "");
-    final Picture picture =
-        svgDrawableRoot.toPicture(size: Size(width, height));
-    final img = await picture.toImage(width.toInt(), height.toInt());
-    final data = await img.toByteData(format: ImageByteFormat.png);
-    return data!.buffer.asUint8List();
+  addMarkerstoMap() {
+    removeAllMarkers(() async {
+      Uint8List tollIcon =
+          await srvOsGridConverter.toMarkerIcon(ktollMarker, 60, 60);
+      final BitmapDescriptor svgMarker = BitmapDescriptor.fromBytes(tollIcon);
+
+      // print(
+      //     "data['tolls'].length ${routeData.length} ${routeData[0]['tolls'].length}");
+      for (var data in routeData) {
+        for (var i = 0; i < data['tolls'].length; i++) {
+          var toll = data['tolls'][i];
+          // print(
+          //     "$i ${toll['NAME TOLL STATION']} ${toll['easting']}  ${toll['latitude']}");
+          // print(
+          //     "$i ${toll['NAME TOLL STATION']} ${toll['northing']} ${toll['longitude']}");
+          if (toll['latitude'] == null || toll['longitude'] == null) {
+            var coords = srvOsGridConverter.utmToLatlong(
+                toll['easting'], toll['northing']);
+
+            toll['latitude'] = coords.lat;
+            toll['longitude'] = coords.lon;
+          }
+
+          markersList.add(
+            Marker(
+                markerId: MarkerId(DateTime.now().toString()),
+                icon: svgMarker,
+                position: LatLng(srvShared.anyTypeToDouble(toll['latitude']),
+                    srvShared.anyTypeToDouble(toll['longitude']))),
+          );
+        }
+      }
+      // print("markersList.length  ${markersList.length}");
+      markersList.refresh();
+      update();
+      addStartMarker();
+      endStartMarker();
+      // checkRouteCount();
+    });
   }
 
-  addStartMarker(Position position) async {
-    Uint8List startIcon = await toMarkerIcon(
-        '<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="16" fill="#0046AC" fill-opacity="0.3"/><circle cx="16" cy="16" r="10" fill="#0046AC"/></svg>',
-        100,
-        100);
+  checkRouteCount() async {
+    // if (result.length > routeData.length) {
+    srvApi.refetchRoutesOnServer(
+        "${startPlace.position!.lat},${startPlace.position!.lng}",
+        "${endPlace.position!.lat},${endPlace.position!.lng}");
+    // }
+  }
 
-    final BitmapDescriptor svgMarker = BitmapDescriptor.fromBytes(startIcon);
+  addStartMarker([bool shouldCheckTolls = false]) async {
+    Position position = shouldCheckTolls
+        ? Position(
+            lat: (routeData[0]['tolls'] as List).first['latitude'],
+            lng: (routeData[0]['tolls'] as List).first['longitude'])
+        : startPlace.position!;
+    final Uint8List markerIcon = await srvOsGridConverter.getBytesFromAsset(
+        'assets/images/start-marker.png', 70);
 
     markersList.add(Marker(
         markerId: const MarkerId('startMarker'),
         draggable: false,
-        icon: svgMarker,
+        icon: BitmapDescriptor.fromBytes(markerIcon),
         position: LatLng(position.lat, position.lng)));
     markersList.refresh();
     update();
   }
 
-  endStartMarker(Position position) async {
-    Uint8List startIcon = await toMarkerIcon(
-        '<svg width="43" height="61" viewBox="0 0 43 61" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21.4111 0C9.58646 0 0 9.58647 0 21.4111C0 30.8392 13.6132 51.548 19.1301 59.5557C20.3748 61.3614 22.4474 61.3614 23.6921 59.5557C29.209 51.5466 42.8222 30.8406 42.8222 21.4111C42.8222 9.58647 33.2357 0 21.4111 0ZM21.4111 9.99186C24.4397 9.99186 27.3442 11.195 29.4857 13.3365C31.6272 15.478 32.8303 18.3825 32.8303 21.4111C32.8303 22.9107 32.535 24.3956 31.9611 25.7811C31.3872 27.1665 30.5461 28.4254 29.4857 29.4858C28.4253 30.5461 27.1665 31.3873 25.7811 31.9611C24.3956 32.535 22.9107 32.8304 21.4111 32.8304C18.3825 32.8304 15.478 31.6273 13.3365 29.4858C11.1949 27.3442 9.99184 24.4397 9.99184 21.4111C9.99184 18.3825 11.1949 15.478 13.3365 13.3365C15.478 11.195 18.3825 9.99186 21.4111 9.99186Z" fill="#0046AC"/></svg>',
-        83,
-        100);
-
-    final BitmapDescriptor svgMarker = BitmapDescriptor.fromBytes(startIcon);
-
+  endStartMarker([bool shouldCheckTolls = false]) async {
+    final Uint8List markerIcon = await srvOsGridConverter.getBytesFromAsset(
+        "assets/images/destination-marker.png", 70);
+    // Position position = endPlace.position!;
+    Position position = shouldCheckTolls
+        ? Position(
+            lat: (routeData[0]['tolls'] as List).last['latitude'],
+            lng: (routeData[0]['tolls'] as List).last['longitude'])
+        : endPlace.position!;
     markersList.add(Marker(
         markerId: const MarkerId('endMarker'),
         draggable: false,
-        icon: svgMarker,
+        icon: BitmapDescriptor.fromBytes(markerIcon),
         position: LatLng(position.lat, position.lng)));
 
     markersList.refresh();
     update();
   }
 
-  addMarkers() async {
-    destIcon = await BitmapDescriptor.fromAssetImage(
-        const ImageConfiguration(devicePixelRatio: 3.2),
-        "assets/images/destination-marker.png");
-
-    startIcon = await BitmapDescriptor.fromAssetImage(
-        const ImageConfiguration(devicePixelRatio: 10.2),
-        "assets/images/my-marker.png");
-
-    Marker destmarker = Marker(
-        markerId: const MarkerId('arrivalMarker'),
-        draggable: false,
-        icon: destIcon,
-        position: const LatLng(59.945167, 10.758978));
-
-    Marker myLocIcon = Marker(
-        markerId: const MarkerId('arrivalMarker'),
-        draggable: false,
-        icon: startIcon,
-        position: const LatLng(59.892365, 10.790427));
-    markersList.add(destmarker);
-    markersList.add(myLocIcon);
-    markersList.refresh();
-    createPolylines(59.892365, 10.790427, 59.945167, 10.758978);
-  }
-
-  createPolylines(
-    double startLatitude,
-    double startLongitude,
-    double destinationLatitude,
-    double destinationLongitude,
-  ) async {
-    // print("called 4");
-    // Initializing PolylinePoints
-    polylinePoints = PolylinePoints();
-    // print("called 5");
-    // Generating the list of coordinates to be used for
-    // drawing the polylines
-    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-      mapApiKey, // Google Maps API Key
-      PointLatLng(startLatitude, startLongitude),
-      PointLatLng(destinationLatitude, destinationLongitude),
-      travelMode: TravelMode.transit,
-      avoidFerries: true,
-      optimizeWaypoints: true,
-    );
-
-    // print("called 6");
-    // Adding the coordinates to the list
-    polylineCoordinates.clear();
-    polylineCoordinates = [];
-    polylines = RxSet({});
-
-    // Future.delayed(const Duration(seconds: 4), () {
-
-    print(result.points.length);
-    if (result.points.isNotEmpty) {
-      for (var point in result.points) {
-        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-      }
-    }
-    // print("called 7");
-
-    // Defining an ID
-    PolylineId id = PolylineId('');
-    // Initializing Polyline
-    Polyline polyline = Polyline(
-      polylineId: id,
-      color: kPrimaryColor,
-      points: polylineCoordinates,
-      width: 2,
-    );
-
-    // inspect('createPolylines ${polylineCoordinates.length}');
-
-    // Adding the polyline to the map
-
-    polylines.add(polyline); //[id] = polyline;
-    // print("called 8");
-    text.value = 'fetched';
-    update();
-    refresh();
-    // });
-  }
-
-  Future<Map<String, dynamic>?> getFuelPrice(
-      double totalDis, String tollCost, int index) async {
+  Future<Map<String, dynamic>?> getFuelPrice(double totalDis) async {
     String totalDistance = (totalDis * 0.001).toString();
-    var response = await srvApi.getFuelData("${totalDis * 0.001} km", tollCost);
-    // .then((response) {
+
+    var response = await srvApi.getFuelData();
     if (response.statusCode == 200) {
       XmlDocument xmlDocument = XmlDocument.parse(response.data);
       var elements = xmlDocument.findAllElements('gpp:element').first;
       double fuelCostPerLitre =
-          double.parse(elements.findElements('gpp:gasoline').first.text);
+          double.parse(elements.findElements('gpp:gasoline').first.innerText);
       String km = totalDistance.substring(0, totalDistance.length - 3);
       km = km.replaceAll(',', '');
       km = km.replaceAll(' ', '');
 
-      double totalLitres = (11.11 / 100.0) * double.parse(km);
+      double totalLitres =
+          (double.parse(carData.value.vehFuelCmp!) / 100.0) * double.parse(km);
       String gasolinePrice =
           (fuelCostPerLitre * totalLitres).toStringAsFixed(2);
-      String totalPrice = (double.parse(gasolinePrice) + double.parse(tollCost))
-          .toStringAsFixed(2);
+      // String totalPrice = (double.parse(gasolinePrice) + double.parse(tollCost))
+      //     .toStringAsFixed(2);
+
       return {
         "gasolinePrice": gasolinePrice,
         "totalLitres": totalLitres,
-        "totalPrice": totalPrice,
+        // "totalPrice": totalPrice,
       };
-
-      // summary.refresh();
-      // update();
-      // print(summary);
     } else {
       return null;
     }
-    // }).catchError((error) {
-    //   // srvToastAlert.toast(error.toString());
-    //   return {};
-    // });
   }
 
   setMapBounds() {
-    controller.animateCamera(
-      CameraUpdate.newLatLngBounds(
-          LatLngBounds(
-            southwest: LatLng(endPlace.position!.lat, endPlace.position!.lng),
-            northeast:
-                LatLng(startPlace.position!.lat, startPlace.position!.lng),
-          ),
-          20),
-    );
+    try {
+      controller.animateCamera(
+        CameraUpdate.newLatLngBounds(
+            LatLngBounds(
+              southwest:
+                  LatLng(startPlace.position!.lat, startPlace.position!.lng),
+              northeast: LatLng(endPlace.position!.lat, endPlace.position!.lng),
+            ),
+            50),
+      );
+    } catch (e) {
+      controller.animateCamera(
+        CameraUpdate.newLatLngBounds(
+            LatLngBounds(
+              southwest: LatLng(endPlace.position!.lat, endPlace.position!.lng),
+              northeast:
+                  LatLng(startPlace.position!.lat, startPlace.position!.lng),
+            ),
+            50),
+      );
+    }
   }
 
   mapAnimateCamera() {
     controller.animateCamera(CameraUpdate.newLatLng(
         LatLng(startPlace.position!.lat, startPlace.position!.lng)));
   }
+
+  calcFuelPrice(int index) async {
+    // var fuelData = await getFuelPrice(
+    //     srvFirebase.toDouble(routeData[index]['distance']['value']));
+    // if (fuelData != null) {
+    //   routeData[index]['totalPrice']['fuelPrice'] = fuelData['gasolinePrice'];
+    //   // routeData.refresh();
+    //   // update();
+    calcPrice(index);
+    // }
+  }
+
+  calcPrice(int index) {
+    var info = routeData[index]['totalPrice'] ?? {};
+    print("total price $index $info");
+
+    var fuelPrice = routeData[index]['totalPriceFuel'] ?? 0.0;
+    var price = {"withFuel": 0.0, "withoutFuel": 0.0};
+    // var withAutoPassPrice =
+    //     srvFirebase.toDouble(info['totalPriceWithAutoPass']);
+    // var withoutAutoPassPrice =
+    //     srvFirebase.toDouble(info['totalPriceWithoutAutoPass']);
+    // var withRushPrice = srvFirebase.toDouble(info['totalPriceWithRushHour']);
+    // var withoutRushPrice =
+    //     srvFirebase.toDouble(info['totalPriceWithoutRushHour']);
+
+    // print("price withAutoPassPrice $withAutoPassPrice");
+    // print("price withoutAutoPassPrice $withoutAutoPassPrice");
+    // print("price withRushPrice $withRushPrice");
+    // print("price withoutRushPrice $withoutRushPrice");
+
+    var gasPrice = srvFirebase.toDouble(fuelPrice ?? 0.0);
+
+    if (autopass.isTrue && rushHour.isTrue) {
+      price = {
+        "withoutFuel": double.parse(info['totalPriceWithRushHourWithAutoPass']
+            .toString()), //withAutoPassPrice + withRushPrice,
+        "withFuel": double.parse(
+                info['totalPriceWithRushHourWithAutoPass'].toString()) +
+            gasPrice // (withAutoPassPrice + withRushPrice) + gasPrice
+      };
+    }
+    if (autopass.isTrue && rushHour.isFalse) {
+      price = {
+        "withoutFuel": double.parse(
+            info['totalPriceWithoutRushHourWithAutoPass']
+                .toString()), //withAutoPassPrice + withoutRushPrice,
+        "withFuel": double.parse(
+                info['totalPriceWithoutRushHourWithAutoPass'].toString()) +
+            gasPrice, //(withAutoPassPrice + withoutRushPrice) + gasPrice
+      };
+    }
+    if (autopass.isFalse && rushHour.isTrue) {
+      price = {
+        "withoutFuel": double.parse(
+            info['totalPriceWithRushHourWithoutAutoPass']
+                .toString()), //withRushPrice + withoutAutoPassPrice,
+        "withFuel": double.parse(
+                info['totalPriceWithRushHourWithoutAutoPass'].toString()) +
+            gasPrice
+      };
+    }
+
+    if (autopass.isFalse && rushHour.isFalse) {
+      price = {
+        "withoutFuel": double.parse(
+            info['totalPriceWithoutRushHourWithoutAutoPass']
+                .toString()), //withoutAutoPassPrice + withoutRushPrice,
+        "withFuel": double.parse(
+                info['totalPriceWithoutRushHourWithoutAutoPass'].toString()) +
+            gasPrice
+      };
+    }
+
+    print("price $index $price");
+    routeData[index]['price'] = price;
+    routeData.refresh;
+    return price;
+  }
+
+  calcAfterToggle() {
+    for (var i = 0; i < routeData.length; i++) {
+      calcPrice(i);
+    }
+  }
+}
+
+class IsolateModel {
+  IsolateModel(this.iteration, this.multiplier);
+
+  final int iteration;
+  final int multiplier;
 }

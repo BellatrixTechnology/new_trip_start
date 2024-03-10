@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:new_trip_start/components/app_button.dart';
 import 'package:new_trip_start/components/app_input.dart';
 import 'package:new_trip_start/components/app_text.dart';
@@ -7,14 +8,16 @@ import 'package:new_trip_start/components/custom_spacer.dart';
 import 'package:new_trip_start/components/custom_surfix_icon.dart';
 import 'package:new_trip_start/constants.dart';
 import 'package:new_trip_start/modals/bottom_modal.dart';
+import 'package:new_trip_start/services/index.dart';
 import 'package:new_trip_start/size_config.dart';
 import 'package:new_trip_start/utils/app_bg.dart';
 
 class ForgetPassword extends StatelessWidget {
-  const ForgetPassword({super.key});
-
+  const ForgetPassword({super.key, this.isFromInnerApp});
+  final bool? isFromInnerApp;
   @override
   Widget build(BuildContext context) {
+    TextEditingController ctrl = TextEditingController();
     return Scaffold(
       body: AppGradientBg(
         padding: 0,
@@ -29,8 +32,10 @@ class ForgetPassword extends StatelessWidget {
                         const CustomBackButton(),
                         const CustomSpacer(spaceValue: 10),
 
-                        const AppText(
-                          text: 'Reset Your Password',
+                        AppText(
+                          text: isFromInnerApp == true
+                              ? "Change Password"
+                              : 'Reset Your Password',
                           fontSize: 20,
                           fontWeight: FontWeight.w600,
                         ),
@@ -46,9 +51,10 @@ class ForgetPassword extends StatelessWidget {
                           size: SizeConfig.screenWidth * 0.9,
                         ),
                         const CustomSpacer(spaceValue: 10),
-                        const AppInput(
+                        AppInput(
                           hintText: 'Email',
-                          icon: Center(
+                          controller: ctrl,
+                          icon: const Center(
                             child: CustomSurffixIcon(
                               svgIcon: 'assets/icons/email.svg',
                               // color: kPrimaryColor,
@@ -59,33 +65,41 @@ class ForgetPassword extends StatelessWidget {
                         const CustomSpacer(spaceValue: 20),
                         AppButton(
                           text: 'Reset Password',
-                          press: () {
-                            AppBottomModal().bottomSheet(context);
+                          press: () async {
+                            if (ctrl.text.isEmail) {
+                              srvFirebase
+                                  .sendResetPasswordLink(ctrl.text)
+                                  .then((value) {
+                                AppBottomModal().bottomSheet(context);
+                              });
+                            }
                           },
                           showLoader: false,
                           width: SizeConfig.screenWidth,
                         ),
                         const Spacer(),
 
-                        const Align(
-                          alignment: Alignment.center,
-                          child: AppText(
-                            text: 'If you don’t have and account.',
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16,
+                        if (isFromInnerApp == null)
+                          const Align(
+                            alignment: Alignment.center,
+                            child: AppText(
+                              text: 'If you don’t have and account.',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                            ),
                           ),
-                        ),
-                        const Align(
-                          alignment: Alignment.center,
-                          child: AppText(
-                            text: 'Register Now',
-                            textAlign: TextAlign.center,
-                            color: kPrimaryColor,
-                            textDecoration: TextDecoration.underline,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16,
+                        if (isFromInnerApp == null)
+                          const Align(
+                            alignment: Alignment.center,
+                            child: AppText(
+                              text: 'Register Now',
+                              textAlign: TextAlign.center,
+                              color: kPrimaryColor,
+                              textDecoration: TextDecoration.underline,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                            ),
                           ),
-                        ),
                         const Spacer(),
                       ],
                     )))),

@@ -11,6 +11,7 @@ class Tabs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BottomTabController btmTabCtrl = Get.put(BottomTabController());
+    // btmTabCtrl.checkIfUserNotSubscribed(context);
     return Scaffold(
       body: Obx(() =>
           Center(child: btmTabCtrl.page[btmTabCtrl.selectedTabIndex.value])),
@@ -45,26 +46,26 @@ class Tabs extends StatelessWidget {
                         svgIcon: btmTabCtrl.selectedTabIndex.value == 0
                             ? 'assets/icons/tab-selected-route.svg'
                             : 'assets/icons/tab-route.svg'),
-                    label: 'Route',
+                    label: 'Route'.tr,
                   ),
                   BottomNavigationBarItem(
                     icon: CustomSurffixIcon(
                         svgIcon: btmTabCtrl.selectedTabIndex.value == 1
                             ? 'assets/icons/tab-selected-vehicles.svg'
                             : 'assets/icons/tab-vehicles.svg'),
-                    label: 'My Vehicles',
+                    label: 'My Vehicles'.tr,
                   ),
                   BottomNavigationBarItem(
                     icon: CustomSurffixIcon(
                         svgIcon: btmTabCtrl.selectedTabIndex.value == 2
                             ? 'assets/icons/tab-selected-profile.svg'
                             : 'assets/icons/tab-profile.svg'),
-                    label: 'Profile',
+                    label: 'Profile'.tr,
                   ),
                 ],
                 currentIndex: btmTabCtrl.selectedTabIndex.value,
                 selectedItemColor: kPrimaryColor,
-                onTap: (value) => btmTabCtrl.onTabChange(value)),
+                onTap: (value) => btmTabCtrl.onTabChange(value, context)),
           ),
         ),
       ),

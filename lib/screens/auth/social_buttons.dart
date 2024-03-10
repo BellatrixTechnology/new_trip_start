@@ -15,7 +15,7 @@ class SocialButtons extends StatelessWidget {
       builder: (authCtrl) => Column(
         children: [
           const CustomSpacer(spaceValue: 10),
-          const AppText(text: 'or sign in with'),
+          AppText(text: 'or sign in with'.tr),
           const CustomSpacer(spaceValue: 10),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -24,7 +24,7 @@ class SocialButtons extends StatelessWidget {
               GestureDetector(
                 behavior: HitTestBehavior.opaque,
                 onTap: () {
-                  authCtrl.facebookLogin();
+                  authCtrl.facebookLogin(context);
                 },
                 child: Container(
                   height: 50,
@@ -33,15 +33,19 @@ class SocialButtons extends StatelessWidget {
                       color: kBgLightColor,
                       borderRadius: BorderRadius.circular(50),
                       boxShadow: boxShadow(0.1)),
-                  child: Image.asset(
-                    'assets/images/facebook.png',
+                  child: Center(
+                    child: Image.asset(
+                      'assets/images/facebook.png',
+                      width: 35,
+                      height: 35,
+                    ),
                   ),
                 ),
               ),
               GestureDetector(
                 behavior: HitTestBehavior.opaque,
                 onTap: () {
-                  authCtrl.googleLogin();
+                  authCtrl.googleLogin(context);
                 },
                 child: Container(
                   height: 50,
@@ -50,28 +54,37 @@ class SocialButtons extends StatelessWidget {
                       color: kBgLightColor,
                       borderRadius: BorderRadius.circular(50),
                       boxShadow: boxShadow(0.1)),
-                  child: Image.asset(
-                    'assets/images/google.png',
+                  child: Center(
+                    child: Image.asset(
+                      'assets/images/google.png',
+                      width: 35,
+                      height: 35,
+                    ),
                   ),
                 ),
               ),
-              GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () {
-                  authCtrl.appleLogin();
-                },
-                child: Container(
-                  height: 50,
-                  width: 50,
-                  decoration: BoxDecoration(
-                      color: kBgLightColor,
-                      borderRadius: BorderRadius.circular(50),
-                      boxShadow: boxShadow(0.1)),
-                  child: Image.asset(
-                    'assets/images/apple.png',
+              if (!isAndroid)
+                GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () {
+                    authCtrl.appleLogin(context);
+                  },
+                  child: Container(
+                    height: 50,
+                    width: 50,
+                    decoration: BoxDecoration(
+                        color: kBgLightColor,
+                        borderRadius: BorderRadius.circular(50),
+                        boxShadow: boxShadow(0.1)),
+                    child: Center(
+                      child: Image.asset(
+                        'assets/images/apple.png',
+                        width: 35,
+                        height: 35,
+                      ),
+                    ),
                   ),
                 ),
-              ),
             ],
           ),
           // const CustomSpacer(spaceValue: 20),

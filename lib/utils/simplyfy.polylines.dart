@@ -8,7 +8,7 @@ class PolylineSimplifier {
   }
 
   List<Point> simplify(double tolerance) {
-    if (_points == null || _points.length < 3) {
+    if (_points.length < 3) {
       return _points;
     }
 
@@ -66,7 +66,7 @@ class PolylineSimplifier {
     var lenSq = c * c + d * d;
     var param = dot / lenSq;
 
-    var xx, yy;
+    num xx, yy;
 
     if (param < 0) {
       xx = lineStart.x;

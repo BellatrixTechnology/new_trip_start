@@ -1,15 +1,23 @@
-import 'dart:convert';
-import 'dart:developer';
+// import 'dart:convert';
+import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:new_trip_start/constants.dart';
+
 import 'package:new_trip_start/models/places.model.dart';
-import 'package:new_trip_start/services/index.dart';
-import 'package:utm/utm.dart';
+// import 'package:new_trip_start/models/toll.dart';
+import 'package:new_trip_start/models/vehicle.model.dart';
+
+// import 'package:xml/xml.dart';
+// import 'package:xml2json/xml2json.dart';
 
 class ApiService {
   var dio = Dio();
+
+  var baseURL =
+      "https://us-central1-car-app-5b455.cloudfunctions.net/app"; //"http://localhost:5000/car-app-5b455/us-central1/app";
+
   Future<Response> getVehicleDataWithRegistrationNum(String regNum) async {
     Response response;
     var headerData = {
@@ -23,7 +31,9 @@ class ApiService {
             : 'https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/felles/datautlevering/enkeltoppslag/kjoretoydata?kjennemerke=$regNum&lang=en';
 
     response = await dio.get(url,
-        options: Options(headers: headerData, receiveTimeout: 8000));
+        options: Options(
+          headers: headerData,
+        ));
     return response;
   }
 
@@ -35,9 +45,8 @@ class ApiService {
     };
     var url =
         'https://www.vegvesen.no/ws/no/vegvesen/routeplan/routingService_v1_0/routingService?stops=277648.71063131,6760327.2812364;292465.40693137,6695768.8187861&returnDirections=true&returnGeometry=true&format=xml';
-    response = await dio.get(url,
-        options: Options(headers: headerData, receiveTimeout: 8000));
-    log(response.data.toString());
+    response = await dio.get(url, options: Options(headers: headerData));
+    // log(response.data.toString());
     return response;
   }
 
@@ -47,6 +56,31 @@ class ApiService {
         // 'https://autocomplete.search.hereapi.com/v1/autocomplete?q=$keywords&in=countryCode%3ANOR&limit=2&apiKey=8ZI4V33ffRb_xelYDekkMJL4pAVM47fCa2eb82sog6s'
         );
     return response;
+  }
+
+  Future<Response?> searchPlaces(String text) async {
+    Response response;
+    try {
+      String url =
+          "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$text&key=$mapApiKey&components";
+
+      response = await dio.get(url);
+      return response;
+    } on DioException catch (e) {
+      // print(e);
+      if (e.response != null) {
+        return e.response;
+      } else {
+        return null;
+      }
+    }
+  }
+
+  Future<Response> getPlaceDetailsFromPlaceId(String placeId) async {
+    var url =
+        "https://maps.googleapis.com/maps/api/place/details/json?placeid=$placeId&key=$mapApiKey";
+    print(url);
+    return await dio.get(url);
   }
 
   // get toll cost
@@ -67,58 +101,156 @@ class ApiService {
     return response;
   }
 
-  Future<Response> getFuelData(String totalDis, String tollCost) async {
+  Future<Response> getFuelData() async {
     String url =
         'https://www.globalpetrolprices.com/api_gpp.php?cnt=NO&ind=gp,dp&prd=latest'
         '&uid=2554&uidc=fa4f1abfaf33b809fc521ca81061053a';
-    // print(url);
+    print(url);
     Response response = await dio.get(url);
     return response;
   }
 
-  Future<Response> getRouteData(String stops) async {
-    // Define the URL for the Routing Service
-    // 277648.71063131,6760327.2812364;292465.40693137,6695768.8187861
-    // const stops =
-    //     "278533.80079608515,6658558.8728278065;93895.00050445361,6909396.81459309";
-    // "261956.33112242934,6649777.651720167;249859.3503714263,6647664.398433175"; //oslo and sandvika (*.*)
-    // "264542.8162633929,6646911.956227346;263162.1650432468,6652896.618364637;292465.40693137,6695768.8187861"; // multiple stops
-    // '263162.1650432468,6652896.618364637;292465.40693137,6695768.8187861'; //oslo and req stops
-    // '277648.71063131,6760327.2812364;292465.40693137,6695768.8187861'; //request stops
-
+  Future<Response> getRouteData(
+      Position start, Position end, Vehicle veh) async {
     String apiUrl =
-        'https://www.vegvesen.no/ws/no/vegvesen/ruteplan/routingService_v2_0/routingService?stops=$stops&returnDirections=true&returnGeometry=true&lang=en-US&format=json'; //&route_type=alternative
+        // "https://us-central1-car-app-5b455.cloudfunctions.net/direction/v2?origin=${start.lat},${start.lng}&destination=${end.lat},${end.lng}&vehicleGroup=${veh.vehicleGroup}&vehLength=${veh.vehLength}&vehFuelCmp=${double.parse(veh.vehFuelCmp!) / 10}&vehFuelType=${veh.vehFuelType}";
+        "https://us-central1-car-app-5b455.cloudfunctions.net/direction"; //"$baseURL/directions";
 
-    print(apiUrl);
-    String username = 'TjeRuteplanJaved';
-    String password = 'Yd2H7q0SNjF5dpwEKzQO';
+    print("apiUrl $apiUrl");
+    print({
+      "origin": "${start.lat},${start.lng}",
+      "destination": "${end.lat},${end.lng}",
+      "vehicleGroup": veh.vehicleGroup,
+      "vehFuelType": veh.vehFuelType,
+      "vehFuelCmp": double.parse(veh.vehFuelCmp!),
+      "cache": true,
+      "geometry": true,
+      "coordinates": true,
+      "vehLength": veh.vehLength,
+      "type": "gas",
+      "travelMode": "driving"
+    });
 
-    String basicAuth =
-        'Basic ${base64Encode(utf8.encode('$username:$password'))}';
+    return dio.post(
+      apiUrl,
+      data: {
+        "origin": "${start.lat},${start.lng}",
+        "destination": "${end.lat},${end.lng}",
+        "vehicleGroup": veh.vehicleGroup,
+        "vehFuelType": veh.vehFuelType,
+        "vehFuelCmp": double.parse(veh.vehFuelCmp!),
+        "cache": true,
+        "geometry": true,
+        "coordinates": true,
+        "vehLength": veh.vehLength,
+        "type": "gas",
+        "travelMode": "driving"
+      },
+      options: Options(
+          receiveTimeout: const Duration(minutes: 2),
+          sendTimeout: const Duration(minutes: 2)),
+    );
+    // return await dio.post(apiUrl, data: data);
+  }
 
-    final response = await dio.get(apiUrl,
-        options: Options(headers: <String, String>{
-          'content-type': 'application/json',
-          'accept': 'application/json',
-          'authorization': basicAuth
-        }));
+  Future<Response> getTolls(String summary, Vehicle veh, int distance) async {
+    String url =
+        "https://us-central1-car-app-5b455.cloudfunctions.net/direction/v2/tolls?summary=$summary&vehicleGroup=${veh.vehicleGroup}&vehLength=${veh.vehLength}&vehFuelCmp=${double.parse(veh.vehFuelCmp!) / 10}&vehFuelType=${veh.vehFuelType}&distance=$distance";
+    print(url);
+    return await dio.get(url);
+  }
 
-    return response;
+  Map<String, double> parsePoint(String input) {
+    Map<String, double> point = {};
+    RegExp regex = RegExp(r"([-+]?\d*\.\d+|\d+)");
 
-    // List<dynamic> latLngList = [];
-    // for (var element in path) {
-    //   latLngList.add(element['geometry']['paths'][0].map((point) {
-    //     int easting = point[0];
-    //     int northing = point[1];
-    //     UtmCoordinate coordinate = srvOsGridConverter.utmToLatlong(
-    //         easting.toDouble(), northing.toDouble());
-    //     double latitude = coordinate.lat;
-    //     double longitude =
-    //         coordinate.lon; // convert UTM easting/northing to WGS84 longitude
-    //     return [latitude, longitude];
-    //   }).toList());
-    // }
+    List<double> values = regex
+        .allMatches(input)
+        .map((match) => double.parse(match.group(0)!))
+        .toList();
+    if (input.contains("POINT Z")) {
+      point['easting'] = values[0];
+      point['northing'] = values[1];
+      point['altitude'] = values[2];
+    } else {
+      point['easting'] = values[0];
+      point['northing'] = values[1];
+    }
 
-    // return latLngList;
+    return point;
+  }
+
+// I didn't use the data model
+  // Future<List<Toll>> getXML([String urlString = URL]) async {
+  //   Map<String, String> headers = {"Accept": "text/html,application/xml"};
+  //   Uri url = Uri.parse(urlString);
+  //   final response = await http.get(url, headers: headers);
+  //   final myTransformer = Xml2Json();
+  //   List<Toll> tollList = [];
+
+  //   var storeDocument = XmlDocument.parse(response.body);
+  //   storeDocument.findAllElements('vegobjekt').forEach((element) {
+  //     myTransformer.parse(element.toXmlString(pretty: true));
+  //     var stringJson = myTransformer.toParker();
+  //     Map<String, dynamic> json =
+  //         jsonDecode(stringJson) as Map<String, dynamic>;
+  //     tollList.add(Toll.fromJson(json['vegobjekt']));
+  //   });
+  //   return tollList;
+  // }
+
+// get json from the URL and return a list of maps
+  // Future<List<Map<String, dynamic>>> getJson([String urlString = URL]) async {
+  //   Map<String, String> headers = {"Accept": "text/html,application/xml"};
+  //   Uri url = Uri.parse(urlString);
+  //   final response = await http.get(url, headers: headers);
+  //   final myTransformer = Xml2Json();
+
+  //   List<Map<String, dynamic>> tollList = [];
+  //   // create a document from the response body
+  //   var storeDocument = XmlDocument.parse(response.body);
+  //   storeDocument.findAllElements('vegobjekt').forEach((element) {
+  //     myTransformer.parse(element.toXmlString(pretty: true));
+  //     var stringJson = myTransformer.toParker();
+
+  //     Map<String, dynamic> json =
+  //         jsonDecode(stringJson) as Map<String, dynamic>;
+  //     tollList.add(json);
+  //   });
+  //   return tollList;
+  // }
+
+//  distance between two points
+  Map<String, dynamic> findNearestPoint(
+      Map<String, double> inputPoint, List<Map<String, dynamic>> tollList) {
+    // initialize the nearest point id and the minimum distance
+    Map<String, dynamic> nearestPointId = {};
+    double minDistance = double.infinity;
+    for (var e in tollList) {
+      // create a local point from the wkt string
+      Map<String, double> localPoint;
+      if (e['vegobjekt']['geometri']['wkt'] != null) {
+        localPoint = parsePoint(e['vegobjekt']['geometri']['wkt'] ?? "");
+      } else {
+        continue;
+      }
+      // calculate  the distance between the two points
+      double distance = sqrt(
+          pow((inputPoint['easting']! - localPoint['easting']!), 2) +
+              pow(inputPoint['northing']! - localPoint['northing']!, 2));
+      if (distance < minDistance) {
+        minDistance = distance;
+        nearestPointId = e['vegobjekt'];
+      }
+    }
+
+    return nearestPointId;
+  }
+
+  //
+  Future<Response> refetchRoutesOnServer(
+      String origin, String destination) async {
+    return await dio.get(
+        "https://us-central1-car-app-5b455.cloudfunctions.net/direction/route?origin=$origin&destination=$destination");
   }
 }

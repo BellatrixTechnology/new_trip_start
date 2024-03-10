@@ -4,8 +4,7 @@ import 'package:new_trip_start/constants.dart';
 
 class RatingStars extends StatelessWidget {
   const RatingStars(
-      {Key? key, required this.count, this.size, this.width, this.alignment})
-      : super(key: key);
+      {super.key, required this.count, this.size, this.width, this.alignment});
   final double count;
   final double? size;
   final double? width;

@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:new_trip_start/components/app_text.dart';
 import 'package:new_trip_start/components/custom_spacer.dart';
-import 'package:new_trip_start/components/custom_surfix_icon.dart';
 
 class ProfileItem extends StatelessWidget {
   const ProfileItem({

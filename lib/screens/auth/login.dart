@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get.dart';
 
 import 'package:new_trip_start/components/app_button.dart';
 import 'package:new_trip_start/components/app_input.dart';
@@ -11,7 +11,6 @@ import 'package:new_trip_start/constants.dart';
 import 'package:new_trip_start/controllers/auth_ctrl.dart';
 import 'package:new_trip_start/screens/auth/forget_password.dart';
 import 'package:new_trip_start/screens/auth/social_buttons.dart';
-import 'package:new_trip_start/screens/onboarding/onboarding.dart';
 import 'package:new_trip_start/services/index.dart';
 import 'package:new_trip_start/size_config.dart';
 
@@ -20,15 +19,13 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print(srvOsGridConverter.fromLatLon(60.004438, 11.0273592, 33)); //home
-    // print(srvOsGridConverter.fromLatLon(62.0965849, 7.2083712, 33));
     return GetBuilder<AuthController>(
         builder: (controller) => SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const CustomSpacer(spaceValue: 10),
-                  const UnderlineText(text: 'Login'),
+                  UnderlineText(text: 'Login'.tr),
                   const CustomSpacer(spaceValue: 20),
                   AppInput(
                     hintText: 'Email',
@@ -44,7 +41,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   const CustomSpacer(spaceValue: 10),
                   AppInput(
-                    hintText: 'Password',
+                    hintText: 'Password'.tr,
                     controller: controller.password,
                     obscureText: controller.obscureText.value,
                     textInputType: TextInputType.visiblePassword,
@@ -71,21 +68,36 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   const CustomSpacer(spaceValue: 10),
-                  GestureDetector(
-                    onTap: () {
-                      // controller.onSignIn();
-                      srvPageRoute.goToNext(context, const ForgetPassword());
-                    },
-                    behavior: HitTestBehavior.opaque,
-                    child: const AppText(
-                      text: 'Forget Password?',
-                      color: kPrimaryColor,
-                      fontWeight: FontWeight.w700,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      AppText(
+                        text: "Terms & conditions",
+                        fontWeight: FontWeight.bold,
+                        onTap: () {
+                          srvShared.lauchUrl(
+                              "https://www.privacypolicygenerator.info/live.php?token=5JA0iHT81FqJ8Wtz4nsV3UqTmZrxoiKs");
+                        },
+                        textDecoration: TextDecoration.underline,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          // controller.onSignIn();
+                          srvPageRoute.goToNext(
+                              context, const ForgetPassword());
+                        },
+                        behavior: HitTestBehavior.opaque,
+                        child: AppText(
+                          text: 'Forget Password?'.tr,
+                          color: kPrimaryColor,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
                   ),
                   const CustomSpacer(spaceValue: 30),
                   AppButton(
-                    text: 'Login',
+                    text: 'Login'.tr,
                     width: SizeConfig.screenWidth,
                     showLoader: controller.isLoading.value,
                     press: () {

@@ -9,7 +9,6 @@ import 'package:new_trip_start/constants.dart';
 import 'package:new_trip_start/controllers/auth_ctrl.dart';
 import 'package:new_trip_start/screens/auth/social_buttons.dart';
 import 'package:new_trip_start/size_config.dart';
-import 'package:new_trip_start/utils/email_validator.dart';
 
 class Singup extends StatelessWidget {
   const Singup({super.key});
@@ -22,11 +21,11 @@ class Singup extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const CustomSpacer(spaceValue: 20),
-                  const UnderlineText(text: 'Sign Up'),
+                  UnderlineText(text: 'Sign Up'.tr),
                   const CustomSpacer(spaceValue: 20),
                   AppInput(
                     controller: controller.nameCtrl,
-                    hintText: 'Name',
+                    hintText: 'Name'.tr,
                     icon: const Center(
                       child: CustomSurffixIcon(
                         svgIcon: 'assets/icons/profile.svg',
@@ -57,7 +56,7 @@ class Singup extends StatelessWidget {
                   AppInput(
                     controller: controller.emailCtrl,
                     textInputType: TextInputType.emailAddress,
-                    hintText: 'Email',
+                    hintText: 'Email'.tr,
                     icon: const Center(
                       child: CustomSurffixIcon(
                         svgIcon: 'assets/icons/email.svg',
@@ -68,7 +67,7 @@ class Singup extends StatelessWidget {
                   ),
                   const CustomSpacer(spaceValue: 10),
                   AppInput(
-                    hintText: 'Password',
+                    hintText: 'Password'.tr,
                     controller: controller.password,
                     obscureText: controller.obscureText.value,
                     textInputType: TextInputType.visiblePassword,
@@ -96,7 +95,7 @@ class Singup extends StatelessWidget {
                   ),
                   const CustomSpacer(spaceValue: 10),
                   AppInput(
-                    hintText: 'Confirm Password',
+                    hintText: 'Confirm Password'.tr,
                     controller: controller.confirmPassword,
                     obscureText: controller.obscureText.value,
                     icon: const Center(
@@ -123,7 +122,7 @@ class Singup extends StatelessWidget {
                   ),
                   const CustomSpacer(spaceValue: 20),
                   AppButton(
-                    text: 'Sign Up',
+                    text: 'Sign Up'.tr,
                     width: SizeConfig.screenWidth,
                     showLoader: controller.isLoading.value,
                     press: () {

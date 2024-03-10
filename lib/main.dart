@@ -1,42 +1,71 @@
+import 'package:feedback/feedback.dart';
 import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:here_sdk/core.dart';
-import 'package:here_sdk/core.engine.dart';
-import 'package:here_sdk/core.errors.dart';
+import 'package:new_trip_start/constants.dart';
+// import 'package:here_sdk/core.dart';
+// import 'package:here_sdk/core.engine.dart';
+// import 'package:here_sdk/core.errors.dart';
+import 'package:new_trip_start/controllers/add_vehicle.controller.dart';
 import 'package:new_trip_start/controllers/auth_ctrl.dart';
 import 'package:new_trip_start/controllers/map_ctrl.dart';
+import 'package:new_trip_start/controllers/onboarding_ctrl.dart';
+import 'package:new_trip_start/controllers/places.controller.dart';
+import 'package:new_trip_start/controllers/route_detail.controller.dart';
+import 'package:new_trip_start/controllers/tab_ctrl.dart';
 import 'package:new_trip_start/firebase_options.dart';
 import 'package:new_trip_start/screens/splash/splash.dart';
+import 'package:new_trip_start/services/index.dart';
+import 'package:new_trip_start/utils/translations.dart';
+// import 'package:device_preview/device_preview.dart';
+
+// import 'package:purchases_flutter/purchases_flutter.dart';
+
+// final configuration =
+//     PurchasesConfiguration("appl_hUPXcbRjXVrdFEJxvmtgbfcPQwL");
 
 void main() async {
   Get.lazyPut(() => AuthController());
   Get.lazyPut(() => MapController());
+  Get.lazyPut(() => AddVehicleCtrl());
+  Get.lazyPut(() => OnBoardingController());
+  Get.lazyPut(() => PlaceController());
+  Get.lazyPut(() => RouteDetailCtrl());
+  Get.lazyPut(() => BottomTabController());
   WidgetsFlutterBinding.ensureInitialized();
-  _initializeHERESDK();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  runApp(const MyApp());
+
+  // final config = QonversionConfigBuilder('UXhA__7E9XnhUW7nf6YwjGAUZae260Zc',
+  //         QLaunchMode.subscriptionManagement)
+  //     .build();
+  // Qonversion.initialize(config);
+
+  // await Purchases.configure(configuration);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(const BetterFeedback(child: MyApp()));
+  // DevicePreview(
+  //   enabled: !kReleaseMode,
+  //   builder: (context) => MyApp(), // Wrap your app
+  // );
 }
 
-void _initializeHERESDK() async {
-  // Needs to be called before accessing SDKOptions to load necessary libraries.
-  SdkContext.init(IsolateOrigin.main);
+// void initializeHERESDK() async {
+//   // Needs to be called before accessing SDKOptions to load necessary libraries.
+//   SdkContext.init(IsolateOrigin.main);
 
-  // Set your credentials for the HERE SDK.
-  String accessKeyId = "wtwzmWpiLelM_6syxvMqFQ";
-  String accessKeySecret =
-      "b7WrYeLusbcUzJNJcmp_aGvBlZmmmR7vB18otH5J9Sn0ybOT_IZpMNKQeND9QUpeHAHH2F8CipHCPMblacg6dw";
-  SDKOptions sdkOptions =
-      SDKOptions.withAccessKeySecret(accessKeyId, accessKeySecret);
+//   // Set your credentials for the HERE SDK.
+//   String accessKeyId = "wtwzmWpiLelM_6syxvMqFQ";
+//   String accessKeySecret =
+//       "b7WrYeLusbcUzJNJcmp_aGvBlZmmmR7vB18otH5J9Sn0ybOT_IZpMNKQeND9QUpeHAHH2F8CipHCPMblacg6dw";
+//   SDKOptions sdkOptions =
+//       SDKOptions.withAccessKeySecret(accessKeyId, accessKeySecret);
 
-  try {
-    await SDKNativeEngine.makeSharedInstance(sdkOptions);
-  } on InstantiationException {
-    throw Exception("Failed to initialize the HERE SDK.");
-  }
-}
+//   try {
+//     await SDKNativeEngine.makeSharedInstance(sdkOptions);
+//   } on InstantiationException {
+//     throw Exception("Failed to initialize the HERE SDK.");
+//   }
+// }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -45,8 +74,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+        // useInheritedMediaQuery: true,
+        // locale: DevicePreview.locale(context),
+        // builder: DevicePreview.appBuilder,
+        navigatorObservers: [srvAnalytics.getAnalyticsObserver()],
         debugShowCheckedModeBanner: false,
         title: 'Trip Start',
+        translations: AppTranslations(),
+        locale: Get.deviceLocale, //const Locale("en", "US"),
+        fallbackLocale: const Locale("en", "US"),
         theme: ThemeData(
             // This is the theme of your application.
             //
@@ -57,7 +93,9 @@ class MyApp extends StatelessWidget {
             // or simply save your changes to "hot reload" in a Flutter IDE).
             // Notice that the counter didn't reset back to zero; the application
             // is not restarted.
-            primarySwatch: Colors.blue,
+            appBarTheme: const AppBarTheme(
+                iconTheme: IconThemeData(color: kBgLightColor)),
+            colorScheme: ColorScheme.fromSeed(seedColor: kPrimaryColor),
             fontFamily: 'Sarabun'),
         home:
             const SplashScreen() //const MyHomePage(title: 'Flutter Demo Home Page'),
@@ -136,7 +174,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
         ),

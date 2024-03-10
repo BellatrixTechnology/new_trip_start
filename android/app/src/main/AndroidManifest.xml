@@ -2,8 +2,10 @@
   xmlns:tools="http://schemas.android.com/tools"
     package="com.kadodata.journeycost"
     >
+    <uses-permission android:name="com.android.vending.BILLING"/>
+
    <application
-        android:label="new_trip_start"
+        android:label="Bompenge Appen"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <provider

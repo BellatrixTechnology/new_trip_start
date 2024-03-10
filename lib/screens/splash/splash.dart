@@ -15,12 +15,16 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
+    // srvPaymentService.initPlatformState();
+    srvRevenueCatSub.initPlatformState();
 
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 3), () async {
       User? user = FirebaseAuth.instance.currentUser;
       if (user == null) {
         srvPageRoute.goToNextAndRemoved(context, const AuthScreen());
       } else {
+        await srvFirebase.getUserFromFirestore(user);
+        // ignore: use_build_context_synchronously
         srvPageRoute.goToNextAndRemoved(context, const Tabs());
       }
     });
@@ -38,9 +42,9 @@ class SplashScreen extends StatelessWidget {
               height: 200,
               fit: BoxFit.cover,
             ),
-            Column(
-              children: const [
-                LogoWithText(),
+            const Column(
+              children: [
+                LogoWithText(logoWidthHeight: 120),
                 CustomSpacer(spaceValue: 8),
                 AppText(text: 'Bompenger og Drivstoff Kalkulator')
               ],

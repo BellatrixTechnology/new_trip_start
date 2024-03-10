@@ -1,45 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:new_trip_start/components/app_text.dart';
 import 'package:new_trip_start/components/custom_spacer.dart';
-import 'package:new_trip_start/components/custom_surfix_icon.dart';
-import 'package:new_trip_start/constants.dart';
-import 'package:new_trip_start/size_config.dart';
+import 'package:new_trip_start/controllers/map_ctrl.dart';
+import 'package:new_trip_start/screens/tab_navigator/my-vehicles/vehicle_item.dart';
 
 class ChooseRouteView extends StatelessWidget {
-  const ChooseRouteView({super.key});
-
+  const ChooseRouteView({super.key, required this.controller});
+  final MapController controller;
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: const [
-        AppText(
-          text: 'Choose a Route',
-          fontWeight: FontWeight.w700,
-          fontSize: 18,
+    MapController mapController = Get.find();
+    return Column(
+      children: [
+        VechicleItem(
+          vehicle: mapController.carData.value,
+          index: 0,
+          isFromAvailRoute: true,
         ),
-        // Container(
-        //   // width: getProportionateScreenWidth(120),
-        //   height: getProportionateScreenHeight(40),
-        //   padding: const EdgeInsets.symmetric(horizontal: 10),
-        //   decoration: BoxDecoration(
-        //       color: kPrimaryColor.withOpacity(0.12),
-        //       borderRadius: BorderRadius.circular(10)),
-        //   child: Row(
-        //     // crossAxisAlignment: CrossAxisAlignment.center,
-        //     mainAxisAlignment: MainAxisAlignment.center,
-        //     children: const [
-        //       CustomSurffixIcon(svgIcon: 'assets/icons/avoid.svg'),
-        //       CustomSpacer(spaceValue: 5),
-        //       AppText(text: 'Avoid'),
-        //       CustomSpacer(spaceValue: 10),
-        //       CustomSurffixIcon(
-        //         svgIcon: 'assets/icons/arrow_down.svg',
-        //         size: 10,
-        //       ),
-        //     ],
-        //   ),
-        // )
+        const CustomSpacer(spaceValue: 10),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const AppText(
+              text: 'Choose a Route',
+              fontWeight: FontWeight.w700,
+              fontSize: 18,
+            ),
+            AppText(
+                text:
+                    '${controller.tabController.selectedVeh.value.regNum!.toUpperCase()} - ${controller.tabController.selectedVeh.value.vehBrand!.toUpperCase()}')
+          ],
+        ),
       ],
     );
   }

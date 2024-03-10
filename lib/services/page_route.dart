@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class PageRoute {
   goToNextAndRemoved(BuildContext context, pageName) {
@@ -12,5 +13,13 @@ class PageRoute {
 
   goBack(BuildContext context) {
     Navigator.pop(context);
+  }
+
+  goNextWithGetx(page, [Map? argument]) {
+    try {
+      Get.to(page, arguments: argument);
+    } catch (e) {
+      Get.to(() => page, arguments: argument);
+    }
   }
 }

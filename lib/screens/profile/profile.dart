@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:new_trip_start/components/app_text.dart';
+import 'package:new_trip_start/components/logo_text.dart';
 import 'package:new_trip_start/constants.dart';
 import 'package:new_trip_start/screens/profile/profile_body.dart';
+import 'package:new_trip_start/services/index.dart';
 import 'package:new_trip_start/size_config.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -27,14 +30,14 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ),
                 padding: const EdgeInsets.only(top: 5),
-                child: const Align(
+                child: Align(
                   alignment: Alignment.topCenter,
                   child: SafeArea(
                       child: AppText(
                           fontSize: 20,
                           fontWeight: FontWeight.w700,
                           color: kBgLightColor,
-                          text: 'My Profile')),
+                          text: 'My Profile'.tr)),
                 ),
               ),
               const Expanded(child: ProfileBody())
@@ -49,15 +52,22 @@ class ProfilePage extends StatelessWidget {
               height: 120,
               width: 120,
               alignment: Alignment.center,
-              // padding: EdgeInsets.,
               decoration: BoxDecoration(
                   color: kBgLightColor,
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: boxShadow(0.6)),
-              child: const Center(
-                  child: FlutterLogo(
-                size: 80,
-              )),
+              child: srvFirebase.auth.currentUser!.photoURL != null
+                  ? ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: FadeInImage(
+                          height: 80,
+                          placeholder:
+                              const AssetImage('assets/images/new_logo.png'),
+                          image: NetworkImage(
+                            srvFirebase.auth.currentUser!.photoURL!,
+                          )),
+                    )
+                  : const LogoWithText(logoWidthHeight: 80, hideText: true),
             ),
           )
         ],

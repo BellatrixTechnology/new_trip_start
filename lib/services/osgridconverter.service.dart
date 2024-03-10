@@ -1,59 +1,62 @@
 import 'dart:math';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:latlong_to_osgrid/latlong_to_osgrid.dart';
-import 'package:new_trip_start/services/index.dart';
+import 'dart:ui' as ui;
+import 'dart:ui';
+
+// import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:utm/utm.dart';
 
 class OsGridConverter {
-  LatLongConverter converter = new LatLongConverter();
+  // LatLongConverter converter = LatLongConverter();
 
-  void yourFunction(double lat, double long) {
-    OSRef result = converter.getOSGBfromDec(lat, long, Datums.ED50);
-    print("${result.easting} ${result.northing}");
-  }
+  // void yourFunction(double lat, double long) {
+  //   OSRef result = converter.getOSGBfromDec(lat, long, Datums.ED50);
+  //   print("${result.easting} ${result.northing}");
+  // }
 
-  LatLong osToLatLng(int easting, int northing) {
-    LatLong result =
-        converter.getLatLongFromOSGB(easting, northing, Datums.WGS84);
-    print("${result.lat} ${result.long}");
-    return result;
-  }
+  // LatLong osToLatLng(int easting, int northing) {
+  //   var result =
+  //       converter.getLatLongFromOSGB(easting, northing, Datums.WGS84);
+  //   print("${result.lat} ${result.long}");
+  //   return result;
+  // }
 
-  void yourFunctionOne(String letterRef) {
-    LatLong result = converter.getLatLongFromOSGBLetterRef(letterRef);
-    print("${result.lat} ${result.long}");
-  }
+  // void yourFunctionOne(String letterRef) {
+  //   LatLong result = converter.getLatLongFromOSGBLetterRef(letterRef);
+  //   print("${result.lat} ${result.long}");
+  // }
 
-  //you can also define your own OSRef object
-  void yourOtherFunction(OSRef os) {
-    LatLong result = converter.getLatLongFromOSGB(os.easting, os.northing);
-    print("${result.lat} ${result.long}");
-  }
+  // //you can also define your own OSRef object
+  // void yourOtherFunction(OSRef os) {
+  //   LatLong result = converter.getLatLongFromOSGB(os.easting, os.northing);
+  //   print("${result.lat} ${result.long}");
+  // }
 
-  void yourOtherFunctionOne(OSRef os) {
-    LatLong result = converter.getLatLongFromOSGBLetterRef(os.letterRef);
-    print("${result.lat} ${result.long}");
-  }
+  // void yourOtherFunctionOne(OSRef os) {
+  //   LatLong result = converter.getLatLongFromOSGBLetterRef(os.letterRef);
+  //   print("${result.lat} ${result.long}");
+  // }
 
-  void usingObjects() {
-    LatLong latL = new LatLong(59.945167, 10.758978, 0, Datums.ETRS89);
-    OSRef osReference = latL.toOsGrid();
-    print(
-        "${osReference.numericalRef}"); //will output the easting and northing as above
-    print(
-        "${osReference.letterRef}"); //will output the letter pair reference as above
-  }
+  // void usingObjects() {
+  //   LatLong latL = LatLong(59.945167, 10.758978, 0, Datums.ETRS89);
+  //   OSRef osReference = latL.toOsGrid();
+  //   print(osReference
+  //       .numericalRef); //will output the easting and northing as above
+  //   print(
+  //       osReference.letterRef); //will output the letter pair reference as above
+  // }
 
-  void usingConverter() {
-    OSRef result = converter.getOSGBfromDec(59.892365, 10.790427, Datums.WGS84);
-    print(result.northing.toString());
-    print(result.easting.toString());
-    // print(
-    //     "${result.numericalRef}"); //will output the easting and northing (460334 452192)
-    // print(
-    //     "${result.letterRef}"); //will output the letter pair reference (SE 60334 52192)
-  }
+  // void usingConverter() {
+  //   OSRef result = converter.getOSGBfromDec(59.892365, 10.790427, Datums.WGS84);
+  //   print(result.northing.toString());
+  //   print(result.easting.toString());
+  //   // print(
+  //   //     "${result.numericalRef}"); //will output the easting and northing (460334 452192)
+  //   // print(
+  //   //     "${result.letterRef}"); //will output the letter pair reference (SE 60334 52192)
+  // }
 
   UtmCoordinate utmToLatlong(int easting, int northing) {
     // input UTM coordinates (example)
@@ -228,7 +231,7 @@ class OsGridConverter {
       zoneNum = forceZoneNum;
     }
 
-    var zoneLetter = latitudeToZoneLetter(latitude);
+    var zoneLetter = "N"; //latitudeToZoneLetter(latitude);
 
     var lonRad = toRadians(longitude);
     var centralLon = zoneNumberToCentralLongitude(zoneNum);
@@ -395,5 +398,25 @@ class OsGridConverter {
     } else {
       return null;
     }
+  }
+
+  Future<Uint8List> getBytesFromAsset(String path, int width) async {
+    ByteData data = await rootBundle.load(path);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
+        targetWidth: width);
+    ui.FrameInfo fi = await codec.getNextFrame();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
+        .buffer
+        .asUint8List();
+  }
+
+  Future<Uint8List> toMarkerIcon(
+      String svgString, double width, double height) async {
+    final PictureInfo pictureInfo =
+        await vg.loadPicture(SvgStringLoader(svgString), null);
+    final img =
+        await pictureInfo.picture.toImage(width.toInt(), height.toInt());
+    final data = await img.toByteData(format: ImageByteFormat.png);
+    return data!.buffer.asUint8List();
   }
 }

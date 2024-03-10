@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_trip_start/controllers/tab_ctrl.dart';
@@ -70,30 +67,29 @@ class AddVehicleCtrl extends GetxController {
       "isSelected": false,
     },
     {
-      "name": "N/A",
+      "name": "Others",
       "isSelected": false,
     }
   ].obs;
 
   onVehicleSave(BuildContext context) {
     if (regNum.text.isEmpty) {
-      srvToastAlert.toast('Please enter registration Number');
+      srvToastAlert.toast('Please enter registration Number'.tr);
     } else if (vehBrand.text.isEmpty) {
-      srvToastAlert.toast('Please enter Vehicle Brand/Name');
+      srvToastAlert.toast('Please enter Vehicle Brand/Name'.tr);
     } else if (vehFuelCmp.text.isEmpty) {
-      srvToastAlert.toast('Please enter Vehicle Fuel Consumption');
+      srvToastAlert.toast('Please enter Vehicle Fuel Consumption'.tr);
     } else if (vehLength.text.isEmpty) {
-      srvToastAlert.toast('Please enter Vehicle Length in meters');
+      srvToastAlert.toast('Please enter Vehicle Length in meters'.tr);
     } else if (vehWeight.text.isEmpty) {
-      srvToastAlert.toast('Please enter Vehicle Weight in kgs');
-    } else if (vehClass.text.isEmpty) {
-      srvToastAlert.toast('Please select Vehicle Euro Class type');
+      srvToastAlert.toast('Please enter Vehicle Weight in kgs'.tr);
+    } else if (double.parse(vehWeight.text) > 3000 && vehClass.text.isEmpty) {
+      srvToastAlert.toast('Please select Vehicle Euro Class type'.tr);
     } else if (vehFuelType.text.isEmpty) {
-      srvToastAlert.toast('Please select Vehicle Fuel type');
+      srvToastAlert.toast('Please select Vehicle Fuel type'.tr);
     } else {
       toggleLoader();
-
-      ;
+      bottomTabController.getSelectedVehicle();
       srvFirebase.addVehicle({
         "regNum": regNum.text,
         "vehBrand": vehBrand.text,
@@ -101,7 +97,9 @@ class AddVehicleCtrl extends GetxController {
         "vehLength": vehLength.text,
         "vehWeight": vehWeight.text,
         "vehClass": vehClass.text,
-        "vehFuelType": vehFuelType.text,
+        "vehFuelType": vehFuelType.text.toUpperCase() == "BENSIN"
+            ? "petrol"
+            : vehFuelType.text,
         "color": "0046AC",
         "createdAt": DateTime.now().millisecondsSinceEpoch,
         "updatedAt": DateTime.now().millisecondsSinceEpoch,
@@ -109,8 +107,15 @@ class AddVehicleCtrl extends GetxController {
         "fuelTypeid": fuelTypeid,
         "vehicleGroup":
             vehicleGroups.where((p0) => p0['isSelected'] = true).first['name'],
+        "isSelected": true
       }).then((value) {
+        int index = bottomTabController.getSelectedVehicle();
+        if (index > -1) {
+          bottomTabController.updateSingleVehicleToFirebase(
+              bottomTabController.getSelectedVehicle(), {"isSelected": false});
+        }
         bottomTabController.getVehicles();
+
         toggleLoader();
         srvPageRoute.goBack(context);
         AppBottomModal().confirmBottomSheet(
@@ -121,8 +126,8 @@ class AddVehicleCtrl extends GetxController {
               width: 90,
               height: 90,
             ),
-            "Vehicle Added",
-            "Your Vehicle has been added successfully",
+            "Vehicle Added".tr,
+            "Your Vehicle has been added successfully".tr,
             'Yes',
             true);
       });
@@ -136,12 +141,15 @@ class AddVehicleCtrl extends GetxController {
       toggleLoader();
       srvApi.getVehicleDataWithRegistrationNum(regNum.text).then((value) {
         toggleLoader();
-        log(jsonEncode(value.data));
         if (value.statusCode == 200) {
           if (value.data != null) {
             // log(jsonEncode(value.data));
-            var data = value.data['kjoretoydataListe'][0]['godkjenning']
-                ['tekniskGodkjenning']['tekniskeData'];
+            var tekniskGodkjenning = value.data['kjoretoydataListe'][0]
+                ['godkjenning']['tekniskGodkjenning'];
+            var data = tekniskGodkjenning['tekniskeData'];
+
+            var vehicleGroup = tekniskGodkjenning['kjoretoyklassifisering']
+                ['tekniskKode']['kodeVerdi'];
 
             if (data['generelt']['merke'][0] != null) {
               vehBrand.text = data['generelt']['merke'][0]['merke'];
@@ -165,9 +173,11 @@ class AddVehicleCtrl extends GetxController {
                   ['forbrukOgUtslipp'];
 
               if (datas != null && datas[0]['forbrukBlandetKjoring'] != null) {
-                vehFuelCmp.text =
-                    calc10Percent(datas[0]['forbrukBlandetKjoring'])
-                        .toString(); //data['dimensjoner']['lengde'];
+                print(
+                    "datas[0]['forbrukBlandetKjoring'] ${datas[0]['forbrukBlandetKjoring']}");
+                vehFuelCmp.text = datas[0]['forbrukBlandetKjoring'].toString();
+                // calc10Percent(datas[0]['forbrukBlandetKjoring'])
+                //     .toString(); //data['dimensjoner']['lengde'];
               }
             }
 
@@ -192,10 +202,15 @@ class AddVehicleCtrl extends GetxController {
               }
             }
 
+            if (vehicleGroup != null) {
+              updateVehicleGroups(vehicleGroup == 'M1' ? 0 : 1);
+            }
+
             callback();
           }
         } else {
-          srvToastAlert.toast('No Vehicle Found against this register number');
+          srvToastAlert
+              .toast('No Vehicle Found against this register number'.tr);
         }
       });
     }
@@ -229,14 +244,15 @@ class AddVehicleCtrl extends GetxController {
       "vehLength": vehLength.text,
       "vehWeight": vehWeight.text,
       "vehClass": vehClass.text,
-      "vehFuelType": vehFuelType.text,
+      "vehFuelType": vehFuelType.text.toUpperCase() == "BENSIN"
+          ? "petrol"
+          : vehFuelType.text,
       "color": "0046AC",
       "userId": srvFirebase.auth.currentUser!.uid,
       "fuelTypeid": fuelTypeid,
       "updatedAt": date,
       "vehicleGroup": vehGroup
     }).then((value) {
-      ;
       Vehicle v = Vehicle(
           color: "0046AC",
           fuelTypeid: fuelTypeid,
@@ -253,7 +269,7 @@ class AddVehicleCtrl extends GetxController {
           vehicleGroup: vehGroup,
           userId: srvFirebase.auth.currentUser!.uid);
       bottomTabController.updateSingleVehicle(v);
-      srvToastAlert.toast('Vehicle Updated Successfully');
+      srvToastAlert.toast('Vehicle Updated Successfully'.tr);
       toggleLoader();
       srvPageRoute.goBack(context);
     });

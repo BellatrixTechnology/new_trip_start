@@ -5,8 +5,7 @@ import '../size_config.dart';
 
 class CustomSurffixIcon extends StatelessWidget {
   const CustomSurffixIcon(
-      {Key? key, required this.svgIcon, this.color, this.size})
-      : super(key: key);
+      {super.key, required this.svgIcon, this.color, this.size});
 
   final String svgIcon;
   final Color? color;
@@ -16,6 +15,7 @@ class CustomSurffixIcon extends StatelessWidget {
     return SvgPicture.asset(
       svgIcon,
       height: getProportionateScreenWidth(size ?? 20),
+      // ignore: deprecated_member_use
       color: color,
     );
     // return Padding(

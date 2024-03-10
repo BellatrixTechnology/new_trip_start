@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_trip_start/components/app_round_button.dart';
-import 'package:new_trip_start/components/custom_spacer.dart';
-import 'package:new_trip_start/components/custom_surfix_icon.dart';
 import 'package:new_trip_start/constants.dart';
 import 'package:new_trip_start/controllers/onboarding_ctrl.dart';
 import 'package:new_trip_start/screens/onboarding/indicator.dart';
 import 'package:new_trip_start/screens/onboarding/onboarding_info.dart';
+// import 'package:new_trip_start/screens/subscription/page.dart';
 import 'package:new_trip_start/screens/tab_navigator/tabs.dart';
+// import 'package:new_trip_start/screens/tab_navigator/tabs.dart';
 import 'package:new_trip_start/services/index.dart';
 import 'package:new_trip_start/size_config.dart';
 import 'package:new_trip_start/utils/app_bg.dart';
@@ -74,8 +74,19 @@ class OnBoarding extends StatelessWidget {
                       padding: const EdgeInsets.only(right: 20),
                       child: RoundButton(
                         press: () {
-                          srvPageRoute.goToNextAndRemoved(
-                              context, const Tabs());
+                          if (onBoardingCtrl.currentIndex.value > 1) {
+                            srvPageRoute.goToNextAndRemoved(
+                                context,
+                                // srvUser.user.isSubscribed == true
+                                //     ?
+                                const Tabs()
+                                // : const SubscriptionPage());
+                                // : const SubscriptionPage()
+                                );
+                          }
+                          controller.nextPage(
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.linear);
                         },
                         showLoader: false,
                         icon: const Icon(

@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:new_trip_start/components/app_text.dart';
-import 'package:new_trip_start/size_config.dart';
 
-import '../constants.dart';
 
 class RoundButton extends StatelessWidget {
   const RoundButton(
-      {Key? key,
+      {super.key,
       required this.press,
       required this.showLoader,
-      required this.icon})
-      : super(key: key);
+      required this.icon});
   final VoidCallback press;
   final bool showLoader;
   final Widget icon;

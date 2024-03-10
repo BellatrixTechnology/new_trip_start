@@ -43,6 +43,8 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>FacebookAppID</key>
 	<string>763971137897994</string>
+	<key>FacebookAutoLogAppEventsEnabled</key>
+	<true/>
 	<key>FacebookClientToken</key>
 	<string>4b974d5ae500598f721885f8f59cfc0d</string>
 	<key>FacebookDisplayName</key>

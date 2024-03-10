@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:new_trip_start/constants.dart';
 import 'package:new_trip_start/services/index.dart';
 

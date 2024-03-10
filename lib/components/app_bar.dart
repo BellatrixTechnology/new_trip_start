@@ -4,9 +4,8 @@ import 'package:new_trip_start/components/app_text.dart';
 import 'package:new_trip_start/constants.dart';
 
 class AppBars extends AppBar {
-  AppBars({Key? key, title, context, hideBackbtn, elevation})
+  AppBars({super.key, title, context, hideBackbtn, elevation})
       : super(
-          key: key,
           elevation: elevation ?? 0.5,
           backgroundColor: kPrimaryLightColor,
           leading: hideBackbtn != null

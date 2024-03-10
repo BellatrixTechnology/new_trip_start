@@ -1,13 +1,16 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 import 'package:new_trip_start/components/app_text.dart';
 import 'package:new_trip_start/components/custom_surfix_icon.dart';
+
 import 'package:new_trip_start/modals/bottom_modal.dart';
-import 'package:new_trip_start/screens/profile/chnage_password.dart';
+import 'package:new_trip_start/screens/auth/forget_password.dart';
 import 'package:new_trip_start/screens/profile/profile_item.dart';
 import 'package:new_trip_start/services/index.dart';
 import 'package:new_trip_start/size_config.dart';
 import 'package:new_trip_start/utils/app_bg.dart';
+// import 'package:purchases_flutter/purchases_flutter.dart';
 
 class ProfileBody extends StatelessWidget {
   const ProfileBody({super.key});
@@ -32,73 +35,95 @@ class ProfileBody extends StatelessWidget {
                 svgIcon: 'assets/icons/email.svg',
                 size: 15,
               ),
-              text: srvFirebase.auth.currentUser!.email.toString(),
+              text: srvFirebase.auth.currentUser!.email != null
+                  ? srvFirebase.auth.currentUser!.email.toString()
+                  : srvFirebase.auth.currentUser!.providerData[0].uid
+                      .toString(),
             ),
-            // const ProfileItem(
-            //   prefixIcon: CustomSurffixIcon(
-            //     svgIcon: 'assets/icons/telephone.svg',
-            //   ),
-            //   text: '+92 300 1234567',
-            // ),
             ProfileItem(
               prefixIcon: const CustomSurffixIcon(
                 svgIcon: 'assets/icons/password.svg',
               ),
               showsuffixIcon: true,
-              text: 'Change Password',
-              onPress: () {
-                srvPageRoute.goToNext(context, const ChangePasswordScreen());
+              text: 'Change Password'.tr,
+              onPress: () async {
+                srvPageRoute.goToNext(
+                    context, const ForgetPassword(isFromInnerApp: true));
               },
             ),
             ProfileItem(
               prefixIcon: const CustomSurffixIcon(
-                svgIcon: 'assets/icons/telephone.svg',
+                svgIcon: 'assets/icons/language.svg',
+                size: 100,
               ),
               showsuffixIcon: true,
-              text: 'Language Settings',
+              text: 'Language Settings'.tr,
               onPress: () {
                 AppBottomModal().changeLangModal(context);
               },
             ),
-            const ProfileItem(
-              prefixIcon: CustomSurffixIcon(
+            ProfileItem(
+              prefixIcon: const CustomSurffixIcon(
                 svgIcon: 'assets/icons/rating.svg',
               ),
               showsuffixIcon: true,
-              text: 'Feedback',
+              text: 'Feedback'.tr,
+              onPress: () {
+                srvShared.lauchUrl(
+                    "mailto:hello@tripstart.no?subject=Feedback To BompengeAppen");
+                // srvPageRoute.goToNext(context, const SubscriptionPage());
+              },
             ),
-            const ProfileItem(
-              prefixIcon: CustomSurffixIcon(
-                svgIcon: 'assets/icons/search.svg',
+            ProfileItem(
+              prefixIcon: const CustomSurffixIcon(
+                svgIcon: 'assets/icons/rating.svg',
               ),
               showsuffixIcon: true,
-              text: 'Search History',
-            ),
-            const ProfileItem(
-              prefixIcon: CustomSurffixIcon(
-                svgIcon: 'assets/icons/more-info.svg',
-              ),
-              showsuffixIcon: true,
-              text: 'More Information',
+              text: 'privacy_policy'.tr,
+              onPress: () {
+                srvShared.lauchUrl(
+                    "https://www.privacypolicygenerator.info/live.php?token=5JA0iHT81FqJ8Wtz4nsV3UqTmZrxoiKs");
+                // srvPageRoute.goToNext(context, const SubscriptionPage());
+              },
             ),
             ProfileItem(
               prefixIcon: const CustomSurffixIcon(
                 svgIcon: 'assets/icons/logout.svg',
               ),
               showsuffixIcon: true,
-              text: 'Logout',
+              text: 'Logout'.tr,
               onPress: () {
-                AppBottomModal().confirmBottomSheet(
-                    context,
-                    () {},
+                AppBottomModal().confirmBottomSheet(context, () {
+                  srvFirebase.signout(context);
+                },
                     Image.asset(
                       'assets/illustrations/logout.png',
                       width: 120,
                       height: 120,
                     ),
-                    'You are about to Logout!',
-                    'Do you want to proceed or cancel?',
-                    'Logout');
+                    'You are about to Logout!'.tr,
+                    'Do you want to proceed or cancel?'.tr,
+                    'Logout'.tr);
+              },
+            ),
+            ProfileItem(
+              prefixIcon: const CustomSurffixIcon(
+                svgIcon: 'assets/icons/logout.svg',
+              ),
+              showsuffixIcon: true,
+              text: 'Delete Account'.tr,
+              onPress: () {
+                AppBottomModal().confirmBottomSheet(context, () {
+                  srvFirebase.signout(context);
+                },
+                    Image.asset(
+                      'assets/illustrations/logout.png',
+                      width: 120,
+                      height: 120,
+                    ),
+                    'You are about to Delete your account!'.tr,
+                    'Do you want to proceed or cancel?'.tr,
+                    'Delete Account'.tr);
               },
             ),
           ],

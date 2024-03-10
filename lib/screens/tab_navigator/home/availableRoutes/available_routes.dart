@@ -6,6 +6,7 @@ import 'package:new_trip_start/constants.dart';
 import 'package:new_trip_start/controllers/map_ctrl.dart';
 import 'package:new_trip_start/controllers/places.controller.dart';
 import 'package:new_trip_start/screens/tab_navigator/home/availableRoutes/choose_route_view.dart';
+import 'package:new_trip_start/screens/tab_navigator/home/availableRoutes/routeDetails/route_detail.dart';
 import 'package:new_trip_start/screens/tab_navigator/home/availableRoutes/route_item.dart';
 import 'package:new_trip_start/screens/tab_navigator/home/map_view.dart';
 import 'package:new_trip_start/services/index.dart';
@@ -23,7 +24,7 @@ class AvailableRoutes extends StatelessWidget {
           appBar: AppBar(
             title: Obx(
               () => AppText(
-                text: controller.availRoutetitle.value,
+                text: controller.availRoutetitle.value.tr,
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
                 color: kBgLightColor,
@@ -60,29 +61,32 @@ class AvailableRoutes extends StatelessWidget {
           body: AppGradientBg(
             padding: 0,
             child: SingleChildScrollView(
-              physics: const ScrollPhysics(),
+              // physics: const ScrollPhysics(),
               // physics: const NeverScrollableScrollPhysics(),
 
               padding: const EdgeInsets.all(20),
-              child: Column(
-                children: [
-                  // const AvailRouteMaps(),
-                  const CustomSpacer(spaceValue: 10),
-                  Container(
-                    height: 400,
-                    width: SizeConfig.screenWidth,
-                    decoration: BoxDecoration(
-                      boxShadow: boxShadow(),
-                      borderRadius: BorderRadius.circular(20),
+              child: SingleChildScrollView(
+                // physics: const ClampingScrollPhysics(),
+                child: Column(
+                  children: [
+                    // const AvailRouteMaps(),
+                    const CustomSpacer(spaceValue: 10),
+                    Container(
+                      height: 300,
+                      width: SizeConfig.screenWidth,
+                      decoration: BoxDecoration(
+                        boxShadow: boxShadow(),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: const HomeMapView(),
+                      ),
                     ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: const HomeMapView(),
-                    ),
-                  ),
 
-                  availRoutesList(),
-                ],
+                    availRoutesList(),
+                  ],
+                ),
               ),
             ),
           ),
@@ -93,32 +97,31 @@ class AvailableRoutes extends StatelessWidget {
   }
 
   Widget availRoutesList() {
-    return GetBuilder<MapController>(
-      builder: (controller) => Column(
-        children: [
-          // const VechicleItem(),
-          const CustomSpacer(spaceValue: 10),
-          const ChooseRouteView(),
-          // AppText(text: controller.availRoutes.length.toString()),
-          ListView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: controller.features.length,
-            itemBuilder: (context, index) {
-              return RouteItem(
-                index: index,
-                onPress: () {
-                  // controller.availRoutetitle.value = 'Fv120';
-                  // controller.switchToNext.toggle();
-                  // controller.update();
-                  // srvPageRoute.goToNext(context, RouteDetails(index: index));
-                },
-              );
-            },
-          ),
-        ],
-      ),
+    MapController controller = Get.find();
+    return Column(
+      children: [
+        const CustomSpacer(spaceValue: 10),
+        ChooseRouteView(
+          controller: controller,
+        ),
+        ListView.builder(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: controller.routeData.length,
+          itemBuilder: (context, index) {
+            controller.calcFuelPrice(index);
+            return RouteItem(
+              index: index,
+              onPress: () {
+                srvPageRoute.goNextWithGetx(
+                    RouteDetails(index: index), {"index": index});
+              },
+            );
+          },
+        ),
+      ],
     );
+    // );
   }
 
   Widget availRouteBottom() {
@@ -150,8 +153,8 @@ class AvailableRoutes extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const AppText(
-                    text: 'Auto Pass',
+                  AppText(
+                    text: 'Auto Pass'.tr,
                     fontSize: 12,
                   ),
                   Switch.adaptive(
@@ -159,35 +162,40 @@ class AvailableRoutes extends StatelessWidget {
                     onChanged: (val) {
                       controller.autopass.toggle();
                       controller.update();
+                      controller.calcAfterToggle();
                     },
                     activeColor: kPrimaryColor,
                   )
                 ],
               ),
             ),
-            // Container(
-            //   width: (SizeConfig.screenWidth - 60) / 2,
-            //   margin: const EdgeInsets.only(left: 10),
-            //   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            //   decoration: BoxDecoration(
-            //       boxShadow: boxShadow(0.1, 8),
-            //       color: kBgLightColor,
-            //       borderRadius: BorderRadius.circular(10)),
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //     children: [
-            //       const AppText(
-            //         text: 'Rush Hour',
-            //         fontSize: 12,
-            //       ),
-            //       Switch.adaptive(
-            //         value: true,
-            //         onChanged: (val) {},
-            //         activeColor: kPrimaryColor,
-            //       )
-            //     ],
-            //   ),
-            // ),
+            Container(
+              width: (SizeConfig.screenWidth - 60) / 2,
+              margin: const EdgeInsets.only(left: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              decoration: BoxDecoration(
+                  boxShadow: boxShadow(0.1, 8),
+                  color: kBgLightColor,
+                  borderRadius: BorderRadius.circular(10)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  AppText(
+                    text: 'Rush Hour'.tr,
+                    fontSize: 12,
+                  ),
+                  Switch.adaptive(
+                    value: controller.rushHour.value,
+                    onChanged: (val) {
+                      controller.rushHour.toggle();
+                      controller.update();
+                      controller.calcAfterToggle();
+                    },
+                    activeColor: kPrimaryColor,
+                  )
+                ],
+              ),
+            ),
           ],
         ),
       ),

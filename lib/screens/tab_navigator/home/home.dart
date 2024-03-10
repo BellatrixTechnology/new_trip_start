@@ -1,53 +1,52 @@
-import 'dart:developer';
-
+// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:here_sdk/core.dart';
-import 'package:here_sdk/mapview.dart';
 import 'package:new_trip_start/components/app_button.dart';
 import 'package:new_trip_start/constants.dart';
-import 'package:new_trip_start/controllers/places.controller.dart';
-import 'package:new_trip_start/models/places.model.dart';
+import 'package:new_trip_start/controllers/map_ctrl.dart';
+// import 'package:new_trip_start/screens/subscription/page.dart';
 import 'package:new_trip_start/screens/tab_navigator/home/availableRoutes/available_routes.dart';
 import 'package:new_trip_start/screens/tab_navigator/home/map_view.dart';
 import 'package:new_trip_start/screens/tab_navigator/home/upper_view.dart';
-import 'package:new_trip_start/services/Routing.service.dart';
 import 'package:new_trip_start/services/index.dart';
+import 'package:new_trip_start/size_config.dart';
 import 'package:new_trip_start/utils/app_bg.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
   @override
   Widget build(BuildContext context) {
-    PlaceController placeController = Get.put(PlaceController());
-    // srvApi.getData();
-    // srvOsGridConverter.yourFunction(59.892365, 10.790427);
-    // srvOsGridConverter.utmConverter(59.892365, 10.790427);
+    MapController mapController = Get.put(MapController());
+    globalContext = context;
+    // print(srvOsGridConverter.fromLatLon(59.824852, 10.804570, 33));
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: AppGradientBg(
         padding: 0,
-        child: Column(
+        child: Stack(
           children: [
+            const HomeMapView(),
             const HomeUpperView(),
-            const Expanded(
-              child: HomeMapView(),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: Obx(
-                () => AppButton(
-                    text: 'See Available Route',
+            Positioned(
+              bottom: 10,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Obx(
+                  () => AppButton(
+                    width: SizeConfig.screenWidth - 40,
+                    text: 'See Available Route'.tr,
                     press: () {
-                      // inspect(placeController.startPlace.position);
-                      // inspect(placeController.endPlace.position);
+                      if (mapController.routeData.isEmpty) return;
+                      // if (kReleaseMode == true &&
+                      //     srvUser.user.isSubscribed == false) {
+                      //   srvPageRoute.goNextWithGetx(const SubscriptionPage());
+                      //   return;
+                      // }
                       srvPageRoute.goToNext(context, const AvailableRoutes());
-                      // srvRouting.clearMap();
-                      // srvRouting.addRoute();
-                      // srvRouting.showAllRouteOnMap(
-                      //     "BGw22w3Do0iqOge0jB8L0FsJTgKzFwH3IkhQj_fkkWj0sBgFjX8BnVoB_2B");
                     },
-                    showLoader: placeController.isFindigRoutes.value),
+                    showLoader: mapController.isFetching.value,
+                  ),
+                ),
               ),
             ),
           ],

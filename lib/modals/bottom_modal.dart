@@ -15,7 +15,6 @@ import 'package:new_trip_start/controllers/places.controller.dart';
 import 'package:new_trip_start/controllers/tab_ctrl.dart';
 import 'package:new_trip_start/models/places.model.dart';
 import 'package:new_trip_start/models/vehicle.model.dart';
-import 'package:new_trip_start/screens/tab_navigator/home/availableRoutes/available_routes.dart';
 import 'package:new_trip_start/services/index.dart';
 import 'package:new_trip_start/size_config.dart';
 
@@ -111,7 +110,7 @@ class AppBottomModal {
                       width: 100, height: 100),
               const CustomSpacer(spaceValue: 10),
               AppText(
-                text: heading ?? 'Delete Vehicle?',
+                text: heading ?? 'Delete Vehicle?'.tr,
                 fontSize: 22,
                 fontWeight: FontWeight.w500,
               ),
@@ -120,7 +119,7 @@ class AppBottomModal {
                   fontSize: 14,
                   color: kTextColor,
                   text: paragragh ??
-                      'Are you sure you want to delete this vehicle?'),
+                      'Are you sure you want to delete this vehicle?'.tr),
               const CustomSpacer(spaceValue: 20),
               hideButtons != null
                   ? const SizedBox()
@@ -128,7 +127,7 @@ class AppBottomModal {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         AppOutlineButton(
-                          text: 'No',
+                          text: 'No'.tr,
                           width: (SizeConfig.screenWidth - 60) / 2,
                           press: () {
                             srvPageRoute.goBack(context);
@@ -137,7 +136,7 @@ class AppBottomModal {
                           showLoader: false,
                         ),
                         AppButton(
-                          text: okBtnText ?? 'Yes',
+                          text: okBtnText ?? 'Yes'.tr,
                           width: (SizeConfig.screenWidth - 60) / 2,
                           press: () {
                             srvPageRoute.goBack(context);
@@ -195,8 +194,8 @@ class AppBottomModal {
                     const CustomSpacer(spaceValue: 10),
                     AppText(
                       text: vehicleCtrl.isVehichleAddedModalExpanded.isTrue
-                          ? 'Save your Vehicle'
-                          : 'Enter Registeration Number',
+                          ? 'Save your Vehicle'.tr
+                          : 'Enter Registeration Number'.tr,
                       fontSize: 22,
                       fontWeight: FontWeight.w500,
                     ),
@@ -205,13 +204,14 @@ class AppBottomModal {
                         fontSize: 14,
                         color: kTextColor,
                         text: vehicleCtrl.isVehichleAddedModalExpanded.isTrue
-                            ? 'Please enter your Vehicle Details below'
-                            : 'Please enter your Vehicle Registeration Number'),
+                            ? 'Please enter your Vehicle Details below'.tr
+                            : 'Please enter your Vehicle Registeration Number'
+                                .tr),
                     const CustomSpacer(spaceValue: 10),
                     const AppText(text: 'Vehicle Registeration Number'),
                     const CustomSpacer(spaceValue: 3),
                     AppInput(
-                      hintText: 'Enter Registeration Number',
+                      hintText: 'Enter Registeration Number'.tr,
                       controller: vehicleCtrl.regNum,
                     ),
                     const CustomSpacer(spaceValue: 5),
@@ -221,33 +221,32 @@ class AppBottomModal {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const AppText(text: 'Vehicle Brand'),
+                              AppText(text: 'Vehicle Brand'.tr),
                               const CustomSpacer(spaceValue: 3),
                               AppInput(
-                                hintText: 'Vehicle Brand',
+                                hintText: 'Vehicle Brand'.tr,
                                 controller: vehicleCtrl.vehBrand,
                               ),
                               const CustomSpacer(spaceValue: 5),
-                              const AppText(text: 'Vehicle Fuel Consumption'),
+                              AppText(text: 'Vehicle Fuel Consumption'.tr),
                               const CustomSpacer(spaceValue: 3),
                               AppInput(
                                   controller: vehicleCtrl.vehFuelCmp,
-                                  hintText: 'Fuel Consumption/Liter Per 10 Km'),
+                                  hintText:
+                                      'Fuel Consumption/Liter Per 100 Km'.tr),
                               const CustomSpacer(spaceValue: 5),
-                              const AppText(text: 'Car Length (Meters)'),
+                              AppText(text: 'Car Length (Meters)'.tr),
                               const CustomSpacer(spaceValue: 3),
                               AppInput(
-                                hintText: 'Car Length (Meters)',
+                                hintText: 'Car Length (Meters)'.tr,
                                 controller: vehicleCtrl.vehLength,
                                 textInputType: TextInputType.number,
                               ),
                               const CustomSpacer(spaceValue: 5),
-                              const AppText(
-                                text: 'Car Weight (Kilograms)',
-                              ),
+                              AppText(text: 'Car Weight (Kilograms)'.tr),
                               const CustomSpacer(spaceValue: 3),
                               AppInput(
-                                hintText: 'Car Weight (Kilograms)',
+                                hintText: 'Car Weight (Kilograms)'.tr,
                                 controller: vehicleCtrl.vehWeight,
                                 textInputType: TextInputType.number,
                               ),
@@ -259,14 +258,14 @@ class AppBottomModal {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const AppText(text: 'Euro Class'),
+                                  AppText(text: 'Euro Class'.tr),
                                   const CustomSpacer(spaceValue: 3),
                                   AppInput(
                                     onPress: () {
                                       selectItemModal(context, false);
                                     },
                                     readOnly: true,
-                                    hintText: 'Euro Class',
+                                    hintText: 'Euro Class'.tr,
                                     controller: vehicleCtrl.vehClass,
                                     suffixicon: const Icon(
                                       CupertinoIcons.chevron_down,
@@ -279,14 +278,14 @@ class AppBottomModal {
                               // ),
                               // ),
                               const CustomSpacer(spaceValue: 5),
-                              const AppText(text: 'Fuel Type'),
+                              AppText(text: 'Fuel Type'.tr),
                               const CustomSpacer(spaceValue: 3),
                               AppInput(
                                 onPress: () {
                                   selectItemModal(context, true);
                                 },
                                 readOnly: true,
-                                hintText: 'Select Fuel Type',
+                                hintText: 'Select Fuel Type'.tr,
                                 controller: vehicleCtrl.vehFuelType,
                                 suffixicon: const Icon(
                                   CupertinoIcons.chevron_down,
@@ -305,8 +304,8 @@ class AppBottomModal {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const AppText(
-                                text: 'OR',
+                              AppText(
+                                text: 'OR'.tr,
                                 fontSize: 22,
                                 fontWeight: FontWeight.w700,
                               ),
@@ -317,10 +316,10 @@ class AppBottomModal {
                                       .toggle();
                                   vehicleCtrl.update();
                                 },
-                                child: const CustomRichText(
+                                child: CustomRichText(
                                     padding: 0,
-                                    text1: 'To Add Vehicle Manually. ',
-                                    text2: 'Click here'),
+                                    text1: 'To Add Vehicle Manually'.tr,
+                                    text2: 'Click here'.tr),
                               ),
                             ],
                           )),
@@ -333,7 +332,7 @@ class AppBottomModal {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const AppText(text: 'Vehicle Group'),
+                            AppText(text: 'Vehicle Group'.tr),
                             ListView.builder(
                               shrinkWrap: true,
                               itemCount: vehicleCtrl.vehicleGroups.length,
@@ -370,8 +369,8 @@ class AppBottomModal {
                     Obx(
                       () => AppButton(
                         text: vehicleCtrl.isVehichleAddedModalExpanded.isFalse
-                            ? 'Submit'
-                            : 'Save',
+                            ? 'Submit'.tr
+                            : 'Save'.tr,
                         press: () {
                           if (isEditing == true) {
                             vehicleCtrl.updateVehicle(vehicle, context);
@@ -529,16 +528,16 @@ class AppBottomModal {
               Image.asset('assets/illustrations/language.png',
                   width: 100, height: 100),
               const CustomSpacer(spaceValue: 10),
-              const AppText(
-                text: 'Select Langauge',
+              AppText(
+                text: 'Select Langauge'.tr,
                 fontSize: 22,
                 fontWeight: FontWeight.w500,
               ),
               const CustomSpacer(spaceValue: 5),
-              const AppText(
+              AppText(
                   fontSize: 14,
                   color: kTextColor,
-                  text: 'Select the Language you prefer'),
+                  text: 'Select the Language you prefer'.tr),
               const CustomSpacer(spaceValue: 10),
               Obx(() => ListView.builder(
                     shrinkWrap: true,
@@ -574,7 +573,14 @@ class AppBottomModal {
               const CustomSpacer(spaceValue: 20),
               AppButton(
                 text: 'Change Language',
-                press: () {},
+                press: () {
+                  Map lang = tabController.languages
+                      .firstWhere((element) => element['isSelected']);
+                  Get.updateLocale(lang['text'] == "English"
+                      ? const Locale("en", "US")
+                      : const Locale("nn", "NO"));
+                  srvPageRoute.goBack(context);
+                },
                 showLoader: false,
               )
             ],
@@ -617,8 +623,8 @@ class AppBottomModal {
                           controller.getSearchResult(e);
                         }
                         if (e.isEmpty) {
-                          controller.places = RxList([]);
-                          controller.places.refresh();
+                          controller.googlePlaces = RxList([]);
+                          controller.googlePlaces.refresh();
                         }
                       },
                       // textInputType: TextInputType.none,
@@ -633,23 +639,24 @@ class AppBottomModal {
                     ),
                     const CustomSpacer(spaceValue: 10),
                     Expanded(
-                      child: controller.places.isEmpty
+                      child: controller.googlePlaces.isEmpty
                           ? const Center(
                               child: AppText(text: "No search Found..."),
                             )
                           : ListView.builder(
                               shrinkWrap: true,
-                              itemCount: controller.places.length,
+                              itemCount: controller.googlePlaces.length,
                               itemBuilder: (context, index) {
-                                Place place = controller.places[index];
+                                GooglePlacesModel place =
+                                    controller.googlePlaces[index];
                                 return GestureDetector(
                                   behavior: HitTestBehavior.opaque,
                                   onTap: () {
                                     // isDestination
                                     //     ? controller.endPlace = place
                                     //     : controller.startPlace = place;
-                                    placeCtrl.onPlaceSelect(
-                                        place, isDestination);
+                                    // placeCtrl.onPlaceSelect(
+                                    //     place, isDestination);
 
                                     srvPageRoute.goBack(context);
                                     if (isDestination) {
@@ -663,13 +670,13 @@ class AppBottomModal {
                                       Row(
                                         children: [
                                           Image.asset(
-                                            'assets/images/dest-icon.png',
+                                            'assets/images/destination-marker.png',
                                             width: 30,
                                             height: 30,
                                             fit: BoxFit.contain,
                                           ),
                                           const CustomSpacer(spaceValue: 5),
-                                          AppText(text: place.title)
+                                          AppText(text: place.description)
                                         ],
                                       ),
                                       const Divider(
@@ -686,10 +693,10 @@ class AppBottomModal {
           );
         }).whenComplete(() {
       placeCtrl.isSearching.value = false;
-      placeCtrl.places = RxList([]);
+      placeCtrl.googlePlaces = RxList([]);
       placeCtrl.placeSearch.text = '';
       placeCtrl.update();
-      placeCtrl.places.refresh();
+      placeCtrl.googlePlaces.refresh();
     });
   }
 }

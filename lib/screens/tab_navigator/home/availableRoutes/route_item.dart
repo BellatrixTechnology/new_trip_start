@@ -6,7 +6,6 @@ import 'package:new_trip_start/components/custom_spacer.dart';
 import 'package:new_trip_start/components/custom_surfix_icon.dart';
 import 'package:new_trip_start/constants.dart';
 import 'package:new_trip_start/controllers/map_ctrl.dart';
-import 'package:new_trip_start/controllers/places.controller.dart';
 import 'package:new_trip_start/services/index.dart';
 
 class RouteItem extends StatelessWidget {
@@ -17,16 +16,16 @@ class RouteItem extends StatelessWidget {
   Widget build(BuildContext context) {
     MapController mapController = Get.find();
 
-    var item = mapController.features[index]['attributes'];
-    var direction = mapController.directions[index];
+    return GetBuilder<MapController>(builder: (controller) {
+      var info = mapController.routeData[index];
+      // print("info --> ${info['distance']}");
 
-    return GetBuilder<MapController>(
-      builder: (controller) => GestureDetector(
+      return GestureDetector(
         onTap: onPress,
         child: Container(
           margin: const EdgeInsets.only(top: 10),
           padding:
-              const EdgeInsets.only(top: 12, bottom: 12, left: 12, right: 8),
+              const EdgeInsets.only(top: 12, bottom: 12, left: 12, right: 12),
           decoration: BoxDecoration(
               boxShadow: boxShadow(),
               color: kBgLightColor,
@@ -40,10 +39,12 @@ class RouteItem extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      AppText(
-                        text: direction['routeName'],
+                      Flexible(
+                          child: AppText(
+                        text: info['summary'],
                         fontWeight: FontWeight.w600,
-                      ),
+                        maxLines: 2,
+                      )),
                       RichText(
                         text: TextSpan(
                           children: <TextSpan>[
@@ -51,14 +52,16 @@ class RouteItem extends StatelessWidget {
                               text: 'Total ',
                               style: GoogleFonts.poppins(
                                   textStyle: const TextStyle(
+                                      fontSize: 12,
                                       fontWeight: FontWeight.w600,
                                       color: kBlackColor)),
                             ),
                             TextSpan(
                               text:
-                                  '  ${(controller.autopass.isTrue ? item['Total_Toll small'] : item['Total_Toll_Without_Discount small']) + double.parse(item['summary']['gasolinePrice'])} NOK',
+                                  "${mapController.routeData[index]['price'] == null ? "Calculating..." : '${info['price']['withFuel'].toStringAsFixed(2)} NOK'} ",
                               style: GoogleFonts.poppins(
                                   textStyle: const TextStyle(
+                                      fontSize: 12,
                                       fontWeight: FontWeight.w300,
                                       color: kTextColor)),
                             ),
@@ -71,26 +74,41 @@ class RouteItem extends StatelessWidget {
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        bottomChild('assets/icons/clock.svg',
-                            srvRouting.formatTime(item['Total_Minutes'] * 60)),
+                        bottomChild(
+                            'assets/icons/clock.svg',
+                            srvShared.convertMinutesToHoursAndMinutes(
+                                info['duration'].runtimeType == int
+                                    ? info['duration'].toString()
+                                    : info['duration']['value'].toString())),
                         bottomChild(
                             'assets/icons/choose-route.svg',
-                            srvRouting
-                                .formatLength(item['Total_Meters'] * 0.001)),
-                        bottomChild('assets/icons/price-bundle.svg',
-                            'Kr ${controller.autopass.isTrue ? item['Total_Toll small'] : item['Total_Toll_Without_Discount small']}'),
-                        bottomChild('assets/icons/pump.svg',
-                            '${item['summary']['gasolinePrice']} Kr'),
+                            info['distance'].runtimeType == int
+                                ? info['distance'].toString()
+                                : info['distance']['text']
+                            // info['distance']['text'],
+                            ),
+                        bottomChild(
+                            'assets/icons/price-bundle.svg',
+                            mapController.routeData[index]['price'] == null
+                                ? "Calculating..."
+                                : 'Kr ${info['price']['withoutFuel'].toStringAsFixed(2)}'),
+                        bottomChild(
+                          'assets/icons/pump.svg',
+                          (info['totalPriceFuel'] ?? 0).toStringAsFixed(2),
+                        ),
                       ])
                 ],
               )),
-              const CustomSpacer(spaceValue: 5),
-              const CustomSurffixIcon(svgIcon: 'assets/icons/arrow-right.svg')
+              const CustomSpacer(spaceValue: 10),
+              const CustomSurffixIcon(
+                svgIcon: 'assets/icons/arrow-right.svg',
+                size: 13,
+              )
             ],
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 
   Widget bottomChild(String iconPath, String text) {
@@ -99,12 +117,13 @@ class RouteItem extends StatelessWidget {
       children: [
         CustomSurffixIcon(
           svgIcon: iconPath, //'assets/icons/clock.svg',
-          size: 13,
+          size: 15,
         ),
-        const CustomSpacer(spaceValue: 1),
+        const CustomSpacer(spaceValue: 3),
         AppText(
+          padding: const EdgeInsets.only(top: 1.5),
           text: text,
-          fontSize: 12,
+          fontSize: 10,
         )
       ],
     );
