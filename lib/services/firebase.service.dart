@@ -223,8 +223,8 @@ class FirebaseService {
     db.collection("users_route_feedback").add({
       "feedback": feedback,
       "rating": rating,
-      "startPosDesp": mapController.startPlace.description,
-      "endPosDesp": mapController.endPlace.description,
+      "startPosDesp": mapController.startPlace.name,
+      "endPosDesp": mapController.endPlace.name,
       "startLatLng":
           "${mapController.startPlace.position!.lat}, ${mapController.startPlace.position!.lng}",
       "endLatLng":

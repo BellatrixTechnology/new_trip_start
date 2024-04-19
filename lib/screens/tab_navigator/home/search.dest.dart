@@ -31,9 +31,7 @@ class SearchDestPage extends StatelessWidget {
                   bottom: MediaQuery.of(context).viewInsets.bottom),
               child: Column(
                 children: [
-                  AppText(
-                    text: heading,
-                  ),
+                  AppText(text: heading),
                   const CustomSpacer(spaceValue: 10),
                   AppInput(
                     hintText: "Search Place Here...".tr,
@@ -65,8 +63,7 @@ class SearchDestPage extends StatelessWidget {
                             shrinkWrap: true,
                             itemCount: placeCtrl.googlePlaces.length,
                             itemBuilder: (context, index) {
-                              GooglePlacesModel place =
-                                  placeCtrl.googlePlaces[index];
+                              CityModel place = placeCtrl.googlePlaces[index];
                               return GestureDetector(
                                 behavior: HitTestBehavior.opaque,
                                 onTap: () {
@@ -95,8 +92,7 @@ class SearchDestPage extends StatelessWidget {
                                         const CustomSpacer(spaceValue: 5),
                                         Flexible(
                                             child: AppText(
-                                                text: place.description,
-                                                maxLines: 2))
+                                                text: place.name, maxLines: 2))
                                       ],
                                     ),
                                     const Divider(

@@ -22,18 +22,17 @@ class MapController extends GetxController {
   RxSet<Polyline> polylines = RxSet({});
 
   PolylinePoints polylinePoints = PolylinePoints();
-  // var da =
-  // {
-  //   "origin": "59.9138688,10.7522454",
-  //   "destination": "63.4305149,10.3950528",
-  //   "vehicleGroup": "M1",
-  //   "vehFuelType": "petrol",
-  //   "vehFuelCmp": 0.385,
-  //   "cache": true,
-  //   "vehLength": 3.91,
-  //   "type": "gas",
-  //   "travelMode": "driving"
-  // };
+  var da = {
+    "origin": "59.9138688,10.7522454",
+    "destination": "63.4305149,10.3950528",
+    "vehicleGroup": "M1",
+    "vehFuelType": "petrol",
+    "vehFuelCmp": 0.385,
+    "cache": true,
+    "vehLength": 3.91,
+    "type": "gas",
+    "travelMode": "driving"
+  };
 
   late BitmapDescriptor destIcon;
   late BitmapDescriptor startIcon;
@@ -46,9 +45,12 @@ class MapController extends GetxController {
   RxList<Map> summary = RxList([]);
   List<LatLng> polylineCoordinates = [];
 
-  GooglePlacesModel startPlace =
-      GooglePlacesModel(description: "", placeId: "");
-  GooglePlacesModel endPlace = GooglePlacesModel(description: "", placeId: "");
+  // GooglePlacesModel startPlace =
+  //     GooglePlacesModel(description: "", placeId: "");
+  // GooglePlacesModel endPlace = GooglePlacesModel(description: "", placeId: "");
+  CityModel startPlace =
+      CityModel(name: "", id: -1, latitude: "", longitude: "");
+  CityModel endPlace = CityModel(name: "", id: -1, latitude: "", longitude: "");
 
   var autopass = true.obs;
   var rushHour = true.obs;
@@ -198,8 +200,8 @@ class MapController extends GetxController {
   addLog(List name) {
     srvAnalytics.addLog("request", {
       "routeData": name.toString(),
-      "start": startPlace.description,
-      "end": endPlace.description,
+      "start": startPlace.name,
+      "end": endPlace.name,
       "start_lat": startPlace.position!.lat,
       "start_lng": startPlace.position!.lng
     });

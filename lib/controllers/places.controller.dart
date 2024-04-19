@@ -5,16 +5,16 @@ import 'package:new_trip_start/models/places.model.dart';
 import 'package:new_trip_start/services/index.dart';
 
 class PlaceController extends GetxController {
-  RxList<GooglePlacesModel> googlePlaces = RxList([]);
+  RxList<CityModel> googlePlaces = RxList([]);
   var isSearching = false.obs;
   TextEditingController placeSearch = TextEditingController();
   TextEditingController startPlaceCtrl = TextEditingController();
   TextEditingController endPlaceCtrl = TextEditingController();
   RxList availRoutes = RxList([]);
 
-  GooglePlacesModel startPlace =
-      GooglePlacesModel(description: "", placeId: "");
-  GooglePlacesModel endPlace = GooglePlacesModel(description: "", placeId: "");
+  CityModel startPlace =
+      CityModel(name: "", id: -1, latitude: "", longitude: "");
+  CityModel endPlace = CityModel(name: "", id: -1, latitude: "", longitude: "");
 
   var switchToNext = false.obs;
   var availRoutetitle = 'Available Route'.obs;
@@ -24,28 +24,25 @@ class PlaceController extends GetxController {
   MapController mapCtrrl = Get.put(MapController());
 
   getSearchResult(String text) async {
-    if (text.length < 2) return;
+    if (text.length < 2 && isSearching.isFalse) return;
     toggleSearch();
     // places = RxList([]);
-    var resp = await srvApi.searchPlaces(text);
+    var resp = await srvApi.getResultForSearchedPlaces(text);
 
-    // print(resp);
+    print(resp);
 
-    if (resp != null) {
-      toggleSearch();
-      if (resp.data['status'] == "OK") {
-        if (resp.data['predictions'].length > 0) {
-          googlePlaces.assignAll([]);
-          for (var element in resp.data['predictions']) {
-            int index = googlePlaces
-                .indexWhere((gp) => gp.placeId == element['place_id']);
-            if (index < 0) {
-              googlePlaces.add(GooglePlacesModel.fromJson(element));
-            }
+    toggleSearch();
+    if (resp.data['status'] == true) {
+      if (resp.data['data'].length > 0) {
+        googlePlaces.assignAll([]);
+        for (var element in resp.data['data']) {
+          int index = googlePlaces.indexWhere((gp) => gp.id == element['id']);
+          if (index < 0) {
+            googlePlaces.add(CityModel.fromMap(element));
           }
-          googlePlaces.refresh();
-          update();
         }
+        googlePlaces.refresh();
+        update();
       }
     }
   }
@@ -60,24 +57,26 @@ class PlaceController extends GetxController {
     update();
   }
 
-  onPlaceSelect(GooglePlacesModel place, bool isDestination) async {
-    var resp = await srvApi.getPlaceDetailsFromPlaceId(place.placeId);
-    if (resp.data['status'] == "OK") {
-      Map<String, dynamic> pos = resp.data['result']['geometry']['location'];
-      place.position =
-          Position.fromjson({"lat": pos['lat'], 'lng': pos['lng']});
-    }
+  onPlaceSelect(CityModel place, bool isDestination) async {
+    // var resp = await srvApi.getPlaceDetailsFromPlaceId(place.placeId);
+    // if (resp.data['status'] == "OK") {
+    //   Map<String, dynamic> pos = resp.data['result']['geometry']['location'];
+    //   place.position =
+    //       Position.fromjson({"lat": pos['lat'], 'lng': pos['lng']});
+    // }
+    place.position = Position(
+        lat: double.parse(place.latitude), lng: double.parse(place.longitude));
 
     if (!isDestination) {
       startPlace = place;
-      startPlaceCtrl.text = place.description;
+      startPlaceCtrl.text = place.name;
       mapCtrrl.startPlace = startPlace;
       mapCtrrl.addStartMarker();
       mapCtrrl.mapAnimateCamera();
       clearSearchData();
     } else {
       endPlace = place;
-      endPlaceCtrl.text = place.description;
+      endPlaceCtrl.text = place.name;
       mapCtrrl.endPlace = endPlace;
       mapCtrrl.endStartMarker();
       mapCtrrl.setMapBounds();

@@ -647,7 +647,7 @@ class AppBottomModal {
                               shrinkWrap: true,
                               itemCount: controller.googlePlaces.length,
                               itemBuilder: (context, index) {
-                                GooglePlacesModel place =
+                                CityModel place =
                                     controller.googlePlaces[index];
                                 return GestureDetector(
                                   behavior: HitTestBehavior.opaque,
@@ -676,7 +676,7 @@ class AppBottomModal {
                                             fit: BoxFit.contain,
                                           ),
                                           const CustomSpacer(spaceValue: 5),
-                                          AppText(text: place.description)
+                                          AppText(text: place.name)
                                         ],
                                       ),
                                       const Divider(

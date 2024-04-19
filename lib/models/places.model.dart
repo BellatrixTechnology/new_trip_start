@@ -1,3 +1,6 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:convert';
+
 class Place {
   String? title;
   String? id;
@@ -84,5 +87,80 @@ class GooglePlacesModel {
         description: json['description'],
         placeId: json['place_id'],
         position: json['position']);
+  }
+}
+
+class CityModel {
+  int id;
+  String name;
+  String latitude;
+  String longitude;
+  Position? position;
+  CityModel(
+      {required this.id,
+      required this.name,
+      required this.latitude,
+      required this.longitude,
+      this.position});
+
+  CityModel copyWith({
+    int? id,
+    String? name,
+    String? latitude,
+    String? longitude,
+    Position? position,
+  }) {
+    return CityModel(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      latitude: latitude ?? this.latitude,
+      longitude: longitude ?? this.longitude,
+      position: position ?? this.position,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'name': name,
+      'latitude': latitude,
+      'longitude': longitude,
+      "position": position
+    };
+  }
+
+  factory CityModel.fromMap(Map<String, dynamic> map) {
+    return CityModel(
+      id: map['id'] as int,
+      name: map['name'] as String,
+      latitude: map['latitude'] as String,
+      longitude: map['longitude'] as String,
+      // position: map['position'] as Position,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory CityModel.fromJson(String source) =>
+      CityModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() {
+    return 'CityModel(id: $id, name: $name, latitude: $latitude, longitude: $longitude)';
+  }
+
+  @override
+  bool operator ==(covariant CityModel other) {
+    if (identical(this, other)) return true;
+
+    return other.id == id &&
+        other.name == name &&
+        other.latitude == latitude &&
+        other.longitude == longitude;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^ name.hashCode ^ latitude.hashCode ^ longitude.hashCode;
   }
 }

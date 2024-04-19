@@ -9,8 +9,19 @@ import 'package:new_trip_start/services/index.dart';
 import 'package:new_trip_start/size_config.dart';
 import 'package:new_trip_start/utils/app_bg.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    // srvRating.askForRating(context);
+  }
 
   @override
   Widget build(BuildContext context) {

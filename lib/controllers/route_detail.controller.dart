@@ -104,6 +104,7 @@ class RouteDetailCtrl extends GetxController {
     final BitmapDescriptor svgMarker = BitmapDescriptor.fromBytes(tollIcon);
     // List tolls =
     tolls = RxList(mapController.routeData[index]['tolls']);
+    print(tolls[0]);
     ferries = RxList(mapController.routeData[index]['ferry']);
     for (var data in tolls) {
       var toll = data;
@@ -228,8 +229,8 @@ class RouteDetailCtrl extends GetxController {
 
     double price = 0.0;
     if (!isAutoPassOn && !isRushHourOn) {
-      price = double.parse(toll['priceWithoutAutoPass'].toString()) +
-          double.parse(toll['priceWithoutRushHour'].toString());
+      price = double.parse(
+          toll['totalPriceWithoutRushHourWithoutAutoPass'].toString());
     }
 
     if (isAutoPassOn && isRushHourOn) {
@@ -241,8 +242,10 @@ class RouteDetailCtrl extends GetxController {
     }
 
     if (!isAutoPassOn && isRushHourOn) {
-      price = double.parse(toll['priceWithoutAutoPass'].toString()) +
-          double.parse(toll['priceWithRushHour'].toString());
+      price = double.parse(
+          toll['totalPriceWithRushHourWithoutAutoPass'].toString());
+      // double.parse(toll['priceWithoutAutoPass'].toString()) +
+      //     double.parse(toll['priceWithRushHour'].toString());
     }
 
     return price;

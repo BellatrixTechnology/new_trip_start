@@ -62,18 +62,18 @@ class ProfileBody extends StatelessWidget {
                 AppBottomModal().changeLangModal(context);
               },
             ),
-            ProfileItem(
-              prefixIcon: const CustomSurffixIcon(
-                svgIcon: 'assets/icons/rating.svg',
-              ),
-              showsuffixIcon: true,
-              text: 'Feedback'.tr,
-              onPress: () {
-                srvShared.lauchUrl(
-                    "mailto:hello@tripstart.no?subject=Feedback To BompengeAppen");
-                // srvPageRoute.goToNext(context, const SubscriptionPage());
-              },
-            ),
+            // ProfileItem(
+            //   prefixIcon: const CustomSurffixIcon(
+            //     svgIcon: 'assets/icons/rating.svg',
+            //   ),
+            //   showsuffixIcon: true,
+            //   text: 'Feedback'.tr,
+            //   onPress: () {
+            //     srvShared.lauchUrl(
+            //         "mailto:hello@tripstart.no?subject=Feedback To BompengeAppen");
+            //     // srvPageRoute.goToNext(context, const SubscriptionPage());
+            //   },
+            // ),
             ProfileItem(
               prefixIcon: const CustomSurffixIcon(
                 svgIcon: 'assets/icons/rating.svg',

@@ -25,6 +25,7 @@ class RouteDetails extends StatelessWidget {
         init: RouteDetailCtrl(),
         builder: (controller) {
           Map data = controller.mapController.routeData[index];
+
           return Scaffold(
               appBar: AppBar(
                 title: AppText(
@@ -46,6 +47,8 @@ class RouteDetails extends StatelessWidget {
                     } else {
                       srvPageRoute.goBack(context);
                     }
+                    srvRating.askForRating(context);
+                    // srvRating.askForRating(context);
                   },
                   child: const Icon(
                     Icons.arrow_back,

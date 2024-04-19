@@ -36,6 +36,7 @@ class HomePage extends StatelessWidget {
                     width: SizeConfig.screenWidth - 40,
                     text: 'See Available Route'.tr,
                     press: () {
+                      // return;
                       if (mapController.routeData.isEmpty) return;
                       // if (kReleaseMode == true &&
                       //     srvUser.user.isSubscribed == false) {

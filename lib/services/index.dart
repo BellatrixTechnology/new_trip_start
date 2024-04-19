@@ -6,6 +6,7 @@ import 'package:new_trip_start/services/loader.service.dart';
 import 'package:new_trip_start/services/osgridconverter.service.dart';
 import 'package:new_trip_start/services/page_route.dart';
 import 'package:new_trip_start/services/payment.service.dart';
+import 'package:new_trip_start/services/rating.service.dart';
 import 'package:new_trip_start/services/revenue_cat_sub.service.dart';
 import 'package:new_trip_start/services/shared.service.dart';
 import 'package:new_trip_start/services/toast_alert.service.dart';
@@ -25,3 +26,4 @@ RevenueCatSubscriptionService srvRevenueCatSub =
     RevenueCatSubscriptionService();
 
 AnalyticsService srvAnalytics = AnalyticsService();
+RatingService srvRating = RatingService();

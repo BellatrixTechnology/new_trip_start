@@ -8,6 +8,7 @@ import 'package:new_trip_start/constants.dart';
 import 'package:new_trip_start/models/places.model.dart';
 // import 'package:new_trip_start/models/toll.dart';
 import 'package:new_trip_start/models/vehicle.model.dart';
+import 'package:new_trip_start/services/index.dart';
 
 // import 'package:xml/xml.dart';
 // import 'package:xml2json/xml2json.dart';
@@ -17,6 +18,8 @@ class ApiService {
 
   var baseURL =
       "https://us-central1-car-app-5b455.cloudfunctions.net/app"; //"http://localhost:5000/car-app-5b455/us-central1/app";
+
+  var url = "http://13.49.48.45:3000/v1";
 
   Future<Response> getVehicleDataWithRegistrationNum(String regNum) async {
     Response response;
@@ -62,7 +65,7 @@ class ApiService {
     Response response;
     try {
       String url =
-          "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$text&key=$mapApiKey&components";
+          "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$text&key=$mapApiKey&components=country:NO";
 
       response = await dio.get(url);
       return response;
@@ -74,6 +77,11 @@ class ApiService {
         return null;
       }
     }
+  }
+
+  Future<Response> getResultForSearchedPlaces(String text) async {
+    // http://13.49.48.45:3000/v1/cities?keyword=oslo
+    return await dio.get("$url/cities?keyword=$text");
   }
 
   Future<Response> getPlaceDetailsFromPlaceId(String placeId) async {
@@ -148,7 +156,10 @@ class ApiService {
       },
       options: Options(
           receiveTimeout: const Duration(minutes: 2),
-          sendTimeout: const Duration(minutes: 2)),
+          sendTimeout: const Duration(minutes: 2),
+          headers: {
+            "x-token": srvUser.user.user!.uid,
+          }),
     );
     // return await dio.post(apiUrl, data: data);
   }
