@@ -74,17 +74,20 @@ class Position {
 
 class GooglePlacesModel {
   String description;
+  String mainText;
   String placeId; //place_id
   Position? position;
   GooglePlacesModel({
     required this.description,
     required this.placeId,
+    required this.mainText,
     this.position,
   });
 
   factory GooglePlacesModel.fromJson(Map<String, dynamic> json) {
     return GooglePlacesModel(
         description: json['description'],
+        mainText: json['main_text'],
         placeId: json['place_id'],
         position: json['position']);
   }

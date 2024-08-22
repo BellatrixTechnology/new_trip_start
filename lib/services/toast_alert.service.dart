@@ -14,8 +14,9 @@ class ToastAlertService {
   toast(String message,
       [SnackPosition? position, String? title, int? seconds]) {
     Get.snackbar(title ?? "Trip Start", message,
-        // backgroundColor: kPrimaryColor,
-        // colorText: kBgLightColor,
+        backgroundColor: kBlackColor,
+        colorText: kBgLightColor,
+
         // icon: CustomSurffixIcon(svgIcon: 'assets/'),
         duration: Duration(seconds: seconds ?? 3),
         snackPosition: position ?? SnackPosition.TOP);

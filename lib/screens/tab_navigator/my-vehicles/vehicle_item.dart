@@ -91,7 +91,7 @@ class VechicleItem extends StatelessWidget {
                       borderRadius: BorderRadius.circular(50)),
                   child: AppText(
                     text:
-                        '${(double.parse(vehicle.vehFuelCmp!)).toStringAsFixed(2)} Liter per 100 km',
+                        '${(double.tryParse(vehicle.vehFuelCmp!))!.toStringAsFixed(2)} Liter per 100 km',
                     fontSize: 12,
                     color: const Color(0xFF387C37),
                   ),
@@ -106,7 +106,8 @@ class VechicleItem extends StatelessWidget {
                       GestureDetector(
                         onTap: () {
                           AppBottomModal().confirmBottomSheet(context, () {
-                            btmTabCtrl.deleteVehicle(vehicle.docId!, context);
+                            btmTabCtrl.deleteVehicle(
+                                vehicle.id.toString(), context);
                           });
                         },
                         child: Container(

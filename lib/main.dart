@@ -1,4 +1,5 @@
-import 'package:feedback/feedback.dart';
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';
@@ -13,11 +14,14 @@ import 'package:new_trip_start/controllers/map_ctrl.dart';
 import 'package:new_trip_start/controllers/onboarding_ctrl.dart';
 import 'package:new_trip_start/controllers/places.controller.dart';
 import 'package:new_trip_start/controllers/route_detail.controller.dart';
+import 'package:new_trip_start/controllers/subscription.controller.dart';
 import 'package:new_trip_start/controllers/tab_ctrl.dart';
 import 'package:new_trip_start/firebase_options.dart';
 import 'package:new_trip_start/screens/splash/splash.dart';
 import 'package:new_trip_start/services/index.dart';
 import 'package:new_trip_start/utils/translations.dart';
+import 'package:flutter_uxcam/flutter_uxcam.dart';
+
 // import 'package:device_preview/device_preview.dart';
 
 // import 'package:purchases_flutter/purchases_flutter.dart';
@@ -26,6 +30,7 @@ import 'package:new_trip_start/utils/translations.dart';
 //     PurchasesConfiguration("appl_hUPXcbRjXVrdFEJxvmtgbfcPQwL");
 
 void main() async {
+  HttpOverrides.global = MyHttpOverrides();
   Get.lazyPut(() => AuthController());
   Get.lazyPut(() => MapController());
   Get.lazyPut(() => AddVehicleCtrl());
@@ -33,6 +38,7 @@ void main() async {
   Get.lazyPut(() => PlaceController());
   Get.lazyPut(() => RouteDetailCtrl());
   Get.lazyPut(() => BottomTabController());
+  Get.lazyPut(() => SubscriptionController());
   WidgetsFlutterBinding.ensureInitialized();
 
   // final config = QonversionConfigBuilder('UXhA__7E9XnhUW7nf6YwjGAUZae260Zc',
@@ -42,7 +48,7 @@ void main() async {
 
   // await Purchases.configure(configuration);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(const BetterFeedback(child: MyApp()));
+  runApp(const MyApp());
   // DevicePreview(
   //   enabled: !kReleaseMode,
   //   builder: (context) => MyApp(), // Wrap your app
@@ -67,12 +73,26 @@ void main() async {
 //   }
 // }
 
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+  }
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    FlutterUxcam
+        .optIntoSchematicRecordings(); // Confirm that you have user permission for screen recording
+    FlutterUxConfig config = FlutterUxConfig(
+        userAppKey: "jfjftjbnbna61dz", enableAutomaticScreenNameTagging: false);
+    FlutterUxcam.startWithConfiguration(config);
     return GetMaterialApp(
         // useInheritedMediaQuery: true,
         // locale: DevicePreview.locale(context),
@@ -93,6 +113,11 @@ class MyApp extends StatelessWidget {
             // or simply save your changes to "hot reload" in a Flutter IDE).
             // Notice that the counter didn't reset back to zero; the application
             // is not restarted.
+            textSelectionTheme: const TextSelectionThemeData(
+              cursorColor: kPrimaryColor,
+              selectionColor: kPrimaryColor,
+              selectionHandleColor: kPrimaryColor,
+            ),
             appBarTheme: const AppBarTheme(
                 iconTheme: IconThemeData(color: kBgLightColor)),
             colorScheme: ColorScheme.fromSeed(seedColor: kPrimaryColor),

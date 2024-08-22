@@ -1,21 +1,35 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:new_trip_start/models/users.model.dart';
 
 class UserService {
-  UserModel user = UserModel(
-      isFreeTrial: false,
+  NewUserModel user = NewUserModel(
+      id: -1,
       email: "",
-      isSubscribed: false,
-      subsDueDate: "",
-      subStartDate: "");
+      token: "",
+      dt: "",
+      // udt: "",
+      // count: 0,
+      // limit: 0,
+      // status: "",
+      name: "",
+      isSubscribe: false,
+      verified: false);
 
-  initUser(User fbUser, Map fSUser) {
-    user = UserModel(
-        email: fbUser.email ?? fbUser.providerData[0].uid!,
-        isSubscribed: fSUser['isSubscribed'],
-        user: fbUser,
-        isFreeTrial: fSUser['isFreeTrial'],
-        subsDueDate: fSUser['subsDueDate'],
-        subStartDate: fSUser['subStartDate']);
+  initUser(NewUserModel newUser) {
+    user = newUser;
+  }
+
+  emptyUser() {
+    return NewUserModel(
+        id: -1,
+        email: "",
+        token: "",
+        dt: "",
+        isSubscribe: false,
+        // udt: "",
+        // count: 0,
+        // limit: 0,
+        // status: "",
+        name: "",
+        verified: false);
   }
 }

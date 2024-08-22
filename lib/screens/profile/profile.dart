@@ -4,7 +4,7 @@ import 'package:new_trip_start/components/app_text.dart';
 import 'package:new_trip_start/components/logo_text.dart';
 import 'package:new_trip_start/constants.dart';
 import 'package:new_trip_start/screens/profile/profile_body.dart';
-import 'package:new_trip_start/services/index.dart';
+// import 'package:new_trip_start/services/index.dart';
 import 'package:new_trip_start/size_config.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -56,18 +56,18 @@ class ProfilePage extends StatelessWidget {
                   color: kBgLightColor,
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: boxShadow(0.6)),
-              child: srvFirebase.auth.currentUser!.photoURL != null
-                  ? ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
-                      child: FadeInImage(
-                          height: 80,
-                          placeholder:
-                              const AssetImage('assets/images/new_logo.png'),
-                          image: NetworkImage(
-                            srvFirebase.auth.currentUser!.photoURL!,
-                          )),
-                    )
-                  : const LogoWithText(logoWidthHeight: 80, hideText: true),
+              // child: srvUser.user. != null
+              //     ? ClipRRect(
+              //         borderRadius: BorderRadius.circular(12),
+              //         child: FadeInImage(
+              //             height: 80,
+              //             placeholder:
+              //                 const AssetImage('assets/images/new_logo.png'),
+              //             image: NetworkImage(
+              //               srvFirebase.auth.currentUser!.photoURL!,
+              //             )),
+              //       )
+              child: const LogoWithText(logoWidthHeight: 80, hideText: true),
             ),
           )
         ],

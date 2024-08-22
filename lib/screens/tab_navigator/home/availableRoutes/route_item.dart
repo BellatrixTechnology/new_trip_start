@@ -41,7 +41,7 @@ class RouteItem extends StatelessWidget {
                     children: [
                       Flexible(
                           child: AppText(
-                        text: info['summary'],
+                        text: info['summary'] ?? info['title'],
                         fontWeight: FontWeight.w600,
                         maxLines: 2,
                       )),

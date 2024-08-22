@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,6 +8,8 @@ import 'package:new_trip_start/components/custom_surfix_icon.dart';
 import 'package:new_trip_start/modals/bottom_modal.dart';
 import 'package:new_trip_start/screens/auth/forget_password.dart';
 import 'package:new_trip_start/screens/profile/profile_item.dart';
+import 'package:new_trip_start/screens/splash/splash.dart';
+import 'package:new_trip_start/screens/subscription/page.dart';
 import 'package:new_trip_start/services/index.dart';
 import 'package:new_trip_start/size_config.dart';
 import 'package:new_trip_start/utils/app_bg.dart';
@@ -26,7 +29,7 @@ class ProfileBody extends StatelessWidget {
         child: Column(
           children: [
             AppText(
-              text: srvFirebase.auth.currentUser!.displayName,
+              text: srvUser.user.name,
               fontSize: 22,
               fontWeight: FontWeight.w700,
             ),
@@ -35,10 +38,14 @@ class ProfileBody extends StatelessWidget {
                 svgIcon: 'assets/icons/email.svg',
                 size: 15,
               ),
-              text: srvFirebase.auth.currentUser!.email != null
-                  ? srvFirebase.auth.currentUser!.email.toString()
-                  : srvFirebase.auth.currentUser!.providerData[0].uid
-                      .toString(),
+              text: srvUser.user.email,
+              onPress: () {
+                srvPageRoute.goNextWithGetx(const SubscriptionPage());
+              },
+              // srvFirebase.auth.currentUser!.email != null
+              //     ? srvFirebase.auth.currentUser!.email.toString()
+              //     : srvFirebase.auth.currentUser!.providerData[0].uid
+              //         .toString(),
             ),
             ProfileItem(
               prefixIcon: const CustomSurffixIcon(
@@ -113,8 +120,19 @@ class ProfileBody extends StatelessWidget {
               showsuffixIcon: true,
               text: 'Delete Account'.tr,
               onPress: () {
-                AppBottomModal().confirmBottomSheet(context, () {
+                AppBottomModal().confirmBottomSheet(context, () async {
                   srvFirebase.signout(context);
+                  try {
+                    var resp = await srvApi.apiUrlDelete(concaturl: "me");
+                    srvShared.printWrapped(resp.toString());
+                    srvPageRoute.goToNextAndRemoved(
+                        // ignore: use_build_context_synchronously
+                        context,
+                        const SplashScreen());
+                  } on DioException catch (e) {
+                    srvToastAlert.toast(e.message ??
+                        "Something went wrong while deleting your account".tr);
+                  }
                 },
                     Image.asset(
                       'assets/illustrations/logout.png',

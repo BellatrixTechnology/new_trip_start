@@ -373,7 +373,7 @@ class AppBottomModal {
                             : 'Save'.tr,
                         press: () {
                           if (isEditing == true) {
-                            vehicleCtrl.updateVehicle(vehicle, context);
+                            vehicleCtrl.updateVehicle(vehicle!, context);
                             return;
                           }
 
@@ -647,7 +647,7 @@ class AppBottomModal {
                               shrinkWrap: true,
                               itemCount: controller.googlePlaces.length,
                               itemBuilder: (context, index) {
-                                CityModel place =
+                                GooglePlacesModel place =
                                     controller.googlePlaces[index];
                                 return GestureDetector(
                                   behavior: HitTestBehavior.opaque,
@@ -676,7 +676,8 @@ class AppBottomModal {
                                             fit: BoxFit.contain,
                                           ),
                                           const CustomSpacer(spaceValue: 5),
-                                          AppText(text: place.name)
+                                          AppText(text: place.mainText),
+                                          AppText(text: place.description),
                                         ],
                                       ),
                                       const Divider(

@@ -3,6 +3,7 @@ import 'package:new_trip_start/services/analytics.service.dart';
 import 'package:new_trip_start/services/api.service.dart';
 import 'package:new_trip_start/services/firebase.service.dart';
 import 'package:new_trip_start/services/loader.service.dart';
+import 'package:new_trip_start/services/local_storage.service.dart';
 import 'package:new_trip_start/services/osgridconverter.service.dart';
 import 'package:new_trip_start/services/page_route.dart';
 import 'package:new_trip_start/services/payment.service.dart';
@@ -27,3 +28,5 @@ RevenueCatSubscriptionService srvRevenueCatSub =
 
 AnalyticsService srvAnalytics = AnalyticsService();
 RatingService srvRating = RatingService();
+
+LocalStorage srvLocalStorage = LocalStorage();

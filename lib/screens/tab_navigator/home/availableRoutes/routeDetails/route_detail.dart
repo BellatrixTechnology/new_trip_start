@@ -38,15 +38,15 @@ class RouteDetails extends StatelessWidget {
                 elevation: 0,
                 leading: GestureDetector(
                   onTap: () {
-                    if (data['isFeedbackAsked'] == null) {
-                      data['isFeedbackAsked'] = true;
-                      controller.mapController.update();
-                      FeedbackModal().showModal(() {
-                        srvPageRoute.goBack(context);
-                      });
-                    } else {
-                      srvPageRoute.goBack(context);
-                    }
+                    // if (data['isFeedbackAsked'] == null) {
+                    //   data['isFeedbackAsked'] = true;
+                    //   controller.mapController.update();
+                    //   FeedbackModal().showModal(() {
+                    //     srvPageRoute.goBack(context);
+                    //   });
+                    // } else {
+                    srvPageRoute.goBack(context);
+                    // }
                     srvRating.askForRating(context);
                     // srvRating.askForRating(context);
                   },
@@ -157,14 +157,17 @@ class RouteDetails extends StatelessWidget {
                               (BuildContext context, bool isExpanded) {
                             // print(item['NAME TOLL STATION']);
                             return ListTile(
-                              title: Text(item['NAME TOLL STATION']),
+                              title: Text(
+                                  item['NAME TOLL STATION'] ?? item['title']),
                             );
                           },
                           body: ListTile(
                               title: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  AppText(text: '${item['NAME TOLL STATION']}'),
+                                  AppText(
+                                      text:
+                                          '${item['NAME TOLL STATION'] ?? item['title']}'),
                                   AppText(
                                       text:
                                           '${"Time rule".tr}(${item['TIME RULE']})'),
@@ -339,7 +342,7 @@ class RouteDetails extends StatelessWidget {
                                 color: kPrimaryColor,
                                 fontWeight: FontWeight.bold,
                                 text:
-                                    'Kr ${(data['totalPriceFuel']).toStringAsFixed(2)}',
+                                    'Kr ${(data['totalPriceFuel'] ?? 0.0).toStringAsFixed(2)}',
                               ),
                       ],
                     ),

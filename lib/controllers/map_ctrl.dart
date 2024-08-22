@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
@@ -9,6 +10,7 @@ import 'package:new_trip_start/constants.dart';
 import 'package:new_trip_start/controllers/tab_ctrl.dart';
 import 'package:new_trip_start/models/places.model.dart';
 import 'package:new_trip_start/models/vehicle.model.dart';
+import 'package:new_trip_start/screens/subscription/page.dart';
 import 'package:new_trip_start/services/index.dart';
 // import 'package:new_trip_start/utils/polyline_decoder.dart';
 
@@ -48,9 +50,10 @@ class MapController extends GetxController {
   // GooglePlacesModel startPlace =
   //     GooglePlacesModel(description: "", placeId: "");
   // GooglePlacesModel endPlace = GooglePlacesModel(description: "", placeId: "");
-  CityModel startPlace =
-      CityModel(name: "", id: -1, latitude: "", longitude: "");
-  CityModel endPlace = CityModel(name: "", id: -1, latitude: "", longitude: "");
+  GooglePlacesModel startPlace =
+      GooglePlacesModel(mainText: "", description: "", placeId: "");
+  GooglePlacesModel endPlace =
+      GooglePlacesModel(mainText: "", description: "", placeId: "");
 
   var autopass = true.obs;
   var rushHour = true.obs;
@@ -122,33 +125,51 @@ class MapController extends GetxController {
 
     // Future.delayed(const Duration(seconds: 10), () {
     //   print("called");
-    //   srvToastAlert.closePopup();
+    //   srvToastAlert.closePopup();ß
     // });
     // return;
-    var response = await srvApi.getRouteData(
-        startPlace.position!, endPlace.position!, carData.value);
+    print("carData.value.toMap() ${carData.value.toMap()}");
+    try {
+      var response = await srvApi.getRouteData(
+          startPlace.position!, endPlace.position!, carData.value);
 
-    // ignore: use_build_context_synchronously
-    Navigator.of(globalContext, rootNavigator: true).pop();
+      srvShared.printWrapped(
+          "response.data['api_count'].toString() ${response.data}");
 
-    // toggleisFetching();
-    // srvLoader.hideLoader();
-    // print("response $response");
-    // if (kReleaseMode)
-    // srvPageRoute.goBack(globalContext);
-    // Get.back(closeOverlays: true);
+      // ignore: use_build_context_synchronously
+      Navigator.of(globalContext, rootNavigator: true).pop();
 
-    if (response.statusCode == 200) {
-      if (response.data['data'] == null) {
-        srvToastAlert.toast("No Route Found");
-        return;
+      // toggleisFetching();
+      // srvLoader.hideLoader();
+      // print("response $response");
+      // if (kReleaseMode)
+      // srvPageRoute.goBack(globalContext);
+      // Get.back(closeOverlays: true);
+
+      if (response.statusCode == 200) {
+        if (response.data['status'] == 422) {
+          Get.snackbar("BompengeAppen", response.data['message'],
+              backgroundColor: kRedColor, colorText: kBgLightColor);
+          srvPageRoute.goNextWithGetx(const SubscriptionPage());
+          return;
+        }
+        if (response.data['status'] == true) {
+          if (response.data['data'] == null) {
+            srvToastAlert.toast("No Route Found");
+            return;
+          }
+          if (response.data['data'].length > 0) {
+            routeData = RxList(response.data['data']);
+            addPolylines();
+          } else {
+            srvToastAlert.toast("No Route Found");
+          }
+        } else {
+          srvToastAlert.toast("No Route Found");
+        }
       }
-      if (response.data['data'].length > 0) {
-        routeData = RxList(response.data['data']);
-        addPolylines();
-      } else {
-        srvToastAlert.toast("No Route Found");
-      }
+    } on DioException catch (e) {
+      print("e.message ---> ${e.message}");
     }
   }
 
@@ -200,8 +221,8 @@ class MapController extends GetxController {
   addLog(List name) {
     srvAnalytics.addLog("request", {
       "routeData": name.toString(),
-      "start": startPlace.name,
-      "end": endPlace.name,
+      "start": startPlace.mainText,
+      "end": endPlace.mainText,
       "start_lat": startPlace.position!.lat,
       "start_lng": startPlace.position!.lng
     });

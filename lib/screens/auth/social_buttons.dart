@@ -21,27 +21,27 @@ class SocialButtons extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () {
-                  authCtrl.facebookLogin(context);
-                },
-                child: Container(
-                  height: 50,
-                  width: 50,
-                  decoration: BoxDecoration(
-                      color: kBgLightColor,
-                      borderRadius: BorderRadius.circular(50),
-                      boxShadow: boxShadow(0.1)),
-                  child: Center(
-                    child: Image.asset(
-                      'assets/images/facebook.png',
-                      width: 35,
-                      height: 35,
-                    ),
-                  ),
-                ),
-              ),
+              // GestureDetector(
+              //   behavior: HitTestBehavior.opaque,
+              //   onTap: () {
+              //     authCtrl.facebookLogin(context);
+              //   },
+              //   child: Container(
+              //     height: 50,
+              //     width: 50,
+              //     decoration: BoxDecoration(
+              //         color: kBgLightColor,
+              //         borderRadius: BorderRadius.circular(50),
+              //         boxShadow: boxShadow(0.1)),
+              //     child: Center(
+              //       child: Image.asset(
+              //         'assets/images/facebook.png',
+              //         width: 35,
+              //         height: 35,
+              //       ),
+              //     ),
+              //   ),
+              // ),
               GestureDetector(
                 behavior: HitTestBehavior.opaque,
                 onTap: () {

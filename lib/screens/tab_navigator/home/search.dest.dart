@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:get/get_rx/src/rx_workers/utils/debouncer.dart';
 import 'package:new_trip_start/components/app_input.dart';
 import 'package:new_trip_start/components/app_text.dart';
 import 'package:new_trip_start/components/custom_spacer.dart';
@@ -16,6 +18,7 @@ class SearchDestPage extends StatelessWidget {
   final String heading;
   @override
   Widget build(BuildContext context) {
+    Debouncer debouncer = Debouncer(delay: const Duration(milliseconds: 500));
     return GetBuilder<PlaceController>(
       builder: (placeCtrl) => Scaffold(
         resizeToAvoidBottomInset: false,
@@ -36,13 +39,13 @@ class SearchDestPage extends StatelessWidget {
                   AppInput(
                     hintText: "Search Place Here...".tr,
                     onChanged: (e) async {
-                      if (e.length > 1) {
+                      debouncer.call(() {
                         placeCtrl.getSearchResult(e);
-                      }
-                      if (e.isEmpty) {
-                        placeCtrl.googlePlaces = RxList([]);
-                        placeCtrl.googlePlaces.refresh();
-                      }
+                        if (e.isEmpty) {
+                          placeCtrl.googlePlaces = RxList([]);
+                          placeCtrl.googlePlaces.refresh();
+                        }
+                      });
                     },
                     controller: placeCtrl.placeSearch,
                     icon: const Padding(
@@ -63,7 +66,8 @@ class SearchDestPage extends StatelessWidget {
                             shrinkWrap: true,
                             itemCount: placeCtrl.googlePlaces.length,
                             itemBuilder: (context, index) {
-                              CityModel place = placeCtrl.googlePlaces[index];
+                              GooglePlacesModel place =
+                                  placeCtrl.googlePlaces[index];
                               return GestureDetector(
                                 behavior: HitTestBehavior.opaque,
                                 onTap: () {
@@ -80,8 +84,11 @@ class SearchDestPage extends StatelessWidget {
                                   }
                                 },
                                 child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Row(
+                                      mainAxisSize: MainAxisSize.min,
                                       children: [
                                         Image.asset(
                                           'assets/images/destination-marker.png',
@@ -91,8 +98,20 @@ class SearchDestPage extends StatelessWidget {
                                         ),
                                         const CustomSpacer(spaceValue: 5),
                                         Flexible(
-                                            child: AppText(
-                                                text: place.name, maxLines: 2))
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              AppText(
+                                                  fontWeight: FontWeight.bold,
+                                                  text: place.mainText,
+                                                  maxLines: 2),
+                                              AppText(
+                                                  text: place.description,
+                                                  maxLines: 2),
+                                            ],
+                                          ),
+                                        ),
                                       ],
                                     ),
                                     const Divider(

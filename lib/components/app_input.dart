@@ -3,22 +3,22 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:new_trip_start/constants.dart';
 
 class AppInput extends StatelessWidget {
-  const AppInput({
-    super.key,
-    required this.hintText,
-    this.icon,
-    this.textInputType,
-    this.suffixicon,
-    this.color,
-    this.borderRaidus,
-    this.textColor,
-    this.controller,
-    this.obscureText,
-    this.validator,
-    this.readOnly,
-    this.onPress,
-    this.onChanged,
-  });
+  const AppInput(
+      {super.key,
+      required this.hintText,
+      this.icon,
+      this.textInputType,
+      this.suffixicon,
+      this.color,
+      this.borderRaidus,
+      this.textColor,
+      this.controller,
+      this.obscureText,
+      this.validator,
+      this.readOnly,
+      this.onPress,
+      this.onChanged,
+      this.textAlign});
   final String hintText;
   final Widget? icon;
   final Widget? suffixicon;
@@ -32,6 +32,7 @@ class AppInput extends StatelessWidget {
   final VoidCallback? onPress;
   final Function(String)? onChanged;
   final String? Function(String?)? validator;
+  final TextAlign? textAlign;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -44,6 +45,8 @@ class AppInput extends StatelessWidget {
       onChanged: onChanged,
       readOnly: readOnly ?? false,
       cursorColor: kPrimaryColor,
+      textAlign: textAlign ?? TextAlign.start,
+      // textAlign: TextAlignVertical.center,
       decoration: InputDecoration(
         fillColor: color ?? kPrimaryColor.withOpacity(0.1),
         filled: true,

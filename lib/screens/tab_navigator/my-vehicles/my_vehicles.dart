@@ -6,6 +6,7 @@ import 'package:new_trip_start/components/app_text.dart';
 import 'package:new_trip_start/controllers/tab_ctrl.dart';
 import 'package:new_trip_start/modals/bottom_modal.dart';
 import 'package:new_trip_start/models/vehicle.model.dart';
+import 'package:new_trip_start/screens/subscription/page.dart';
 // import 'package:new_trip_start/screens/subscription/page.dart';
 import 'package:new_trip_start/screens/tab_navigator/my-vehicles/vehicle_item.dart';
 import 'package:new_trip_start/services/index.dart';
@@ -55,12 +56,12 @@ class MyVehicles extends StatelessWidget {
                     child: AppButton(
                         text: 'Add Vehicle'.tr,
                         press: () {
-                          // if (btmTabCtrl.myVehicles.isNotEmpty &&
-                          //     srvUser.user.isSubscribed == false) {
-                          //   srvPageRoute
-                          //       .goNextWithGetx(const SubscriptionPage());
-                          //   return;
-                          // }
+                          if (btmTabCtrl.myVehicles.isNotEmpty &&
+                              srvUser.user.isSubscribe == false) {
+                            srvPageRoute
+                                .goNextWithGetx(const SubscriptionPage());
+                            return;
+                          }
 
                           AppBottomModal().addVehicleModal(context, () {
                             Future.delayed(const Duration(seconds: 3), () {

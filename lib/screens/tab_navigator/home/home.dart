@@ -1,9 +1,11 @@
 // import 'package:flutter/foundation.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_trip_start/components/app_button.dart';
 import 'package:new_trip_start/constants.dart';
 import 'package:new_trip_start/controllers/map_ctrl.dart';
+import 'package:new_trip_start/screens/subscription/page.dart';
 // import 'package:new_trip_start/screens/subscription/page.dart';
 import 'package:new_trip_start/screens/tab_navigator/home/availableRoutes/available_routes.dart';
 import 'package:new_trip_start/screens/tab_navigator/home/map_view.dart';
@@ -37,12 +39,11 @@ class HomePage extends StatelessWidget {
                     text: 'See Available Route'.tr,
                     press: () {
                       // return;
+                      if (srvUser.user.isSubscribe == false) {
+                        srvPageRoute.goNextWithGetx(const SubscriptionPage());
+                        return;
+                      }
                       if (mapController.routeData.isEmpty) return;
-                      // if (kReleaseMode == true &&
-                      //     srvUser.user.isSubscribed == false) {
-                      //   srvPageRoute.goNextWithGetx(const SubscriptionPage());
-                      //   return;
-                      // }
                       srvPageRoute.goToNext(context, const AvailableRoutes());
                     },
                     showLoader: mapController.isFetching.value,

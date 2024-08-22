@@ -9,7 +9,7 @@ class AnalyticsService {
 
   inituser() {
     // print(srvUser.user.user!.uid);
-    firebaseAnalytics.setUserId(id: srvUser.user.user!.uid);
+    firebaseAnalytics.setUserId(id: srvUser.user.id.toString());
   }
 
   addLog(String name, Map<String, Object?> param) {

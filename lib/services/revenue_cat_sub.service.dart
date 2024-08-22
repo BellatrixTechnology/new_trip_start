@@ -27,6 +27,7 @@ class RevenueCatSubscriptionService {
       configuration =
           PurchasesConfiguration("appl_hUPXcbRjXVrdFEJxvmtgbfcPQwL");
     }
+    configuration.appUserID = srvUser.user.id.toString();
     await Purchases.configure(configuration);
     getOffers();
     checkSubStatus();
@@ -56,23 +57,25 @@ class RevenueCatSubscriptionService {
         EntitlementInfo? data = purchaserInfo.entitlements.all['Pro'];
         if (data == null) return;
         if (data.isActive) {
-          srvUser.user.isSubscribed = true;
-          srvFirebase.updateUser({
-            "isSubscribed": true,
-            "productId": data.productIdentifier,
-            "originalPurchaseDate": data.originalPurchaseDate,
-            "latestPurchaseDate": data.latestPurchaseDate,
-          }).then((value) {
-            subscriptionController.toggleLoader(false, true);
-            srvToastAlert
-                .toast("You are pro user now. enjoy the access of full app.");
-            Get.close(0);
-          });
+          // srvUser.user.isSubscribed = true;
+          srvUser.user.isSubscribe = true;
+          srvUser.user.subscriptionId = data.productIdentifier;
+          // srvFirebase.updateUser({
+          //   "isSubscribed": true,
+          //   "productId": data.productIdentifier,
+          //   "originalPurchaseDate": data.originalPurchaseDate,
+          //   "latestPurchaseDate": data.latestPurchaseDate,
+          // }).then((value) {
+          subscriptionController.toggleLoader(false, true);
+          srvToastAlert
+              .toast("You are pro user now. enjoy the access of full app.");
+          Get.close(0);
+          // });
           // Unlock that great "pro" content
         }
       }).catchError((e) {
         subscriptionController.toggleLoader(false, true);
-        srvToastAlert.toast(e.message!);
+        srvToastAlert.toast(e.message ?? e.toString());
       });
     } on PlatformException catch (e) {
       subscriptionController.toggleLoader(false, true);
@@ -112,17 +115,22 @@ class RevenueCatSubscriptionService {
     try {
       CustomerInfo customerInfo = await Purchases.restorePurchases();
       Map<String, EntitlementInfo> data = customerInfo.entitlements.all;
-      srvUser.user.isSubscribed = true;
-      srvFirebase.updateUser({
-        "isSubscribed": true,
-        "productId": data['productIdentifier'],
-        "originalPurchaseDate": data['originalPurchaseDate'],
-        "latestPurchaseDate": data['latestPurchaseDate'],
-      }).then((value) {
-        subscriptionController.toggleLoader(false, true);
-        srvToastAlert.toast("Your purcahase has been restored successfully.");
-        Get.close(0);
-      });
+      srvUser.user.isSubscribe = true;
+      // srvUser.user.subscriptionId = data.;
+      subscriptionController.toggleLoader(false, true);
+      srvToastAlert.toast("Your purcahase has been restored successfully.");
+      Get.close(0);
+
+      // srvFirebase.updateUser({
+      //   "isSubscribed": true,
+      //   "productId": data['productIdentifier'],
+      //   "originalPurchaseDate": data['originalPurchaseDate'],
+      //   "latestPurchaseDate": data['latestPurchaseDate'],
+      // }).then((value) {
+      //   subscriptionController.toggleLoader(false, true);
+      //   srvToastAlert.toast("Your purcahase has been restored successfully.");
+      //   Get.close(0);
+      // });
     } catch (e) {
       // ignore: avoid_print
       print("restore error == > $e");
@@ -133,19 +141,26 @@ class RevenueCatSubscriptionService {
     EntitlementInfo? data =
         customerInfo.entitlements.all["my_entitlement_identifier"];
     if (data == null) return;
-    srvUser.user.isSubscribed = true;
-    srvFirebase.updateUser({
-      "isSubscribed": true,
-      "productId": data.productIdentifier,
-      "originalPurchaseDate": data.originalPurchaseDate,
-      "latestPurchaseDate": data.latestPurchaseDate,
-    }).then((value) {
-      if (shouldGoBack == true) {
-        subscriptionController.toggleLoader(false, true);
-        srvToastAlert
-            .toast("You are pro user now. enjoy the access of full app.");
-        Get.close(0);
-      }
-    });
+    srvUser.user.isSubscribe = true;
+    srvUser.user.subscriptionId = data.productIdentifier;
+    if (shouldGoBack == true) {
+      subscriptionController.toggleLoader(false, true);
+      srvToastAlert
+          .toast("You are pro user now. enjoy the access of full app.");
+      Get.close(0);
+      // srvUser.user.subscriptionType =data.;
+      // srvUser.updateUser({
+      //   "isSubscribed": true,
+      //   "productId": data.productIdentifier,
+      //   "originalPurchaseDate": data.originalPurchaseDate,
+      //   "latestPurchaseDate": data.latestPurchaseDate,
+      // }).then((value) {
+      // if (shouldGoBack == true) {
+      //   subscriptionController.toggleLoader(false, true);
+      //   srvToastAlert
+      //       .toast("You are pro user now. enjoy the access of full app.");
+      //   Get.close(0);
+    }
+    // });
   }
 }

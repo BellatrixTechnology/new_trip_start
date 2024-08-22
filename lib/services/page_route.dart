@@ -22,4 +22,16 @@ class PageRoute {
       Get.to(() => page, arguments: argument);
     }
   }
+
+  goNextWithGetxAndRemovedAll(page, [Map? argument]) {
+    try {
+      Get.offAll(page, arguments: argument);
+    } catch (e) {
+      Get.offAll(() => page, arguments: argument);
+    }
+  }
+
+  goBackWithGetx() {
+    Get.back();
+  }
 }

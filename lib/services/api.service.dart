@@ -14,12 +14,16 @@ import 'package:new_trip_start/services/index.dart';
 // import 'package:xml2json/xml2json.dart';
 
 class ApiService {
-  var dio = Dio();
+  var dio = Dio(BaseOptions(
+    // headers: {'Content-Type': 'application/json'},
+    contentType: 'application/json',
+  ));
 
   var baseURL =
       "https://us-central1-car-app-5b455.cloudfunctions.net/app"; //"http://localhost:5000/car-app-5b455/us-central1/app";
 
-  var url = "http://13.49.48.45:3000/v1";
+  var url = "https://api.bompengeappen.no/v1";
+  var urlApi = "https://api.bompengeappen.no/api";
 
   Future<Response> getVehicleDataWithRegistrationNum(String regNum) async {
     Response response;
@@ -122,15 +126,17 @@ class ApiService {
       Position start, Position end, Vehicle veh) async {
     String apiUrl =
         // "https://us-central1-car-app-5b455.cloudfunctions.net/direction/v2?origin=${start.lat},${start.lng}&destination=${end.lat},${end.lng}&vehicleGroup=${veh.vehicleGroup}&vehLength=${veh.vehLength}&vehFuelCmp=${double.parse(veh.vehFuelCmp!) / 10}&vehFuelType=${veh.vehFuelType}";
-        "https://us-central1-car-app-5b455.cloudfunctions.net/direction"; //"$baseURL/directions";
-
+        "https://api.bompengeappen.no"; //"$baseURL/directions";
+// https://api.bompengeappen.no/?origin=59.9138688,10.7522454&destination=61.83780729999999,8.5685637&vehicleGroup=1&vehLength=14.6&vehFuelCmp=5.390000000000001&vehFuelType=Bensin&awaisjaved458@gmail.com
     print("apiUrl $apiUrl");
+    // print("veh.toMap() ${veh.toMap()}");
+    print(srvUser.user.token);
     print({
       "origin": "${start.lat},${start.lng}",
       "destination": "${end.lat},${end.lng}",
       "vehicleGroup": veh.vehicleGroup,
       "vehFuelType": veh.vehFuelType,
-      "vehFuelCmp": double.parse(veh.vehFuelCmp!),
+      "vehFuelCmp": double.parse(veh.vehFuelCmp ?? "0"),
       "cache": true,
       "geometry": true,
       "coordinates": true,
@@ -145,8 +151,8 @@ class ApiService {
         "origin": "${start.lat},${start.lng}",
         "destination": "${end.lat},${end.lng}",
         "vehicleGroup": veh.vehicleGroup,
-        "vehFuelType": veh.vehFuelType,
-        "vehFuelCmp": double.parse(veh.vehFuelCmp!),
+        "vehFuelType": veh.vehFuelType ?? "petrol",
+        "vehFuelCmp": double.parse(veh.vehFuelCmp ?? "10"),
         "cache": true,
         "geometry": true,
         "coordinates": true,
@@ -158,7 +164,7 @@ class ApiService {
           receiveTimeout: const Duration(minutes: 2),
           sendTimeout: const Duration(minutes: 2),
           headers: {
-            "x-token": srvUser.user.user!.uid,
+            "x-token": srvUser.user.token,
           }),
     );
     // return await dio.post(apiUrl, data: data);
@@ -190,46 +196,6 @@ class ApiService {
 
     return point;
   }
-
-// I didn't use the data model
-  // Future<List<Toll>> getXML([String urlString = URL]) async {
-  //   Map<String, String> headers = {"Accept": "text/html,application/xml"};
-  //   Uri url = Uri.parse(urlString);
-  //   final response = await http.get(url, headers: headers);
-  //   final myTransformer = Xml2Json();
-  //   List<Toll> tollList = [];
-
-  //   var storeDocument = XmlDocument.parse(response.body);
-  //   storeDocument.findAllElements('vegobjekt').forEach((element) {
-  //     myTransformer.parse(element.toXmlString(pretty: true));
-  //     var stringJson = myTransformer.toParker();
-  //     Map<String, dynamic> json =
-  //         jsonDecode(stringJson) as Map<String, dynamic>;
-  //     tollList.add(Toll.fromJson(json['vegobjekt']));
-  //   });
-  //   return tollList;
-  // }
-
-// get json from the URL and return a list of maps
-  // Future<List<Map<String, dynamic>>> getJson([String urlString = URL]) async {
-  //   Map<String, String> headers = {"Accept": "text/html,application/xml"};
-  //   Uri url = Uri.parse(urlString);
-  //   final response = await http.get(url, headers: headers);
-  //   final myTransformer = Xml2Json();
-
-  //   List<Map<String, dynamic>> tollList = [];
-  //   // create a document from the response body
-  //   var storeDocument = XmlDocument.parse(response.body);
-  //   storeDocument.findAllElements('vegobjekt').forEach((element) {
-  //     myTransformer.parse(element.toXmlString(pretty: true));
-  //     var stringJson = myTransformer.toParker();
-
-  //     Map<String, dynamic> json =
-  //         jsonDecode(stringJson) as Map<String, dynamic>;
-  //     tollList.add(json);
-  //   });
-  //   return tollList;
-  // }
 
 //  distance between two points
   Map<String, dynamic> findNearestPoint(
@@ -264,4 +230,133 @@ class ApiService {
     return await dio.get(
         "https://us-central1-car-app-5b455.cloudfunctions.net/direction/route?origin=$origin&destination=$destination");
   }
+
+  //post get put delete methods
+
+  Future<Response> post(
+      {Map<String, dynamic>? data,
+      required String concaturl,
+      Map<String, dynamic>? headers,
+      bool? addHeaders}) async {
+    print(" post url -> ${'$url/$concaturl'}");
+    print(" post data -> $data");
+    // print(addHeaders == true
+    //     ? Options(headers: headers ?? getHeader())
+    //     : Options());
+    return await dio.post(
+      '$url/$concaturl',
+      data: data,
+      options: addHeaders == true
+          ? Options(headers: headers ?? getHeader())
+          : Options(headers: {}),
+    );
+  }
+
+  Future<Response> apiUrlpost(
+      {Map<String, dynamic>? data,
+      required String concaturl,
+      Map<String, dynamic>? headers,
+      bool? addHeaders}) async {
+    print(" post url -> ${'$urlApi/$concaturl'}");
+    print(" post data -> $data");
+    print(getHeader());
+    return await dio.post(
+      '$urlApi/$concaturl',
+      data: data,
+      options: Options(headers: headers ?? getHeader()),
+    );
+  }
+
+  Future<Response> apiUrlput(
+      {Map<String, dynamic>? data,
+      required String concaturl,
+      Map<String, dynamic>? headers,
+      bool? addHeaders}) async {
+    print(" put url -> ${'$urlApi/$concaturl'}");
+    print(" put data -> $data");
+    print(" put header -> ${getHeader()}");
+    return await dio.put(
+      '$urlApi/$concaturl',
+      data: data,
+      options: Options(headers: headers ?? getHeader()),
+    );
+  }
+
+  Future<Response> put({
+    Map<String, dynamic>? data,
+    String? concaturl,
+    String? url,
+  }) async {
+    print(" get url -> ${'$url/$concaturl'}");
+    print(" get data -> $data");
+    print(" put header -> ${getHeader()}");
+    return await dio.put(
+      '$url/$concaturl',
+      data: data,
+      options: Options(headers: getHeader()),
+    );
+  }
+
+  Future<Response> apiUrlget({
+    Map<String, dynamic>? data,
+    String? concaturl,
+  }) async {
+    srvShared.printWrapped(" get url -> ${'$urlApi/$concaturl'}");
+    srvShared.printWrapped(" get data -> $data");
+    srvShared.printWrapped(" get headers -> ${getHeader()}");
+    return await dio.get(
+      '$urlApi/$concaturl',
+      data: data,
+      options: Options(headers: getHeader()),
+    );
+  }
+
+  Future<Response> get({
+    Map<String, dynamic>? data,
+    String? concaturl,
+  }) async {
+    srvShared.printWrapped(" get url -> ${'$url/$concaturl'}");
+    srvShared.printWrapped(" get data -> $data");
+    srvShared.printWrapped(" get headers -> ${getHeader()}");
+    return await dio.get(
+      '$url/$concaturl',
+      data: data,
+      options: Options(headers: getHeader()),
+    );
+  }
+
+  Future<Response> getWithoutHeader(
+      {Map<String, dynamic>? data, String url = ""}) async {
+    print(" getWithoutHeader url -> $url");
+    print(" getWithoutHeader data -> $data");
+    return await dio.get(url, data: data);
+  }
+
+  Future<Response> delete(
+      {Map<String, dynamic>? data, String? concaturl, String? url}) async {
+    print(" delete url -> $url");
+    print(" delete data -> $data");
+    return await dio.delete(
+      url ?? '$url/$concaturl',
+      data: data,
+      // options: Options(headers: getHeader()),
+    );
+  }
+
+  Future<Response> apiUrlDelete(
+      {Map<String, dynamic>? data, String? concaturl, String? url}) async {
+    print(" delete url -> $concaturl");
+    print(" delete data -> $data");
+    return await dio.delete(
+      '$urlApi/$concaturl',
+      data: data,
+      options: Options(headers: getHeader()),
+    );
+  }
+
+  getHeader() {
+    return {"x-token": srvUser.user.token};
+  }
+
+  // end post get put delete methods
 }

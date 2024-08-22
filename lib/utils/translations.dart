@@ -8,7 +8,7 @@ class AppTranslations extends Translations {
           "Email": "Email",
           "Password": "Password",
           "Forget Password?": "Forget Password?",
-          "or sign in with": "or sign in with",
+          "or sign in with": "continue with",
           "If you don’t have and account.": "If you don’t have and account.",
           "If you have an account. ": "If you have an account. '",
           "Register Now": "Register Now",
@@ -155,14 +155,24 @@ class AppTranslations extends Translations {
               "How did this route meet your expectations?",
           "Did the route meet your expectations?":
               "Did the route meet your expectations?",
-          "No Tolls Found.": "No Tolls Found."
+          "No Tolls Found.": "No Tolls Found.",
+          "something_went_wrong_text":
+              "Something went wrong please try again later.",
+          "Something went wrong while deleting your account":
+              "Something went wrong while deleting your account",
+          //new translation
+          "Reset Your Password": "Reset Your Password",
+          "We’ll send an rest password link to your email.":
+              "We’ll send a code to your email. Please verify to continue",
+          "enter_code_here": "Enter Code Here...",
+          "enter_new_password": "Enter New Password..."
         },
         'nn_NO': {
           "Login": "Logg inn",
           "Email": "E-post",
           "Password": "Passord",
           "Forget Password?": "Glemt passord?",
-          "or sign in with": "eller logg inn med",
+          "or sign in with": "fortsett med",
           "If you don’t have and account.": "Hvis du ikke har en konto.",
           "If you have an account. ": "Hvis du har en konto.",
           "Register Now": "Registrer deg nå",
