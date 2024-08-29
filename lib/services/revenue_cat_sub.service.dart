@@ -138,29 +138,36 @@ class RevenueCatSubscriptionService {
   }
 
   onPurchaseDone(CustomerInfo customerInfo, [bool shouldGoBack = false]) {
-    EntitlementInfo? data =
-        customerInfo.entitlements.all["my_entitlement_identifier"];
-    if (data == null) return;
-    srvUser.user.isSubscribe = true;
-    srvUser.user.subscriptionId = data.productIdentifier;
-    if (shouldGoBack == true) {
+    try {
+      EntitlementInfo? data =
+          customerInfo.entitlements.all["my_entitlement_identifier"];
+      if (data == null) return;
+      srvUser.user.isSubscribe = true;
+      srvUser.user.subscriptionId = data.productIdentifier;
+      if (shouldGoBack == true) {
+        subscriptionController.toggleLoader(false, true);
+        srvToastAlert
+            .toast("You are pro user now. enjoy the access of full app.");
+        Get.close(0);
+      }
+    } catch (e) {
       subscriptionController.toggleLoader(false, true);
-      srvToastAlert
-          .toast("You are pro user now. enjoy the access of full app.");
-      Get.close(0);
-      // srvUser.user.subscriptionType =data.;
-      // srvUser.updateUser({
-      //   "isSubscribed": true,
-      //   "productId": data.productIdentifier,
-      //   "originalPurchaseDate": data.originalPurchaseDate,
-      //   "latestPurchaseDate": data.latestPurchaseDate,
-      // }).then((value) {
-      // if (shouldGoBack == true) {
-      //   subscriptionController.toggleLoader(false, true);
-      //   srvToastAlert
-      //       .toast("You are pro user now. enjoy the access of full app.");
-      //   Get.close(0);
+      srvToastAlert.toast(e.toString());
     }
+
+    // srvUser.user.subscriptionType =data.;
+    // srvUser.updateUser({
+    //   "isSubscribed": true,
+    //   "productId": data.productIdentifier,
+    //   "originalPurchaseDate": data.originalPurchaseDate,
+    //   "latestPurchaseDate": data.latestPurchaseDate,
+    // }).then((value) {
+    // if (shouldGoBack == true) {
+    //   subscriptionController.toggleLoader(false, true);
+    //   srvToastAlert
+    //       .toast("You are pro user now. enjoy the access of full app.");
+    //   Get.close(0);
+
     // });
   }
 }

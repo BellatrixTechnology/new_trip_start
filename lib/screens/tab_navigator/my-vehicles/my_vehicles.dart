@@ -65,8 +65,10 @@ class MyVehicles extends StatelessWidget {
 
                           AppBottomModal().addVehicleModal(context, () {
                             Future.delayed(const Duration(seconds: 3), () {
+                              // ignore: use_build_context_synchronously
                               srvPageRoute.goBack(context);
                               AppBottomModal().confirmBottomSheet(
+                                  // ignore: use_build_context_synchronously
                                   context,
                                   () {},
                                   Image.asset(

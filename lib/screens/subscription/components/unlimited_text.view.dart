@@ -11,8 +11,8 @@ class UnlimitedTextView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Package yearly = srvRevenueCatSub.getYearly();
-
+    Package monthly = srvRevenueCatSub.getMonthly();
+    // print(monthly);
     TextStyle? textStyle = const TextStyle(color: k51Color, fontSize: 16);
     return RichText(
       textAlign: TextAlign.center,
@@ -20,16 +20,16 @@ class UnlimitedTextView extends StatelessWidget {
         text: 'Unlimited free access for 7 days, then'.tr,
         style: GoogleFonts.poppins(textStyle: textStyle),
         children: <TextSpan>[
-          TextSpan(
-              text: 'per year'
-                  .trParams({"price": yearly.storeProduct.priceString}),
-              style: GoogleFonts.poppins(
-                  textStyle: const TextStyle(
-                      color: kPrimaryColorLight, fontSize: 16))),
+          // TextSpan(
+          //     text: 'per year'
+          //         .trParams({"price": yearly.storeProduct.priceString}),
+          //     style: GoogleFonts.poppins(
+          //         textStyle: const TextStyle(
+          //             color: kPrimaryColorLight, fontSize: 16))),
           TextSpan(
               text: 'month'.trParams({
                 "price":
-                    "${yearly.storeProduct.currencyCode} ${(yearly.storeProduct.price / 12).toStringAsFixed(2)}",
+                    "${monthly.storeProduct.currencyCode} ${(monthly.storeProduct.price).toStringAsFixed(2)}",
               }),
               style: GoogleFonts.poppins(textStyle: textStyle)),
         ],

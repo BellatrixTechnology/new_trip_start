@@ -19,7 +19,7 @@ import 'package:new_trip_start/controllers/tab_ctrl.dart';
 import 'package:new_trip_start/firebase_options.dart';
 import 'package:new_trip_start/screens/splash/splash.dart';
 import 'package:new_trip_start/services/index.dart';
-import 'package:new_trip_start/utils/translations.dart';
+import 'package:new_trip_start/utils/translations/translations.dart';
 import 'package:flutter_uxcam/flutter_uxcam.dart';
 
 // import 'package:device_preview/device_preview.dart';

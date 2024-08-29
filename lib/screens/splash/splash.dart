@@ -39,8 +39,12 @@ class _SplashScreenState extends State<SplashScreen> {
         debugPrint("user-> $resp");
         srvUser.initUser(
             NewUserModel.fromMap(resp.data['data'] as Map<String, dynamic>));
-        srvRevenueCatSub.initPlatformState();
-        srvPageRoute.goNextWithGetxAndRemovedAll(const Tabs());
+        try {
+          await srvRevenueCatSub.initPlatformState();
+          srvPageRoute.goNextWithGetxAndRemovedAll(const Tabs());
+        } catch (e) {
+          srvPageRoute.goNextWithGetxAndRemovedAll(const Tabs());
+        }
       } catch (e) {
         debugPrint("err is -> $e");
         srvPageRoute.goNextWithGetxAndRemovedAll(const AuthScreen());

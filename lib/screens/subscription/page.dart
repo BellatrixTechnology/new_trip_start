@@ -43,17 +43,17 @@ class SubscriptionPage extends GetView<SubscriptionController> {
                   const HowItWorksView(),
                   const CustomSpacerWidthHeight(height: 23),
                   const UnlimitedTextView(),
-                  const CustomSpacerWidthHeight(height: 10),
-                  AppText(
-                    onTap: () {
-                      srvPageRoute.goNextWithGetx(const ViewAllPlansPage());
-                    },
-                    text: "View All Plans".tr,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: kPrimaryColorLight,
-                    textDecoration: TextDecoration.underline,
-                  ),
+                  // const CustomSpacerWidthHeight(height: 10),
+                  // AppText(
+                  //   onTap: () {
+                  //     srvPageRoute.goNextWithGetx(const ViewAllPlansPage());
+                  //   },
+                  //   text: "View All Plans".tr,
+                  //   fontSize: 16,
+                  //   fontWeight: FontWeight.w600,
+                  //   color: kPrimaryColorLight,
+                  //   textDecoration: TextDecoration.underline,
+                  // ),
                   const CustomSpacerWidthHeight(height: 23),
                   GestureDetector(
                     behavior: HitTestBehavior.opaque,
@@ -76,33 +76,34 @@ class SubscriptionPage extends GetView<SubscriptionController> {
                               Color(0xFF2F4D99),
                             ],
                           )),
-                      child:
-                          Obx(() => controller.isLoadingForSubscription.isTrue
-                              ? const Center(
-                                  child: CircularProgressIndicator.adaptive(
-                                    backgroundColor: kBgLightColor,
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                        kBgLightColor),
+                      child: Obx(
+                        () => controller.isLoadingForSubscription.isTrue
+                            ? const Center(
+                                child: CircularProgressIndicator.adaptive(
+                                  backgroundColor: kBgLightColor,
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      kBgLightColor),
+                                ),
+                              )
+                            : Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  AppText(
+                                    text: "Start Free Trial Now".tr,
+                                    fontSize: 18,
+                                    color: kBgLightColor,
+                                    fontWeight: FontWeight.w600,
                                   ),
-                                )
-                              : Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    AppText(
-                                      text: "Start Free Trial Now".tr,
-                                      fontSize: 18,
-                                      color: kBgLightColor,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                    AppText(
-                                      text:
-                                          "2 taps to start, super easy to cancel"
-                                              .tr,
-                                      fontSize: 12,
-                                      color: kBgLightColor,
-                                    ),
-                                  ],
-                                )),
+                                  AppText(
+                                    text:
+                                        "2 taps to start, super easy to cancel"
+                                            .tr,
+                                    fontSize: 12,
+                                    color: kBgLightColor,
+                                  ),
+                                ],
+                              ),
+                      ),
                     ),
                   ),
                   AppText(

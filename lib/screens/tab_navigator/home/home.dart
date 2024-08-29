@@ -1,5 +1,4 @@
 // import 'package:flutter/foundation.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_trip_start/components/app_button.dart';
@@ -39,11 +38,11 @@ class HomePage extends StatelessWidget {
                     text: 'See Available Route'.tr,
                     press: () {
                       // return;
+                      if (mapController.routeData.isEmpty) return;
                       if (srvUser.user.isSubscribe == false) {
                         srvPageRoute.goNextWithGetx(const SubscriptionPage());
                         return;
                       }
-                      if (mapController.routeData.isEmpty) return;
                       srvPageRoute.goToNext(context, const AvailableRoutes());
                     },
                     showLoader: mapController.isFetching.value,

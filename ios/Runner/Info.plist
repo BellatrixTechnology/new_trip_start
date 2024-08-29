@@ -89,6 +89,7 @@
     <key>CFBundleURLSchemes</key>
     <array>
       <string>com.aimee.app</string>
+	  <string>com.googleusercontent.apps.592385846462-4kk7jjctp9ifq5rvgda50ssmcivccsb4</string>
     </array>
   </dict>
 </array>
