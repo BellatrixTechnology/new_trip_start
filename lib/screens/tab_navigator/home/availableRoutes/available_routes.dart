@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:new_trip_start/components/app_text.dart';
+import 'package:new_trip_start/components/banner.component.dart';
 import 'package:new_trip_start/components/custom_spacer.dart';
 import 'package:new_trip_start/constants.dart';
 import 'package:new_trip_start/controllers/map_ctrl.dart';
 import 'package:new_trip_start/controllers/places.controller.dart';
+import 'package:new_trip_start/controllers/route_detail.controller.dart';
 import 'package:new_trip_start/screens/tab_navigator/home/availableRoutes/choose_route_view.dart';
 import 'package:new_trip_start/screens/tab_navigator/home/availableRoutes/routeDetails/route_detail.dart';
 import 'package:new_trip_start/screens/tab_navigator/home/availableRoutes/route_item.dart';
@@ -13,9 +16,14 @@ import 'package:new_trip_start/services/index.dart';
 import 'package:new_trip_start/size_config.dart';
 import 'package:new_trip_start/utils/app_bg.dart';
 
-class AvailableRoutes extends StatelessWidget {
+class AvailableRoutes extends StatefulWidget {
   const AvailableRoutes({super.key});
 
+  @override
+  State<AvailableRoutes> createState() => _AvailableRoutesState();
+}
+
+class _AvailableRoutesState extends State<AvailableRoutes> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<PlaceController>(
@@ -70,6 +78,10 @@ class AvailableRoutes extends StatelessWidget {
                 child: Column(
                   children: [
                     // const AvailRouteMaps(),
+                    // const BannerAdWidget(showOnError: true),
+                    AdMobBannerWidget(
+                        adUnitId: srvAdmob.bannerAdId,
+                        uniqueKey: "available_routes"),
                     const CustomSpacer(spaceValue: 10),
                     Container(
                       height: 300,
@@ -101,9 +113,7 @@ class AvailableRoutes extends StatelessWidget {
     return Column(
       children: [
         const CustomSpacer(spaceValue: 10),
-        ChooseRouteView(
-          controller: controller,
-        ),
+        const ChooseRouteView(),
         ListView.builder(
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
@@ -113,8 +123,10 @@ class AvailableRoutes extends StatelessWidget {
             return RouteItem(
               index: index,
               onPress: () {
-                srvPageRoute.goNextWithGetx(
-                    RouteDetails(index: index), {"index": index});
+                Get.delete<RouteDetailCtrl>().then((v) {
+                  srvPageRoute.goNextWithGetx(
+                      RouteDetails(index: index), {"index": index});
+                });
               },
             );
           },

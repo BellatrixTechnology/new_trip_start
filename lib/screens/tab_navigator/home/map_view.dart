@@ -31,9 +31,8 @@ class HomeMapView extends StatelessWidget {
             // gestureRecognizers: <Set>{}
             //   ..add(Factory<EagerGestureRecognizer>(
             //       () => EagerGestureRecognizer())),
-            gestureRecognizers: Set()
-              ..add(Factory<EagerGestureRecognizer>(
-                  () => EagerGestureRecognizer())),
+            gestureRecognizers: {}..add(Factory<EagerGestureRecognizer>(
+                () => EagerGestureRecognizer())),
             initialCameraPosition: kGooglePlex,
             onMapCreated: (GoogleMapController ctrl) {
               // mapController.controller.complete(ctrl);

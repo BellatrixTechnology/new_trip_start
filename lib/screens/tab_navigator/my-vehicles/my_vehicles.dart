@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:new_trip_start/components/app_bar.dart';
 import 'package:new_trip_start/components/app_button.dart';
 import 'package:new_trip_start/components/app_text.dart';
+import 'package:new_trip_start/components/banner.component.dart';
+import 'package:new_trip_start/controllers/map_ctrl.dart';
+
 import 'package:new_trip_start/controllers/tab_ctrl.dart';
 import 'package:new_trip_start/modals/bottom_modal.dart';
 import 'package:new_trip_start/models/vehicle.model.dart';
-import 'package:new_trip_start/screens/subscription/page.dart';
 // import 'package:new_trip_start/screens/subscription/page.dart';
 import 'package:new_trip_start/screens/tab_navigator/my-vehicles/vehicle_item.dart';
 import 'package:new_trip_start/services/index.dart';
@@ -17,7 +20,7 @@ class MyVehicles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // BottomTabController bottomTabController = Get.find();
+    final ctrl = Get.find<MapController>();
     // bottomTabController.getVehicles();
     return GetBuilder<BottomTabController>(
       builder: (btmTabCtrl) => Scaffold(
@@ -28,6 +31,16 @@ class MyVehicles extends StatelessWidget {
           padding: 0,
           child: Column(
             children: [
+              // NativeAdComponent(),
+
+              Obx(() {
+                if (!ctrl.user.value.isSubscribe) {
+                  return AdMobBannerWidget(
+                      adUnitId: srvAdmob.bannerAdId,
+                      uniqueKey: "my_vehicles_list");
+                }
+                return SizedBox();
+              }),
               Expanded(
                 flex: 7,
                 child: btmTabCtrl.myVehicles.isEmpty
@@ -56,10 +69,15 @@ class MyVehicles extends StatelessWidget {
                     child: AppButton(
                         text: 'Add Vehicle'.tr,
                         press: () {
+                          // googleAdsController.showInterstitialAd();
+                          // return;
                           if (btmTabCtrl.myVehicles.isNotEmpty &&
                               srvUser.user.isSubscribe == false) {
-                            srvPageRoute
-                                .goNextWithGetx(const SubscriptionPage());
+                            // srvPageRoute
+                            //     .goNextWithGetx(const SubscriptionPage());
+                            srvToastAlert
+                                .toast("free_limit_reached_for_vehicles".tr);
+                            btmTabCtrl.onTabChange(2, context);
                             return;
                           }
 
@@ -86,10 +104,19 @@ class MyVehicles extends StatelessWidget {
                         showLoader: false),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
+        // bottomNavigationBar: googleAdsController.isBannerShown.isTrue
+        //     ? srvAdmob.bannerAd == null
+        //         ? const SizedBox()
+        //         : SizedBox(
+        //             width: srvAdmob.bannerAd!.size.width.toDouble(),
+        //             height: srvAdmob.bannerAd!.size.height.toDouble(),
+        //             child: AdWidget(ad: srvAdmob.bannerAd!),
+        //           )
+        //     : const SizedBox(),
       ),
     );
   }

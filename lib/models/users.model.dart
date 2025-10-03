@@ -53,38 +53,46 @@ class NewUserModel {
   String? subscribtionDate;
   String? subscriptionValidty;
   String? subscriptionType;
+  int? apiCount;
+  String? loginType;
+  Map<String, dynamic>? config;
 
-  NewUserModel({
-    // this.verificationToken,
-    // this.loginType,
-    required this.id,
-    required this.email,
-    required this.token,
-    this.expiry,
-    required this.dt,
-    required this.name,
-    required this.verified,
-    this.subscriptionId,
-    required this.isSubscribe,
-    this.subscribtionDate,
-    this.subscriptionValidty,
-    this.subscriptionType,
-  });
+  NewUserModel(
+      {
+      // this.verificationToken,
+      // this.loginType,
+      required this.id,
+      required this.email,
+      required this.token,
+      this.expiry,
+      required this.dt,
+      required this.name,
+      required this.verified,
+      this.subscriptionId,
+      required this.isSubscribe,
+      this.subscribtionDate,
+      this.subscriptionValidty,
+      this.subscriptionType,
+      this.apiCount,
+      this.loginType,
+      this.config});
 
-  NewUserModel copyWith({
-    int? id,
-    String? email,
-    String? token,
-    String? expiry,
-    String? dt,
-    String? name,
-    bool? verified,
-    String? subscriptionId,
-    bool? isSubscribe,
-    String? subscribtionDate,
-    String? subscriptionValidty,
-    String? subscriptionType,
-  }) {
+  NewUserModel copyWith(
+      {int? id,
+      String? email,
+      String? token,
+      String? expiry,
+      String? dt,
+      String? name,
+      bool? verified,
+      String? subscriptionId,
+      bool? isSubscribe,
+      String? subscribtionDate,
+      String? subscriptionValidty,
+      String? subscriptionType,
+      int? apiCount,
+      String? loginType,
+      Map<String, dynamic>? config}) {
     return NewUserModel(
       id: id ?? this.id,
       email: email ?? this.email,
@@ -98,6 +106,9 @@ class NewUserModel {
       subscribtionDate: subscribtionDate ?? this.subscribtionDate,
       subscriptionValidty: subscriptionValidty ?? this.subscriptionValidty,
       subscriptionType: subscriptionType ?? this.subscriptionType,
+      apiCount: apiCount ?? this.apiCount,
+      loginType: loginType ?? this.loginType,
+      config: config ?? this.config,
     );
   }
 
@@ -114,25 +125,29 @@ class NewUserModel {
       // 'status': status,
       'name': name,
       'verified': verified,
+      'apiCount': apiCount,
       // 'verification_token': verificationToken,
-      // 'login_type': loginType,
+      'loginType': loginType,
     };
   }
 
   factory NewUserModel.fromMap(Map<String, dynamic> map) {
+    print(map['is_subscribe']);
     return NewUserModel(
-      id: map['id'] as int,
-      email: map['email'] as String,
-      token: map['token'] as String,
-      expiry: map['expiry'] != null ? map['expiry'] as String : null,
-      dt: srvShared.createDate(map['dt']),
-      name: map['name'] as String,
-      verified: map['verified'] as bool,
-      isSubscribe: map['is_subscribe'] ?? false,
-      subscribtionDate: map['subscribtion_date'] ?? "",
-      subscriptionValidty: map['subscription_validty'] ?? "",
-      subscriptionType: map['subscription_type'] ?? "",
-    );
+        id: map['id'] as int,
+        email: map['email'] as String,
+        token: map['token'] as String,
+        expiry: map['expiry'] != null ? map['expiry'] as String : null,
+        dt: srvShared.createDate(map['dt']),
+        name: map['name'] as String,
+        verified: map['verified'] as bool,
+        isSubscribe: map['is_subscribe'] ?? false,
+        subscribtionDate: map['subscribtion_date'] ?? "",
+        subscriptionValidty: map['subscription_validty'] ?? "",
+        subscriptionType: map['subscription_type'] ?? "",
+        apiCount: map['api_count'] ?? 0,
+        loginType: map['login_type'] ?? "",
+        config: map['config'] ?? {});
   }
 
   String toJson() => json.encode(toMap());

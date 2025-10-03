@@ -102,7 +102,7 @@ const nnNO = {
   "Rush hour": "Rushtid",
   "origin": "Opphavssted",
   "destination": "Destinasjon",
-  "At least one vehicle should be in your list to calculate Route":
+  "Atleat one vehicle you should be in your list to calculate Route":
       "Minst ett kjøretøy må være i listen din for å beregne rute.",
   "Optimize Your Commute: Know Your Daily Cost and Find Cheaper Routes!":
       "Optimaliser din pendling: Kjenn dine daglige kostnader og finn billigere ruter!",
@@ -148,5 +148,43 @@ const nnNO = {
   "We’ll send an rest password link to your email.":
       "Vi sender en kode til e-posten din. Bekreft for å fortsette",
   "enter_code_here": "Skriv inn koden her...",
-  "enter_new_password": "Skriv inn nytt passord..."
+  "enter_new_password": "Skriv inn nytt passord...",
+  "purchase_get_error":
+      "Du kan ikke kjøpe produktet akkurat nå, vennligst prøv igjen senere",
+  "new_features_info_page_title": "Velkommen til den nye og forbedrede appen!",
+  "new_features_info_page_descp":
+      "Vi er glade for å introdusere en helt ny versjon av appen vår! Vi har gjort store oppgraderinger for å forbedre din opplevelse. Som en del av denne overgangen kan du legge merke til noen endringer, og vi er her for å hjelpe deg med å komme i gang med de nye funksjonene.",
+  "features_we_added": "Funksjoner vi har lagt til",
+  "feature_1":
+      "Raskt og sikkert database: Nyt raskere og mer pålitelige spørringer.",
+  "feature_2":
+      "Mer nøyaktige data: Få presis informasjon om fergeruter, bompenger og beregninger.",
+  "feature_3": "Forbedret ytelse: Raskere lastetider og jevnere overganger.",
+  "feature_4":
+      "Ekstra funksjoner: Nye verktøy og forbedringer for å gjøre reisen din enklere.",
+  "important_note": "Viktig beskjed",
+  "important_note_desp":
+      "Hvis du ikke kan logge inn med dine tidligere legitimasjoner, vennligst opprett en ny konto for å fortsette å bruke appen. Vi beklager ulempen og setter pris på din forståelse under denne oppgraderingen.\n\nTakk for at du er en del av vårt fellesskap, og vi håper du liker den nye og forbedrede opplevelsen!",
+  "Vehicle Registeration Number": "Kjøretøyets registreringsnummer",
+  "upgrade_to_premium": "Oppgrader til Premium",
+  "login_signup": "Logg inn/registrering",
+  "vehicles": "Kjøretøy",
+  "multiple": "Flere",
+  "searches": "Søk",
+  "unlimited": "Ubegrenset",
+  "free_plan": "Gratis plan",
+  "guest_searches_used": "Brukte gjestesøk",
+  "all_searches_used": "Brukte alle søk",
+  "free_searches_used": "Brukte gratis søk",
+  "subs_status_msg_1":
+      "Logg inn eller registrer deg for å få flere gratis søk!",
+  "subs_status_msg_2": "Siste gjestesøk tilgjengelig - logg inn for mer!",
+  "subs_status_msg_3": "Opprett en konto for flere gratis søk",
+  "subs_status_msg_4": "Du har brukt alle gratis søk. Oppgrader til premium!",
+  "subs_status_msg_5": "Nesten alle søk brukt - vurder å oppgradere!",
+  "subs_status_msg_6": "Mer enn halvparten av gratis søk brukt",
+  "subs_status_msg_7": "Mange gratis søk tilgjengelig",
+  "watch_free_video_to_get_free_search":
+      "Se en gratis video for å få et gratis søk.",
+  "api_count_updated_succesffuly": "Gratis søkekvote har blitt oppdatert"
 };

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:new_trip_start/size_config.dart';
+import 'package:new_trip_start/config/env_config.dart';
 
 const kPrimaryColor = Color(0xFF0046AC);
 const kPrimaryColorLight = Color(0xFF2273B7);
@@ -31,9 +32,9 @@ bool isDev = false;
 
 List riderTotalBadges = [];
 
-const hereApiKey = '8ZI4V33ffRb_xelYDekkMJL4pAVM47fCa2eb82sog6s';
-const mapApiKey =
-    "AIzaSyDOgdb_Om6t6gGcZeSr-33D1vwmaO-YIjg"; //'AIzaSyBH1ciOuOLVHKjgfaxLempr30PfblTdVEg';
+// API keys are now loaded from environment variables
+String get hereApiKey => EnvConfig.hereApiKey;
+String get mapApiKey => EnvConfig.googleMapsApiKey;
 
 const kPrimaryGradientColor = LinearGradient(
   begin: Alignment.topRight,

@@ -27,14 +27,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb763971137897994</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
+				<string>com.aimee.app</string>
 				<string>com.googleusercontent.apps.592385846462-4kk7jjctp9ifq5rvgda50ssmcivccsb4</string>
 			</array>
 		</dict>
@@ -50,7 +43,7 @@
 	<key>FacebookDisplayName</key>
 	<string>Trip Start</string>
 	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-3165620212348966~5545838824</string>
+	<string>ca-app-pub-3165620212348966~4400278118</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -83,15 +76,8 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>CFBundleURLTypes</key>
-<array>
-  <dict>
-    <key>CFBundleURLSchemes</key>
-    <array>
-      <string>com.aimee.app</string>
-	  <string>com.googleusercontent.apps.592385846462-4kk7jjctp9ifq5rvgda50ssmcivccsb4</string>
-    </array>
-  </dict>
-</array>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>Your app uses IDFA to improve ad personalization.</string>
+
 </dict>
 </plist>

@@ -10,6 +10,10 @@ class SizeConfig {
   static late Orientation orientation;
   static late bool isAndroid;
   static late double heightExcludedSafeArea;
+  static late double kAppBarWithStatusBarHeight;
+  static late double statusBarHeight;
+  static late double appBarHeight;
+  static late double kBottomBarWithNavigationBarHeight;
 
   void init(BuildContext context) {
     _mediaQueryData = MediaQuery.of(context);
@@ -21,6 +25,13 @@ class SizeConfig {
     final padding = MediaQuery.of(context).padding;
     heightExcludedSafeArea =
         SizeConfig.screenHeight - (padding.top + padding.bottom + 10);
+    statusBarHeight = _mediaQueryData.padding.top;
+    appBarHeight = kToolbarHeight;
+    kAppBarWithStatusBarHeight = statusBarHeight + appBarHeight;
+    double bottomBarHeight = _mediaQueryData.padding.bottom;
+    double appNavigationBarHeight = kBottomNavigationBarHeight;
+    kBottomBarWithNavigationBarHeight =
+        bottomBarHeight + appNavigationBarHeight;
   }
 }
 

@@ -172,101 +172,145 @@ class AppBottomModal {
       clipBehavior: Clip.antiAliasWithSaveLayer,
       builder: (BuildContext context) {
         return Obx(() => AnimatedContainer(
-              duration: const Duration(milliseconds: 3),
-              height: vehicleCtrl.isVehichleAddedModalExpanded.isFalse
-                  ? null
-                  : SizeConfig.screenHeight - (kToolbarHeight),
-              padding: EdgeInsets.only(
-                  top: 20,
-                  left: 20,
-                  right: 20,
-                  bottom: MediaQuery.of(context).viewInsets.bottom),
-              color: kBgLightColor,
-              child: SafeArea(
-                  child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const CustomSpacer(spaceValue: 10),
-                    Image.asset('assets/illustrations/add.png',
-                        width: 120, height: 120),
-                    const CustomSpacer(spaceValue: 10),
-                    AppText(
-                      text: vehicleCtrl.isVehichleAddedModalExpanded.isTrue
-                          ? 'Save your Vehicle'.tr
-                          : 'Enter Registeration Number'.tr,
-                      fontSize: 22,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    const CustomSpacer(spaceValue: 5),
-                    AppText(
-                        fontSize: 14,
-                        color: kTextColor,
-                        text: vehicleCtrl.isVehichleAddedModalExpanded.isTrue
-                            ? 'Please enter your Vehicle Details below'.tr
-                            : 'Please enter your Vehicle Registeration Number'
-                                .tr),
-                    const CustomSpacer(spaceValue: 10),
-                    const AppText(text: 'Vehicle Registeration Number'),
-                    const CustomSpacer(spaceValue: 3),
-                    AppInput(
-                      hintText: 'Enter Registeration Number'.tr,
-                      controller: vehicleCtrl.regNum,
-                    ),
-                    const CustomSpacer(spaceValue: 5),
-                    Obx(() => Visibility(
-                          visible:
-                              vehicleCtrl.isVehichleAddedModalExpanded.isTrue,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              AppText(text: 'Vehicle Brand'.tr),
-                              const CustomSpacer(spaceValue: 3),
-                              AppInput(
-                                hintText: 'Vehicle Brand'.tr,
-                                controller: vehicleCtrl.vehBrand,
-                              ),
-                              const CustomSpacer(spaceValue: 5),
-                              AppText(text: 'Vehicle Fuel Consumption'.tr),
-                              const CustomSpacer(spaceValue: 3),
-                              AppInput(
-                                  controller: vehicleCtrl.vehFuelCmp,
-                                  hintText:
-                                      'Fuel Consumption/Liter Per 100 Km'.tr),
-                              const CustomSpacer(spaceValue: 5),
-                              AppText(text: 'Car Length (Meters)'.tr),
-                              const CustomSpacer(spaceValue: 3),
-                              AppInput(
-                                hintText: 'Car Length (Meters)'.tr,
-                                controller: vehicleCtrl.vehLength,
-                                textInputType: TextInputType.number,
-                              ),
-                              const CustomSpacer(spaceValue: 5),
-                              AppText(text: 'Car Weight (Kilograms)'.tr),
-                              const CustomSpacer(spaceValue: 3),
-                              AppInput(
-                                hintText: 'Car Weight (Kilograms)'.tr,
-                                controller: vehicleCtrl.vehWeight,
-                                textInputType: TextInputType.number,
-                              ),
-                              const CustomSpacer(spaceValue: 5),
-                              // Obx(
-                              //   () => Visibility(
-                              //     visible: vehicleCtrl.showClassInput.value,
-                              //     child:
-                              Column(
+            duration: const Duration(milliseconds: 3),
+            height: vehicleCtrl.isVehichleAddedModalExpanded.isFalse
+                ? null
+                : SizeConfig.screenHeight - (kToolbarHeight),
+            padding: EdgeInsets.only(
+                top: 20,
+                left: 20,
+                right: 20,
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            color: kBgLightColor,
+            child: SafeArea(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Flexible(
+                    child: ListView(
+                      shrinkWrap: true,
+                      children: [
+                        const CustomSpacer(spaceValue: 10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            // CustomSurffixIcon(
+                            //   svgIcon: "assets/icons/add.svg",
+                            //   size: 100,
+                            // ),
+                            Image.asset('assets/illustrations/add.png',
+                                width: 120, height: 120),
+                            IconButton(
+                                onPressed: () {
+                                  srvPageRoute.goBackWithGetx();
+                                },
+                                icon: const Icon(
+                                  Icons.close,
+                                  size: 40,
+                                  color: kPrimaryColor,
+                                ))
+                          ],
+                        ),
+                        const CustomSpacer(spaceValue: 10),
+                        AppText(
+                          text: vehicleCtrl.isVehichleAddedModalExpanded.isTrue
+                              ? 'Save your Vehicle'.tr
+                              : 'Enter Registeration Number'.tr,
+                          fontSize: 22,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        const CustomSpacer(spaceValue: 5),
+                        AppText(
+                            fontSize: 14,
+                            color: kTextColor,
+                            text: vehicleCtrl
+                                    .isVehichleAddedModalExpanded.isTrue
+                                ? 'Please enter your Vehicle Details below'.tr
+                                : 'Please enter your Vehicle Registeration Number'
+                                    .tr),
+                        const CustomSpacer(spaceValue: 10),
+                        AppText(text: 'Vehicle Registeration Number'.tr),
+                        const CustomSpacer(spaceValue: 3),
+                        AppInput(
+                          hintText: 'Enter Registeration Number'.tr,
+                          controller: vehicleCtrl.regNum,
+                        ),
+                        const CustomSpacer(spaceValue: 5),
+                        Obx(() => Visibility(
+                              visible: vehicleCtrl
+                                  .isVehichleAddedModalExpanded.isTrue,
+                              child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  AppText(text: 'Euro Class'.tr),
+                                  AppText(text: 'Vehicle Brand'.tr),
+                                  const CustomSpacer(spaceValue: 3),
+                                  AppInput(
+                                    hintText: 'Vehicle Brand'.tr,
+                                    controller: vehicleCtrl.vehBrand,
+                                  ),
+                                  const CustomSpacer(spaceValue: 5),
+                                  AppText(text: 'Vehicle Fuel Consumption'.tr),
+                                  const CustomSpacer(spaceValue: 3),
+                                  AppInput(
+                                      textInputType: TextInputType.number,
+                                      controller: vehicleCtrl.vehFuelCmp,
+                                      hintText:
+                                          'Fuel Consumption/Liter Per 100 Km'
+                                              .tr),
+                                  const CustomSpacer(spaceValue: 5),
+                                  AppText(text: 'Car Length (Meters)'.tr),
+                                  const CustomSpacer(spaceValue: 3),
+                                  AppInput(
+                                    hintText: 'Car Length (Meters)'.tr,
+                                    controller: vehicleCtrl.vehLength,
+                                    textInputType: TextInputType.number,
+                                  ),
+                                  const CustomSpacer(spaceValue: 5),
+                                  AppText(text: 'Car Weight (Kilograms)'.tr),
+                                  const CustomSpacer(spaceValue: 3),
+                                  AppInput(
+                                    hintText: 'Car Weight (Kilograms)'.tr,
+                                    controller: vehicleCtrl.vehWeight,
+                                    textInputType: TextInputType.number,
+                                  ),
+                                  const CustomSpacer(spaceValue: 5),
+                                  // Obx(
+                                  //   () => Visibility(
+                                  //     visible: vehicleCtrl.showClassInput.value,
+                                  //     child:
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      AppText(text: 'Euro Class'.tr),
+                                      const CustomSpacer(spaceValue: 3),
+                                      AppInput(
+                                        onPress: () {
+                                          selectItemModal(context, false);
+                                        },
+                                        readOnly: true,
+                                        hintText: 'Euro Class'.tr,
+                                        controller: vehicleCtrl.vehClass,
+                                        suffixicon: const Icon(
+                                          CupertinoIcons.chevron_down,
+                                          color: kBlackColor,
+                                          size: 15,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  // ),
+                                  // ),
+                                  const CustomSpacer(spaceValue: 5),
+                                  AppText(text: 'Fuel Type'.tr),
                                   const CustomSpacer(spaceValue: 3),
                                   AppInput(
                                     onPress: () {
-                                      selectItemModal(context, false);
+                                      selectItemModal(context, true);
                                     },
                                     readOnly: true,
-                                    hintText: 'Euro Class'.tr,
-                                    controller: vehicleCtrl.vehClass,
+                                    hintText: 'Select Fuel Type'.tr,
+                                    controller: vehicleCtrl.vehFuelType,
                                     suffixicon: const Icon(
                                       CupertinoIcons.chevron_down,
                                       color: kBlackColor,
@@ -275,126 +319,111 @@ class AppBottomModal {
                                   ),
                                 ],
                               ),
-                              // ),
-                              // ),
-                              const CustomSpacer(spaceValue: 5),
-                              AppText(text: 'Fuel Type'.tr),
-                              const CustomSpacer(spaceValue: 3),
-                              AppInput(
-                                onPress: () {
-                                  selectItemModal(context, true);
-                                },
-                                readOnly: true,
-                                hintText: 'Select Fuel Type'.tr,
-                                controller: vehicleCtrl.vehFuelType,
-                                suffixicon: const Icon(
-                                  CupertinoIcons.chevron_down,
-                                  color: kBlackColor,
-                                  size: 15,
-                                ),
-                              ),
-                            ],
-                          ),
-                        )),
-                    Visibility(
-                      visible: vehicleCtrl.isVehichleAddedModalExpanded.isFalse,
-                      child: SizedBox(
-                          width: SizeConfig.screenWidth,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              AppText(
-                                text: 'OR'.tr,
-                                fontSize: 22,
-                                fontWeight: FontWeight.w700,
-                              ),
-                              GestureDetector(
-                                behavior: HitTestBehavior.opaque,
-                                onTap: () {
-                                  vehicleCtrl.isVehichleAddedModalExpanded
-                                      .toggle();
-                                  vehicleCtrl.update();
-                                },
-                                child: CustomRichText(
-                                    padding: 0,
-                                    text1: 'To Add Vehicle Manually'.tr,
-                                    text2: 'Click here'.tr),
-                              ),
-                            ],
-                          )),
-                    ),
-                    const CustomSpacer(spaceValue: 10),
-                    Obx(
-                      () => Visibility(
-                        visible:
-                            vehicleCtrl.isVehichleAddedModalExpanded.isTrue,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            AppText(text: 'Vehicle Group'.tr),
-                            ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: vehicleCtrl.vehicleGroups.length,
-                              itemBuilder: (context, index) {
-                                var item = vehicleCtrl.vehicleGroups[index];
-                                return GestureDetector(
-                                  behavior: HitTestBehavior.opaque,
-                                  onTap: () {
-                                    vehicleCtrl.updateVehicleGroups(index);
-                                  },
-                                  child: Container(
-                                    margin: const EdgeInsets.only(top: 5),
-                                    child: Row(
-                                      children: [
-                                        CustomSurffixIcon(
-                                            svgIcon: item['isSelected'] == true
-                                                ? "assets/icons/checkmark.svg"
-                                                : "assets/icons/unchekmark.svg"),
-                                        const CustomSpacer(spaceValue: 5),
-                                        AppText(
-                                          text: item['name'].toString(),
-                                        ),
-                                      ],
-                                    ),
+                            )),
+                        Visibility(
+                          visible:
+                              vehicleCtrl.isVehichleAddedModalExpanded.isFalse,
+                          child: SizedBox(
+                              width: SizeConfig.screenWidth,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  AppText(
+                                    text: 'OR'.tr,
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w700,
                                   ),
-                                );
-                              },
-                            ),
-                          ],
+                                  GestureDetector(
+                                    behavior: HitTestBehavior.opaque,
+                                    onTap: () {
+                                      vehicleCtrl.isVehichleAddedModalExpanded
+                                          .toggle();
+                                      vehicleCtrl.update();
+                                    },
+                                    child: CustomRichText(
+                                        padding: 0,
+                                        text1: 'To Add Vehicle Manually'.tr,
+                                        text2: 'Click here'.tr),
+                                  ),
+                                ],
+                              )),
                         ),
-                      ),
+                        const CustomSpacer(spaceValue: 10),
+                        Obx(
+                          () => Visibility(
+                            visible:
+                                vehicleCtrl.isVehichleAddedModalExpanded.isTrue,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                AppText(text: 'Vehicle Group'.tr),
+                                ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: vehicleCtrl.vehicleGroups.length,
+                                  itemBuilder: (context, index) {
+                                    var item = vehicleCtrl.vehicleGroups[index];
+                                    return GestureDetector(
+                                      behavior: HitTestBehavior.opaque,
+                                      onTap: () {
+                                        vehicleCtrl.updateVehicleGroups(index);
+                                      },
+                                      child: Container(
+                                        margin: const EdgeInsets.only(top: 5),
+                                        child: Row(
+                                          children: [
+                                            CustomSurffixIcon(
+                                                svgIcon: item['isSelected'] ==
+                                                        true
+                                                    ? "assets/icons/checkmark.svg"
+                                                    : "assets/icons/unchekmark.svg"),
+                                            const CustomSpacer(spaceValue: 5),
+                                            AppText(
+                                              text: item['name'].toString(),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const CustomSpacer(spaceValue: 10),
+                      ],
                     ),
-                    const CustomSpacer(spaceValue: 10),
-                    Obx(
-                      () => AppButton(
-                        text: vehicleCtrl.isVehichleAddedModalExpanded.isFalse
-                            ? 'Submit'.tr
-                            : 'Save'.tr,
-                        press: () {
-                          if (isEditing == true) {
-                            vehicleCtrl.updateVehicle(vehicle!, context);
-                            return;
-                          }
+                  ),
+                  Obx(
+                    () => AppButton(
+                      text: vehicleCtrl.isVehichleAddedModalExpanded.isFalse
+                          ? 'Submit'.tr
+                          : 'Save'.tr,
+                      press: () {
+                        if (isEditing == true) {
+                          vehicleCtrl.updateVehicle(vehicle!, context);
+                          return;
+                        }
 
-                          if (vehicleCtrl
-                              .isVehichleAddedModalExpanded.isFalse) {
-                            vehicleCtrl.fetchVehicleData(() {
-                              vehicleCtrl.isVehichleAddedModalExpanded.value =
-                                  true;
-                              vehicleCtrl.update();
-                            });
-                          } else {
-                            vehicleCtrl.onVehicleSave(context);
-                          }
-                        },
-                        showLoader: vehicleCtrl.isFetchingRecord.value,
-                      ),
+                        if (vehicleCtrl.isVehichleAddedModalExpanded.isFalse) {
+                          vehicleCtrl.fetchVehicleData(() {
+                            vehicleCtrl.isVehichleAddedModalExpanded.value =
+                                true;
+                            vehicleCtrl.update();
+                          });
+                        } else {
+                          vehicleCtrl.onVehicleSave(context);
+                        }
+                      },
+                      showLoader: vehicleCtrl.isFetchingRecord.value,
                     ),
-                    const CustomSpacer(spaceValue: 10),
-                  ],
-                ),
-              )),
+                  ),
+                  if (isAndroid) const CustomSpacer(spaceValue: 10),
+                ],
+              ),
+            )
+            // ),
             ));
       },
     ).whenComplete(() {
@@ -465,8 +494,10 @@ class AppBottomModal {
                                       ? "assets/icons/checkmark.svg"
                                       : "assets/icons/unchekmark.svg"),
                               const CustomSpacer(spaceValue: 5),
-                              AppText(
-                                text: item['name'].toString(),
+                              Flexible(
+                                child: AppText(
+                                  text: item['name'].toString(),
+                                ),
                               ),
                             ],
                           ),
@@ -510,6 +541,7 @@ class AppBottomModal {
     BottomTabController tabController = Get.find();
     showModalBottomSheet<void>(
       context: context,
+      isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20), topRight: Radius.circular(20)),
@@ -520,70 +552,73 @@ class AppBottomModal {
             child: Container(
           padding: const EdgeInsets.all(20),
           color: kBgLightColor,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const CustomSpacer(spaceValue: 10),
-              Image.asset('assets/illustrations/language.png',
-                  width: 100, height: 100),
-              const CustomSpacer(spaceValue: 10),
-              AppText(
-                text: 'Select Langauge'.tr,
-                fontSize: 22,
-                fontWeight: FontWeight.w500,
-              ),
-              const CustomSpacer(spaceValue: 5),
-              AppText(
-                  fontSize: 14,
-                  color: kTextColor,
-                  text: 'Select the Language you prefer'.tr),
-              const CustomSpacer(spaceValue: 10),
-              Obx(() => ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: tabController.languages.length,
-                    itemBuilder: (context, index) {
-                      var item = tabController.languages[index];
-                      return GestureDetector(
-                          behavior: HitTestBehavior.opaque,
-                          onTap: () {
-                            tabController.onLanguageSelect(index);
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.only(bottom: 10),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              // mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                CustomSurffixIcon(
-                                    size: 25,
-                                    svgIcon: item['isSelected']
-                                        ? 'assets/icons/checkmark.svg'
-                                        : 'assets/icons/unchekmark.svg'),
-                                const CustomSpacer(spaceValue: 10),
-                                AppText(
-                                  text: item['text'],
-                                  fontSize: 18,
-                                )
-                              ],
-                            ),
-                          ));
-                    },
-                  )),
-              const CustomSpacer(spaceValue: 20),
-              AppButton(
-                text: 'Change Language',
-                press: () {
-                  Map lang = tabController.languages
-                      .firstWhere((element) => element['isSelected']);
-                  Get.updateLocale(lang['text'] == "English"
-                      ? const Locale("en", "US")
-                      : const Locale("nn", "NO"));
-                  srvPageRoute.goBack(context);
-                },
-                showLoader: false,
-              )
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const CustomSpacer(spaceValue: 10),
+                Image.asset('assets/illustrations/language.png',
+                    width: 100, height: 100),
+                const CustomSpacer(spaceValue: 10),
+                AppText(
+                  text: 'Select Langauge'.tr,
+                  fontSize: 22,
+                  fontWeight: FontWeight.w500,
+                ),
+                const CustomSpacer(spaceValue: 5),
+                AppText(
+                    fontSize: 14,
+                    color: kTextColor,
+                    text: 'Select the Language you prefer'.tr),
+                const CustomSpacer(spaceValue: 10),
+                Obx(() => ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: tabController.languages.length,
+                      itemBuilder: (context, index) {
+                        var item = tabController.languages[index];
+                        return GestureDetector(
+                            behavior: HitTestBehavior.opaque,
+                            onTap: () {
+                              tabController.onLanguageSelect(index);
+                            },
+                            child: Container(
+                              margin: const EdgeInsets.only(bottom: 10),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                // mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  CustomSurffixIcon(
+                                      size: 25,
+                                      svgIcon: item['isSelected']
+                                          ? 'assets/icons/checkmark.svg'
+                                          : 'assets/icons/unchekmark.svg'),
+                                  const CustomSpacer(spaceValue: 10),
+                                  AppText(
+                                    text: item['text'],
+                                    fontSize: 18,
+                                  )
+                                ],
+                              ),
+                            ));
+                      },
+                    )),
+                const CustomSpacer(spaceValue: 20),
+                AppButton(
+                  text: 'Change Language',
+                  press: () {
+                    Map lang = tabController.languages
+                        .firstWhere((element) => element['isSelected']);
+                    Get.updateLocale(lang['text'] == "English"
+                        ? const Locale("en", "US")
+                        : const Locale("nn", "NO"));
+                    srvPageRoute.goBack(context);
+                  },
+                  showLoader: false,
+                )
+              ],
+            ),
           ),
         ));
       },

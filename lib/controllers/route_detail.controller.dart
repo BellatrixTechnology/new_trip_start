@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/foundation.dart';
 // import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
@@ -23,7 +21,8 @@ class RouteDetailCtrl extends GetxController {
   var isLoading = false.obs;
 
   PolylinePoints polylinePoints = PolylinePoints();
-  RxList<Marker> markersList = RxList([]);
+  // RxList<Marker> markersList = RxList([]);
+  RxSet<Marker> markersList = RxSet({});
   List<LatLng> polylineCoordinates = [];
   RxSet<Polyline> polylines = RxSet({});
   // late PolylinePoints polylinePoints;
@@ -57,29 +56,29 @@ class RouteDetailCtrl extends GetxController {
     index = routeindex;
   }
 
-  getTolls() async {
-    tolls.assignAll([]);
-    ferries.assignAll([]);
+  // getTolls() async {
+  //   tolls.assignAll([]);
+  //   ferries.assignAll([]);
 
-    update();
-    toggleLoading();
+  //   update();
+  //   toggleLoading();
 
-    var resp = await srvApi.getTolls(
-        mapController.routeData[index]['summary'],
-        mapController.carData.value,
-        mapController.routeData[index]['distance']['value']);
-    toggleLoading();
-    if (resp.statusCode == 200) {
-      var data = resp.data['data'][0];
-      tolls.addAll(data['tolls']);
-      ferries.addAll(data['ferry']);
-      tolls.refresh();
-      ferries.refresh();
-      update();
-      calcPrice(data);
-      getTollsMarkers(data);
-    }
-  }
+  //   var resp = await srvApi.getTolls(
+  //       mapController.routeData[index]['summary'],
+  //       mapController.carData.value,
+  //       mapController.routeData[index]['distance']['value']);
+  //   toggleLoading();
+  //   if (resp.statusCode == 200) {
+  //     var data = resp.data['data'][0];
+  //     tolls.addAll(data['tolls']);
+  //     ferries.addAll(data['ferry']);
+  //     tolls.refresh();
+  //     ferries.refresh();
+  //     update();
+  //     calcPrice(data);
+  //     getTollsMarkers(data);
+  //   }
+  // }
 
   toggleLoading() {
     isLoading.toggle();
@@ -104,7 +103,7 @@ class RouteDetailCtrl extends GetxController {
     final BitmapDescriptor svgMarker = BitmapDescriptor.fromBytes(tollIcon);
     // List tolls =
     tolls = RxList(mapController.routeData[index]['tolls']);
-    print(tolls[0]);
+    // print(tolls[0]);
     ferries = RxList(mapController.routeData[index]['ferry']);
     for (var data in tolls) {
       var toll = data;
@@ -120,47 +119,50 @@ class RouteDetailCtrl extends GetxController {
 
       markersList.add(
         Marker(
-            markerId: MarkerId(data['NAME TOLL STATION'].toString()),
+            markerId: MarkerId(toll['title'].toString()),
             icon: svgMarker,
             position: LatLng(toll['latitude'], toll['longitude'])),
       );
-      markersList.refresh();
       // }
     }
 
+    markersList.refresh();
+
     addStartMarker();
     endStartMarker();
     update();
     refresh();
+    getPolyLines(index);
   }
 
-  getTollsMarkers(Map data) async {
-    Uint8List tollIcon =
-        await srvOsGridConverter.toMarkerIcon(ktollMarker, 60, 60);
+  // getTollsMarkers(Map data) async {
+  //   Uint8List tollIcon =
+  //       await srvOsGridConverter.toMarkerIcon(ktollMarker, 60, 60);
 
-    final BitmapDescriptor svgMarker = BitmapDescriptor.fromBytes(tollIcon);
-    markersList.clear();
-    markersList = RxList([]);
-    markersList.refresh();
-    update();
-    refresh();
+  //   final BitmapDescriptor svgMarker = BitmapDescriptor.fromBytes(tollIcon);
+  //   markersList.clear();
+  //   markersList = RxList([]);
+  //   markersList.refresh();
+  //   update();
+  //   refresh();
+  //   addStartMarker();
+  //   endStartMarker();
 
-    for (var element in data['tolls']) {
-      markersList.add(
-        Marker(
-          markerId: MarkerId(element['geohash'].toString()),
-          icon: svgMarker,
-          position: LatLng(srvShared.anyTypeToDouble(element['latitude']),
-              srvShared.anyTypeToDouble(element['longitude'])),
-        ),
-      );
-    }
-    markersList.refresh();
-    addStartMarker();
-    endStartMarker();
-    setBounds();
-    // update();
-  }
+  //   for (var element in data['tolls']) {
+  //     markersList.add(
+  //       Marker(
+  //         markerId: MarkerId(element['geohash'].toString()),
+  //         icon: svgMarker,
+  //         position: LatLng(srvShared.anyTypeToDouble(element['latitude']),
+  //             srvShared.anyTypeToDouble(element['longitude'])),
+  //       ),
+  //     );
+  //   }
+  //   markersList.refresh();
+  //   update();
+  //   setBounds();
+  //   // update();
+  // }
 
   addStartMarker() async {
     Position position = mapController.startPlace.position!;
@@ -227,25 +229,26 @@ class RouteDetailCtrl extends GetxController {
     bool isAutoPassOn = mapController.autopass.value;
     bool isRushHourOn = mapController.rushHour.value;
 
+    debugPrint("toll -> $toll");
     double price = 0.0;
     if (!isAutoPassOn && !isRushHourOn) {
       price = double.parse(
-          toll['totalPriceWithoutRushHourWithoutAutoPass'].toString());
+          (toll['totalPriceWithoutRushHourWithoutAutoPass'] ?? 0).toString());
     }
 
     if (isAutoPassOn && isRushHourOn) {
-      price = double.parse(toll['priceWithRushHourWithAutoPass'].toString());
+      price =
+          double.parse((toll['priceWithRushHourWithAutoPass'] ?? 0).toString());
     }
 
     if (isAutoPassOn && !isRushHourOn) {
-      price = double.parse(toll['priceWithoutRushHourWithAutoPass'].toString());
+      price = double.parse(
+          (toll['priceWithoutRushHourWithAutoPass'] ?? 0).toString());
     }
 
     if (!isAutoPassOn && isRushHourOn) {
       price = double.parse(
-          toll['totalPriceWithRushHourWithoutAutoPass'].toString());
-      // double.parse(toll['priceWithoutAutoPass'].toString()) +
-      //     double.parse(toll['priceWithRushHour'].toString());
+          (toll['totalPriceWithRushHourWithoutAutoPass'] ?? 0).toString());
     }
 
     return price;
@@ -291,7 +294,7 @@ class RouteDetailCtrl extends GetxController {
       };
     }
 
-    log("price $price");
+    // log("price $price");
     singleRoutePrices.value = price;
     update();
   }

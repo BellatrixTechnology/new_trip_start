@@ -12,7 +12,7 @@ class AnalyticsService {
     firebaseAnalytics.setUserId(id: srvUser.user.id.toString());
   }
 
-  addLog(String name, Map<String, Object?> param) {
+  addLog(String name, Map<String, Object> param) {
     firebaseAnalytics.logEvent(name: name, parameters: param);
   }
 }

@@ -13,7 +13,7 @@ import 'package:new_trip_start/controllers/shared.controller.dart';
 class ToastAlertService {
   toast(String message,
       [SnackPosition? position, String? title, int? seconds]) {
-    Get.snackbar(title ?? "Trip Start", message,
+    Get.snackbar(title ?? "BompengeAppen", message,
         backgroundColor: kBlackColor,
         colorText: kBgLightColor,
 
@@ -24,7 +24,7 @@ class ToastAlertService {
 
   alert(String message, [String? textConfirm, void Function()? onClick]) {
     Get.defaultDialog(
-      title: "Trip Start",
+      title: "BompengeAppen",
       middleText: message,
       confirm: InkWell(
         onTap: () {
@@ -50,7 +50,7 @@ class ToastAlertService {
           return CupertinoAlertDialog(
             title: showTitle
                 ? const AppText(
-                    text: 'Trip Start',
+                    text: 'BompengeAppen',
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                     textAlign: TextAlign.center,
@@ -93,7 +93,7 @@ class ToastAlertService {
         builder: (BuildContext context) {
           return CupertinoAlertDialog(
             title: const AppText(
-              text: 'Trip Start',
+              text: 'BompengeAppen',
               fontSize: 20,
               fontWeight: FontWeight.bold,
               textAlign: TextAlign.center,

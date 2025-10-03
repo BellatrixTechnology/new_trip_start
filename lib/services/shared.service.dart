@@ -68,9 +68,9 @@ class SharedService {
         : '0 mins'; // Default to '0 mins' if input is invalid or zero
   }
 
-  createDate(String _createdAt, [String? format]) {
-    var createdAt = DateTime.parse(_createdAt);
-    return DateFormat(format ?? 'MMMM dd, yyyy hh:mm a').format(createdAt);
+  createDate(String createdAt, [String? format]) {
+    var createdAtDate = DateTime.parse(createdAt);
+    return DateFormat(format ?? 'MMMM dd, yyyy hh:mm a').format(createdAtDate);
   }
 
   void printWrapped(dynamic text) {

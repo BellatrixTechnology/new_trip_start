@@ -2,6 +2,7 @@
 import 'package:new_trip_start/services/analytics.service.dart';
 import 'package:new_trip_start/services/api.service.dart';
 import 'package:new_trip_start/services/firebase.service.dart';
+import 'package:new_trip_start/services/google_admob.service.dart';
 import 'package:new_trip_start/services/loader.service.dart';
 import 'package:new_trip_start/services/local_storage.service.dart';
 import 'package:new_trip_start/services/osgridconverter.service.dart';
@@ -10,6 +11,7 @@ import 'package:new_trip_start/services/payment.service.dart';
 import 'package:new_trip_start/services/rating.service.dart';
 import 'package:new_trip_start/services/revenue_cat_sub.service.dart';
 import 'package:new_trip_start/services/shared.service.dart';
+import 'package:new_trip_start/services/titktok_sdk.dart';
 import 'package:new_trip_start/services/toast_alert.service.dart';
 import 'package:new_trip_start/services/user.service.dart';
 
@@ -30,3 +32,7 @@ AnalyticsService srvAnalytics = AnalyticsService();
 RatingService srvRating = RatingService();
 
 LocalStorage srvLocalStorage = LocalStorage();
+
+GoogleAdMobService srvAdmob = GoogleAdMobService();
+
+TikTokService srvTiktok = TikTokService();

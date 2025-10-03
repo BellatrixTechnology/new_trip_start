@@ -6,25 +6,38 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:new_trip_start/components/app_text.dart';
+import 'package:new_trip_start/components/banner.component.dart';
 import 'package:new_trip_start/components/custom_spacer.dart';
 import 'package:new_trip_start/constants.dart';
+import 'package:new_trip_start/controllers/map_ctrl.dart';
 
 import 'package:new_trip_start/controllers/route_detail.controller.dart';
-import 'package:new_trip_start/modals/feedback.dart';
 import 'package:new_trip_start/services/index.dart';
 
 import 'package:new_trip_start/size_config.dart';
 import 'package:shimmer/shimmer.dart';
 
-class RouteDetails extends StatelessWidget {
+class RouteDetails extends StatefulWidget {
   const RouteDetails({super.key, required this.index});
   final int index;
+
+  @override
+  State<RouteDetails> createState() => _RouteDetailsState();
+}
+
+class _RouteDetailsState extends State<RouteDetails> {
+  final mapCtrl = Get.find<MapController>();
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<RouteDetailCtrl>(
         init: RouteDetailCtrl(),
         builder: (controller) {
-          Map data = controller.mapController.routeData[index];
+          Map data = controller.mapController.routeData[widget.index];
 
           return Scaffold(
               appBar: AppBar(
@@ -69,6 +82,16 @@ class RouteDetails extends StatelessWidget {
               body: ListView(
                 padding: const EdgeInsets.all(20),
                 children: [
+                  // const BannerAdWidget(),
+                  Obx(() {
+                    if (mapCtrl.user.value.isSubscribe) {
+                      return const SizedBox();
+                    }
+                    return AdMobBannerWidget(
+                        adUnitId: srvAdmob.bannerAdId,
+                        uniqueKey: "available_routes_details");
+                  }),
+                  const CustomSpacer(spaceValue: 10),
                   Container(
                     height: getProportionateScreenHeight(320),
                     decoration: BoxDecoration(
@@ -78,23 +101,24 @@ class RouteDetails extends StatelessWidget {
                       borderRadius: const BorderRadius.all(Radius.circular(20)),
                       child: Align(
                         alignment: Alignment.bottomRight,
-                        child: GoogleMap(
-                          initialCameraPosition: const CameraPosition(
-                            target: LatLng(59.892365, 10.790427),
-                            zoom: 5,
+                        child: Obx(
+                          () => GoogleMap(
+                            initialCameraPosition: const CameraPosition(
+                              target: LatLng(59.892365, 10.790427),
+                              zoom: 5,
+                            ),
+                            // ignore: prefer_collection_literals
+                            gestureRecognizers: Set()
+                              ..add(Factory<EagerGestureRecognizer>(
+                                  () => EagerGestureRecognizer())),
+                            onMapCreated: (GoogleMapController ctrl) {
+                              controller.googlemapController = ctrl;
+                              controller.addMarkerstoMap(widget.index);
+                            },
+                            markers: controller.markersList,
+                            polylines: Set.from(controller.polylines),
+                            myLocationButtonEnabled: false,
                           ),
-                          // ignore: prefer_collection_literals
-                          gestureRecognizers: Set()
-                            ..add(Factory<EagerGestureRecognizer>(
-                                () => EagerGestureRecognizer())),
-                          onMapCreated: (GoogleMapController ctrl) {
-                            controller.googlemapController = ctrl;
-                            controller.addMarkerstoMap(index);
-                            controller.getPolyLines(index);
-                          },
-                          markers: Set.from(controller.markersList),
-                          polylines: Set.from(controller.polylines),
-                          myLocationButtonEnabled: false,
                         ),
                       ),
                     ),

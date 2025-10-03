@@ -1,5 +1,5 @@
 // ignore: implementation_imports
-import 'package:flutter_polyline_points/src/PointLatLng.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 
 /// Decode the google encoded string using Encoded Polyline Algorithm Format
 /// for more info about the algorithm check https://developers.google.com/maps/documentation/utilities/polylinealgorithm

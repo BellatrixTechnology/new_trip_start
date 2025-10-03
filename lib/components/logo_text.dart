@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:new_trip_start/components/app_text.dart';
-import 'package:new_trip_start/components/custom_spacer.dart';
+// import 'package:new_trip_start/components/custom_spacer.dart';
 import 'package:new_trip_start/constants.dart';
 
 class LogoWithText extends StatelessWidget {
-  const LogoWithText({super.key, this.logoWidthHeight, this.hideText});
+  const LogoWithText(
+      {super.key, this.logoWidthHeight, this.hideText, this.fontSize});
   final double? logoWidthHeight;
   final bool? hideText;
+  final double? fontSize;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -18,13 +20,13 @@ class LogoWithText extends StatelessWidget {
           height: logoWidthHeight,
         ),
         if (hideText != true)
-          const Column(
+          Column(
             children: [
-              CustomSpacer(spaceValue: 8),
+              // const CustomSpacer(spaceValue: 8),
               AppText(
                 text: "BompengeAppen",
                 color: kPrimaryColor,
-                fontSize: 32,
+                fontSize: fontSize ?? 32,
                 fontWeight: FontWeight.w700,
               ),
             ],

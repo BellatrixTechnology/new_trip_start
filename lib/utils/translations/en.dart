@@ -63,7 +63,7 @@ const enUS = {
       "Are you sure you want to delete this vehicle?",
   "Yes": "Yes",
   "No": "No",
-  "No Vehcile Found": "No Vehcile Found",
+  "No Vehcile Found": "No Vehicle Found",
   "Add Vehicle": "Add Vehicle",
   "Vehicle Added": "Vehicle Added",
   "Your Vehicle has been added successfully":
@@ -105,7 +105,7 @@ const enUS = {
   "origin": "Origin",
   "destination": "Destination",
   "Atleat one vehicle you should be in your list to calculate Route":
-      "Atleat one vehicle you should have in your list to calculate Route.",
+      "Atleast one vehicle you should have in your list to calculate Route.",
   "Optimize Your Commute: Know Your Daily Cost and Find Cheaper Routes!":
       "Optimize Your Commute: Know Your Daily Cost and Find Cheaper Routes!",
   "Seamless Road Trips: Plan Ahead and Travel Stress-Free!":
@@ -116,7 +116,7 @@ const enUS = {
   "Enter your destination": "Enter your destination",
   "Search Place Here...": "Search Place Here...",
   "No search Found...": "No search Found...",
-  "WE ARE SEARHING...": "WE ARE SEARHING...",
+  "WE ARE SEARHING...": "WE ARE SEARCHING...",
   "DID YOU KNOW!!!": "DID YOU KNOW!!!",
   "No Vehicle Found against this register number":
       "No Vehicle Found against this register number",
@@ -151,5 +151,50 @@ const enUS = {
   "We’ll send an rest password link to your email.":
       "We’ll send a code to your email. Please verify to continue",
   "enter_code_here": "Enter Code Here...",
-  "enter_new_password": "Enter New Password..."
+  "enter_new_password": "Enter New Password...",
+  "purchase_get_error":
+      "You can't purchase product right now, Please try again later",
+  "new_features_info_page_title": "Welcome to the New and Improved App!",
+  "new_features_info_page_descp":
+      "We’re excited to introduce a brand-new version of our app! We’ve made major upgrades to improve your experience. As part of this transition, you may notice some changes, and we’re here to help you get started with the new features.",
+  "features_we_added": "Features We Added",
+  "feature_1":
+      "Fast and Secure Database: Enjoy quicker and more reliable queries",
+  "feature_2":
+      "More Accurate Data: Get precise information for ferry routes, tolls, and calculations.",
+  "feature_3":
+      "Improved Performance: Faster load times and smoother transitions.",
+  "feature_4":
+      "Additional Features: New tools and enhancements to make your travel easier",
+  "important_note": "Important Note",
+  "important_note_desp":
+      "If you’re unable to log in with your previous credentials, please create a new account to continue using the app. We apologize for the inconvenience and appreciate your understanding during this upgrade.\n\nThank you for being a part of our community, and we hope you enjoy the new and improved experience!",
+  "Vehicle Registeration Number": "Vehicle Registeration Number",
+  "pro_user": "Pro User",
+  "become_pro_user": "Become a Pro User",
+  "become_pro_user_descp": "Become a Pro User to avail all features of the app",
+  "all_features_are_unlocked":
+      "You are a Pro user, all features are availble to you.",
+  "upgrade_to_premium": "Upgrade to Premium",
+  "login_signup": "Login/Signup",
+  "vehicles": "Vehicles",
+  "multiple": "Multiple",
+  "searches": "Searches",
+  "unlimited": "Unlimited",
+  "free_plan": "Free Plan",
+  "guest_searches_used": "Guest searches used",
+  "all_searches_used": "All searches used",
+  "free_searches_used": "Free Searches Used",
+  "subs_status_msg_1": "Login or sign up to get more free searches!",
+  "subs_status_msg_2": "Last guest search available - login for more!",
+  "subs_status_msg_3": "Create an account for more free searches",
+  "subs_status_msg_4": "You've used all free searches. Upgrade to premium!",
+  "subs_status_msg_5": "Almost all searches used - consider upgrading!",
+  "subs_status_msg_6": "Over half of free searches used",
+  "subs_status_msg_7": "Plenty of free searches available",
+  "watch_free_video_to_get_free_search":
+      "Watch a free video to get a free search",
+  "api_count_updated_succesffuly": "Free Search Count has been updated",
+  "free_limit_reached_for_vehicles":
+      "Free limit reached. Upgrade to add more vehicles."
 };

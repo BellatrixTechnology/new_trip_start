@@ -3,14 +3,17 @@ import 'package:get/get.dart';
 import 'package:new_trip_start/components/app_text.dart';
 import 'package:new_trip_start/components/custom_spacer.dart';
 import 'package:new_trip_start/controllers/map_ctrl.dart';
+// import 'package:new_trip_start/controllers/tab_ctrl.dart';
+// import 'package:new_trip_start/models/vehicle.model.dart';
 import 'package:new_trip_start/screens/tab_navigator/my-vehicles/vehicle_item.dart';
 
 class ChooseRouteView extends StatelessWidget {
-  const ChooseRouteView({super.key, required this.controller});
-  final MapController controller;
+  const ChooseRouteView({super.key});
+
   @override
   Widget build(BuildContext context) {
     MapController mapController = Get.find();
+
     return Column(
       children: [
         VechicleItem(
@@ -29,7 +32,7 @@ class ChooseRouteView extends StatelessWidget {
             ),
             AppText(
                 text:
-                    '${controller.tabController.selectedVeh.value.regNum!.toUpperCase()} - ${controller.tabController.selectedVeh.value.vehBrand!.toUpperCase()}')
+                    '${mapController.carData.value.regNum!.toUpperCase()} - ${mapController.carData.value.vehBrand!.toUpperCase()}')
           ],
         ),
       ],

@@ -9,8 +9,8 @@ import 'package:new_trip_start/constants.dart';
 
 import 'package:new_trip_start/controllers/tab_ctrl.dart';
 import 'package:new_trip_start/models/places.model.dart';
+import 'package:new_trip_start/models/users.model.dart';
 import 'package:new_trip_start/models/vehicle.model.dart';
-import 'package:new_trip_start/screens/subscription/page.dart';
 import 'package:new_trip_start/services/index.dart';
 // import 'package:new_trip_start/utils/polyline_decoder.dart';
 
@@ -57,7 +57,7 @@ class MapController extends GetxController {
       GooglePlacesModel(mainText: "", description: "", placeId: "");
 
   var autopass = true.obs;
-  var rushHour = true.obs;
+  var rushHour = false.obs;
 
   late GoogleMapController controller;
   GoogleMapController? mapController;
@@ -71,6 +71,7 @@ class MapController extends GetxController {
   // var tolls = [0];
   Rx<Vehicle> carData = Vehicle().obs;
 
+  Rx<NewUserModel> user = Rx(srvUser.user);
   toggleisFetching() {
     isFetching.toggle();
     update();
@@ -110,6 +111,14 @@ class MapController extends GetxController {
   //   }
   // }
 
+  updateApiCount(int apiCount) {
+    user.update((u) {
+      u?.apiCount = apiCount;
+    });
+    user.refresh;
+    update();
+  }
+
   getData() async {
     // if (kReleaseMode)
     // Future.delayed(const Duration(seconds: 5), () {
@@ -129,13 +138,22 @@ class MapController extends GetxController {
     //   srvToastAlert.closePopup();ß
     // });
     // return;
-    print("carData.value.toMap() ${carData.value.toMap()}");
+    // print("carData.value.toMap() ${carData.value.id} ${carData.value.toMap()}");
+
+    if (carData.value.id == null) {
+      carData.value =
+          tabController.myVehicles[tabController.getSelectedVehicleIndex()];
+    }
+    // print("carData.value.toMap() ${carData.value.id} ${carData.value.toMap()}");
+
+    // print("carData.value.toMap() ${carData.value.id} ${carData.value.toMap()}");
+
     try {
       var response = await srvApi.getRouteData(
           startPlace.position!, endPlace.position!, carData.value);
 
-      srvShared.printWrapped(
-          "response.data['api_count'].toString() ${response.data}");
+      // srvShared.printWrapped(
+      //     "response.data['api_count'].toString() ${response.data}");
 
       // ignore: use_build_context_synchronously
       Navigator.of(globalContext, rootNavigator: true).pop();
@@ -151,9 +169,11 @@ class MapController extends GetxController {
         if (response.data['status'] == 422) {
           Get.snackbar("BompengeAppen", response.data['message'],
               backgroundColor: kRedColor, colorText: kBgLightColor);
-          srvPageRoute.goNextWithGetx(const SubscriptionPage());
+          // srvPageRoute.goNextWithGetx(const SubscriptionPage());
+          tabController.onTabChange(2, Get.context!);
           return;
         }
+        updateApiCount(response.data['api_count'] ?? user.value.apiCount);
         if (response.data['status'] == true) {
           if (response.data['data'] == null) {
             srvToastAlert.toast("No Route Found");
@@ -161,6 +181,7 @@ class MapController extends GetxController {
           }
           if (response.data['data'].length > 0) {
             routeData = RxList(response.data['data']);
+            update();
             addPolylines();
           } else {
             srvToastAlert.toast("No Route Found");
@@ -171,6 +192,9 @@ class MapController extends GetxController {
       }
     } on DioException catch (e) {
       print("e.message ---> ${e.message}");
+      srvToastAlert.toast("No Route Found");
+      // ignore: use_build_context_synchronously
+      Navigator.of(globalContext, rootNavigator: true).pop();
     }
   }
 
@@ -427,76 +451,45 @@ class MapController extends GetxController {
 
   calcPrice(int index) {
     var info = routeData[index]['totalPrice'] ?? {};
-    print("total price $index $info");
-
     var fuelPrice = routeData[index]['totalPriceFuel'] ?? 0.0;
-    var price = {"withFuel": 0.0, "withoutFuel": 0.0};
-    // var withAutoPassPrice =
-    //     srvFirebase.toDouble(info['totalPriceWithAutoPass']);
-    // var withoutAutoPassPrice =
-    //     srvFirebase.toDouble(info['totalPriceWithoutAutoPass']);
-    // var withRushPrice = srvFirebase.toDouble(info['totalPriceWithRushHour']);
-    // var withoutRushPrice =
-    //     srvFirebase.toDouble(info['totalPriceWithoutRushHour']);
-
-    // print("price withAutoPassPrice $withAutoPassPrice");
-    // print("price withoutAutoPassPrice $withoutAutoPassPrice");
-    // print("price withRushPrice $withRushPrice");
-    // print("price withoutRushPrice $withoutRushPrice");
-
     var gasPrice = srvFirebase.toDouble(fuelPrice ?? 0.0);
 
-    if (autopass.isTrue && rushHour.isTrue) {
-      price = {
-        "withoutFuel": double.parse(info['totalPriceWithRushHourWithAutoPass']
-            .toString()), //withAutoPassPrice + withRushPrice,
-        "withFuel": double.parse(
-                info['totalPriceWithRushHourWithAutoPass'].toString()) +
-            gasPrice // (withAutoPassPrice + withRushPrice) + gasPrice
-      };
-    }
-    if (autopass.isTrue && rushHour.isFalse) {
-      price = {
-        "withoutFuel": double.parse(
-            info['totalPriceWithoutRushHourWithAutoPass']
-                .toString()), //withAutoPassPrice + withoutRushPrice,
-        "withFuel": double.parse(
-                info['totalPriceWithoutRushHourWithAutoPass'].toString()) +
-            gasPrice, //(withAutoPassPrice + withoutRushPrice) + gasPrice
-      };
-    }
-    if (autopass.isFalse && rushHour.isTrue) {
-      price = {
-        "withoutFuel": double.parse(
-            info['totalPriceWithRushHourWithoutAutoPass']
-                .toString()), //withRushPrice + withoutAutoPassPrice,
-        "withFuel": double.parse(
-                info['totalPriceWithRushHourWithoutAutoPass'].toString()) +
-            gasPrice
-      };
-    }
+    String priceKey = _getPriceKey();
+    double basePrice = double.parse(info[priceKey].toString());
 
-    if (autopass.isFalse && rushHour.isFalse) {
-      price = {
-        "withoutFuel": double.parse(
-            info['totalPriceWithoutRushHourWithoutAutoPass']
-                .toString()), //withoutAutoPassPrice + withoutRushPrice,
-        "withFuel": double.parse(
-                info['totalPriceWithoutRushHourWithoutAutoPass'].toString()) +
-            gasPrice
-      };
-    }
+    var price = {
+      "withoutFuel": basePrice,
+      "withFuel": basePrice + gasPrice
+    };
 
-    print("price $index $price");
     routeData[index]['price'] = price;
     routeData.refresh;
     return price;
+  }
+
+  String _getPriceKey() {
+    if (autopass.isTrue && rushHour.isTrue) {
+      return 'totalPriceWithRushHourWithAutoPass';
+    } else if (autopass.isTrue && rushHour.isFalse) {
+      return 'totalPriceWithoutRushHourWithAutoPass';
+    } else if (autopass.isFalse && rushHour.isTrue) {
+      return 'totalPriceWithRushHourWithoutAutoPass';
+    } else {
+      return 'totalPriceWithoutRushHourWithoutAutoPass';
+    }
   }
 
   calcAfterToggle() {
     for (var i = 0; i < routeData.length; i++) {
       calcPrice(i);
     }
+  }
+
+  updateUser() {
+    user.update((u) {
+      u = srvUser.user;
+    });
+    update();
   }
 }
 

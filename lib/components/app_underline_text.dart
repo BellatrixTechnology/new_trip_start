@@ -9,25 +9,39 @@ class UnderlineText extends StatelessWidget {
   final String text;
   @override
   Widget build(BuildContext context) {
+    // return Row(
+    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //   children: [
     return Container(
       padding: const EdgeInsets.only(
-        bottom: 10,
+        bottom: 5,
       ),
       // height: 4,
       decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(
             color: kPrimaryColor,
-            width: 5.0,
+            width: 4.0,
           ),
         ),
       ),
       child: AppText(
         text: text,
         fontWeight: FontWeight.bold,
-        fontSize: 28,
+        fontSize: 24,
         color: kBlackColor,
       ),
+      // ),
+      // Image.asset(
+      //   'assets/images/new_logo.png',
+      //   width: 40,
+      //   height: 40,
+      // ),
+      // LogoWithText(
+      //   fontSize: 10,
+      //   logoWidthHeight: 40,
+      //   // ),
+      // ],
     );
   }
 }

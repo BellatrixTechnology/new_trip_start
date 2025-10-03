@@ -3,6 +3,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:new_trip_start/constants.dart';
 import 'package:new_trip_start/controllers/tab_ctrl.dart';
 import 'package:new_trip_start/modals/bottom_modal.dart';
 import 'package:new_trip_start/models/vehicle.model.dart';
@@ -121,19 +122,22 @@ class AddVehicleCtrl extends GetxController {
             bottomTabController.addVehicleToList(
                 Vehicle.fromJson(resp.data['data']), context);
             // toggleLoader();
-            srvPageRoute.goBack(context);
-            AppBottomModal().confirmBottomSheet(
-                context,
-                () {},
-                Image.asset(
-                  'assets/illustrations/tick.png',
-                  width: 90,
-                  height: 90,
-                ),
-                "Vehicle Added".tr,
-                "Your Vehicle has been added successfully".tr,
-                'Yes'.tr,
-                true);
+            Get.close(0);
+            Get.back();
+            Future.delayed(kAnimationDuration, () {
+              AppBottomModal().confirmBottomSheet(
+                  context,
+                  () {},
+                  Image.asset(
+                    'assets/illustrations/tick.png',
+                    width: 90,
+                    height: 90,
+                  ),
+                  "Vehicle Added".tr,
+                  "Your Vehicle has been added successfully".tr,
+                  'Yes'.tr,
+                  true);
+            });
           } else {
             srvToastAlert.toast(resp.data['message']);
           }
@@ -292,59 +296,76 @@ class AddVehicleCtrl extends GetxController {
 
   updateVehicle(Vehicle vehicle, BuildContext context) async {
     try {
-      toggleLoader();
-      int date = DateTime.now().millisecondsSinceEpoch;
-      String vehGroup = vehicleGroups
-          .where((p0) => p0['isSelected'] = true)
-          .first['name']
-          .toString();
-      print(fuelTypeid);
-      print(vehicle.fuelTypeid);
-      var resp =
-          await srvApi.apiUrlput(concaturl: "vehicle/${vehicle.id}", data: {
-        "regNum": regNum.text,
-        "vehBrand": vehBrand.text,
-        "vehFuelCmp": vehFuelCmp.text,
-        "vehLength": vehLength.text,
-        "vehWeight": vehWeight.text,
-        "vehClass": vehClass.text,
-        "vehFuelType": vehFuelType.text.toUpperCase() == "BENSIN"
-            ? "petrol"
-            : vehFuelType.text,
-        "color": "0046AC",
-        "userId": srvUser.user.id,
-        "fuelTypeId": fuelTypeid,
-        "updatedAt": date,
-        "vehicleGroup": vehGroup
-      });
+      if (regNum.text.isEmpty) {
+        srvToastAlert.toast('Please enter registration Number'.tr);
+      } else if (vehBrand.text.isEmpty) {
+        srvToastAlert.toast('Please enter Vehicle Brand/Name'.tr);
+      } else if (vehFuelCmp.text.isEmpty) {
+        srvToastAlert.toast('Please enter Vehicle Fuel Consumption'.tr);
+      } else if (vehLength.text.isEmpty) {
+        srvToastAlert.toast('Please enter Vehicle Length in meters'.tr);
+      } else if (vehWeight.text.isEmpty) {
+        srvToastAlert.toast('Please enter Vehicle Weight in kgs'.tr);
+      } else if (double.parse(vehWeight.text) > 3000 && vehClass.text.isEmpty) {
+        srvToastAlert.toast('Please select Vehicle Euro Class type'.tr);
+      } else if (vehFuelType.text.isEmpty) {
+        srvToastAlert.toast('Please select Vehicle Fuel type'.tr);
+      } else {
+        toggleLoader();
+        int date = DateTime.now().millisecondsSinceEpoch;
+        String vehGroup = vehicleGroups
+            .where((p0) => p0['isSelected'] = true)
+            .first['name']
+            .toString();
+        print(fuelTypeid);
+        print(vehicle.fuelTypeid);
+        var resp =
+            await srvApi.apiUrlput(concaturl: "vehicle/${vehicle.id}", data: {
+          "regNum": regNum.text,
+          "vehBrand": vehBrand.text,
+          "vehFuelCmp": vehFuelCmp.text,
+          "vehLength": vehLength.text,
+          "vehWeight": vehWeight.text,
+          "vehClass": vehClass.text,
+          "vehFuelType": vehFuelType.text.toUpperCase() == "BENSIN"
+              ? "petrol"
+              : vehFuelType.text,
+          "color": "0046AC",
+          "userId": srvUser.user.id,
+          "fuelTypeId": fuelTypeid,
+          "updatedAt": date,
+          "vehicleGroup": vehGroup
+        });
 
-      if (resp.statusCode == 200) {
-        if (resp.data['status'] == true) {
-          Vehicle v = Vehicle(
-            color: "0046AC",
-            fuelTypeid: fuelTypeid,
-            regNum: regNum.text,
-            vehWeight: vehWeight.text,
-            vehLength: vehLength.text,
-            vehClass: vehClass.text,
-            vehBrand: vehBrand.text,
-            vehFuelCmp: vehFuelCmp.text,
-            vehFuelType: vehFuelType.text,
-            id: vehicle.id,
-            // docId: vehicle.docId,
-            // createdAt: vehicle.createdAt,
-            // updatedAt: DateTime.now().toIso8601String(),
-            vehicleGroup: vehGroup,
-            // userId: srvFirebase.auth.currentUser!.uid,
-          );
-          bottomTabController.updateSingleVehicle(v);
-          srvToastAlert.toast('Vehicle Updated Successfully'.tr);
-          srvPageRoute.goBack(context);
+        if (resp.statusCode == 200) {
+          if (resp.data['status'] == true) {
+            Vehicle v = Vehicle(
+              color: "0046AC",
+              fuelTypeid: fuelTypeid,
+              regNum: regNum.text,
+              vehWeight: vehWeight.text,
+              vehLength: vehLength.text,
+              vehClass: vehClass.text,
+              vehBrand: vehBrand.text,
+              vehFuelCmp: vehFuelCmp.text,
+              vehFuelType: vehFuelType.text,
+              id: vehicle.id,
+              // docId: vehicle.docId,
+              // createdAt: vehicle.createdAt,
+              // updatedAt: DateTime.now().toIso8601String(),
+              vehicleGroup: vehGroup,
+              // userId: srvFirebase.auth.currentUser!.uid,
+            );
+            bottomTabController.updateSingleVehicle(v);
+            srvToastAlert.toast('Vehicle Updated Successfully'.tr);
+            srvPageRoute.goBack(context);
+          }
         }
       }
-      toggleLoader();
     } on DioException catch (e) {
       srvToastAlert.toast(e.message ?? "something_went_wrong_text".tr);
+    } finally {
+      toggleLoader(true);
     }
 
     // srvFirebase.updateVehicle(vehicle!.docId!, {
@@ -385,7 +406,12 @@ class AddVehicleCtrl extends GetxController {
     // });
   }
 
-  toggleLoader() {
+  toggleLoader([bool? forceHide = false]) {
+    if (forceHide == true) {
+      isFetchingRecord.value = false;
+      update();
+      return;
+    }
     isFetchingRecord.toggle();
     update();
   }

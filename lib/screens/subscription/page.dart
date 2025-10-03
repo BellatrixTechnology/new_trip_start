@@ -4,8 +4,7 @@ import 'package:new_trip_start/components/app_text.dart';
 import 'package:new_trip_start/components/custom_spacer.dart';
 import 'package:new_trip_start/constants.dart';
 import 'package:new_trip_start/controllers/subscription.controller.dart';
-import 'package:new_trip_start/screens/subscription/allPlans/page.dart';
-// import 'package:new_trip_start/screens/subscription/components/cancel.view.dart';
+
 import 'package:new_trip_start/screens/subscription/components/how_it_works.view.dart';
 import 'package:new_trip_start/screens/subscription/components/unlimited_text.view.dart';
 import 'package:new_trip_start/services/index.dart';
@@ -17,6 +16,7 @@ class SubscriptionPage extends GetView<SubscriptionController> {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(SubscriptionController());
     return Scaffold(
       body: AppGradientBg(
           padding: 0,
@@ -43,17 +43,6 @@ class SubscriptionPage extends GetView<SubscriptionController> {
                   const HowItWorksView(),
                   const CustomSpacerWidthHeight(height: 23),
                   const UnlimitedTextView(),
-                  // const CustomSpacerWidthHeight(height: 10),
-                  // AppText(
-                  //   onTap: () {
-                  //     srvPageRoute.goNextWithGetx(const ViewAllPlansPage());
-                  //   },
-                  //   text: "View All Plans".tr,
-                  //   fontSize: 16,
-                  //   fontWeight: FontWeight.w600,
-                  //   color: kPrimaryColorLight,
-                  //   textDecoration: TextDecoration.underline,
-                  // ),
                   const CustomSpacerWidthHeight(height: 23),
                   GestureDetector(
                     behavior: HitTestBehavior.opaque,

@@ -150,7 +150,7 @@ class ApiService {
       data: {
         "origin": "${start.lat},${start.lng}",
         "destination": "${end.lat},${end.lng}",
-        "vehicleGroup": veh.vehicleGroup,
+        "vehicleGroup": veh.vehicleGroup ?? "M1",
         "vehFuelType": veh.vehFuelType ?? "petrol",
         "vehFuelCmp": double.parse(veh.vehFuelCmp ?? "10"),
         "cache": true,

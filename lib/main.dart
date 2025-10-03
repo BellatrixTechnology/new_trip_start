@@ -3,8 +3,12 @@ import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:new_trip_start/constants.dart';
+import 'package:new_trip_start/config/env_config.dart';
+import 'package:new_trip_start/controllers/ad_controller.dart';
 // import 'package:here_sdk/core.dart';
 // import 'package:here_sdk/core.engine.dart';
 // import 'package:here_sdk/core.errors.dart';
@@ -30,7 +34,14 @@ import 'package:flutter_uxcam/flutter_uxcam.dart';
 //     PurchasesConfiguration("appl_hUPXcbRjXVrdFEJxvmtgbfcPQwL");
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Load environment variables
+  await EnvConfig.load();
+
+  MobileAds.instance.initialize();
   HttpOverrides.global = MyHttpOverrides();
+
   Get.lazyPut(() => AuthController());
   Get.lazyPut(() => MapController());
   Get.lazyPut(() => AddVehicleCtrl());
@@ -39,7 +50,8 @@ void main() async {
   Get.lazyPut(() => RouteDetailCtrl());
   Get.lazyPut(() => BottomTabController());
   Get.lazyPut(() => SubscriptionController());
-  WidgetsFlutterBinding.ensureInitialized();
+  Get.put(AdController());
+  srvTiktok.init();
 
   // final config = QonversionConfigBuilder('UXhA__7E9XnhUW7nf6YwjGAUZae260Zc',
   //         QLaunchMode.subscriptionManagement)
@@ -48,7 +60,11 @@ void main() async {
 
   // await Purchases.configure(configuration);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(const MyApp());
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]).then((_) {
+    runApp(const MyApp());
+  });
   // DevicePreview(
   //   enabled: !kReleaseMode,
   //   builder: (context) => MyApp(), // Wrap your app
@@ -99,9 +115,12 @@ class MyApp extends StatelessWidget {
         // builder: DevicePreview.appBuilder,
         navigatorObservers: [srvAnalytics.getAnalyticsObserver()],
         debugShowCheckedModeBanner: false,
-        title: 'Trip Start',
+        title: 'BompengeAppen',
         translations: AppTranslations(),
-        locale: Get.deviceLocale, //const Locale("en", "US"),
+        locale:
+            // const Locale("en", "US"),
+            const Locale(
+                "nn", "NO"), //Get.deviceLocale, //const Locale("en", "US"),
         fallbackLocale: const Locale("en", "US"),
         theme: ThemeData(
             // This is the theme of your application.
@@ -122,6 +141,21 @@ class MyApp extends StatelessWidget {
                 iconTheme: IconThemeData(color: kBgLightColor)),
             colorScheme: ColorScheme.fromSeed(seedColor: kPrimaryColor),
             fontFamily: 'Sarabun'),
+        builder: (context, child) {
+          final mediaQueryData = MediaQuery.of(context);
+
+          // Calculate the scaled text factor using the clamp function to ensure it stays within a specified range.
+          final scale = mediaQueryData.textScaler.clamp(
+            minScaleFactor: 1.0, // Minimum scale factor allowed.
+            maxScaleFactor: 1.3, // Maximum scale factor allowed.
+          );
+          return MediaQuery(
+            // Copy the original MediaQueryData and replace the textScaler with the calculated scale.
+            data: mediaQueryData.copyWith(textScaler: scale),
+            // Pass the original child widget to maintain the widget hierarchy.
+            child: child!,
+          );
+        },
         home:
             const SplashScreen() //const MyHomePage(title: 'Flutter Demo Home Page'),
         );

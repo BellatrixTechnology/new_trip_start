@@ -37,20 +37,21 @@ class AppInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      keyboardType: textInputType ?? TextInputType.name,
+      keyboardType: textInputType ?? TextInputType.text,
       style: TextStyle(color: textColor ?? kBlackColor),
       obscureText: obscureText ?? false,
       validator: validator,
       onTap: onPress,
       onChanged: onChanged,
+
       readOnly: readOnly ?? false,
       cursorColor: kPrimaryColor,
       textAlign: textAlign ?? TextAlign.start,
       // textAlign: TextAlignVertical.center,
       decoration: InputDecoration(
-        fillColor: color ?? kPrimaryColor.withOpacity(0.1),
+        fillColor: color ?? kPrimaryColor.withValues(alpha: 0.1),
         filled: true,
-        focusColor: color ?? kPrimaryColor.withOpacity(0.1),
+        focusColor: color ?? kPrimaryColor.withValues(alpha: 0.1),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRaidus ?? 20),
           borderSide: const BorderSide(

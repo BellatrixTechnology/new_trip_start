@@ -4,18 +4,32 @@ import 'package:get/get.dart';
 import 'package:new_trip_start/components/app_button.dart';
 import 'package:new_trip_start/components/app_input.dart';
 import 'package:new_trip_start/components/app_text.dart';
-import 'package:new_trip_start/components/app_underline_text.dart';
 import 'package:new_trip_start/components/custom_spacer.dart';
 import 'package:new_trip_start/components/custom_surfix_icon.dart';
 import 'package:new_trip_start/constants.dart';
 import 'package:new_trip_start/controllers/auth_ctrl.dart';
+// import 'package:new_trip_start/modals/new_changes.info.dart';
 import 'package:new_trip_start/screens/auth/forget_password.dart';
 import 'package:new_trip_start/screens/auth/social_buttons.dart';
 import 'package:new_trip_start/services/index.dart';
 import 'package:new_trip_start/size_config.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    // Future.delayed(const Duration(milliseconds: 400), () {
+    //   NewChangesInfoModal().showModal();
+    // });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +38,8 @@ class LoginScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const CustomSpacer(spaceValue: 10),
-                  UnderlineText(text: 'Login'.tr),
+                  // const CustomSpacer(spaceValue: 10),
+                  // UnderlineText(text: 'Login'.tr),
                   const CustomSpacer(spaceValue: 20),
                   AppInput(
                     hintText: 'Email',
@@ -100,12 +114,14 @@ class LoginScreen extends StatelessWidget {
                     text: 'Login'.tr,
                     width: SizeConfig.screenWidth,
                     showLoader: controller.isLoading.value,
+                    isDisable: controller.isSkipping.isTrue,
                     press: () {
                       controller.onSignIn(context);
                       // srvApi.getVehicleDataWithRegistrationNum('Vh60815');
                       // srvPageRoute.goToNext(context, const OnBoarding());
                     },
                   ),
+
                   const SocialButtons(),
                 ],
               ),

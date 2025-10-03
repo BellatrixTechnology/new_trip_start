@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:new_trip_start/constants.dart';
 import 'package:new_trip_start/size_config.dart';
 
@@ -18,7 +19,7 @@ class CustomRichText extends StatelessWidget {
         text: TextSpan(
           children: <TextSpan>[
             TextSpan(
-              text: text1,
+              text: text1.tr,
               style: const TextStyle(
                   fontFamily: 'Avenir',
                   // fontSize: 32,
@@ -26,7 +27,7 @@ class CustomRichText extends StatelessWidget {
                   color: kBlackColor),
             ),
             TextSpan(
-              text: text2,
+              text: text2.tr,
               style: const TextStyle(
                 color: kPrimaryColor,
                 fontFamily: 'Avenir',

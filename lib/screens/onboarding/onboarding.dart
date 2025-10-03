@@ -3,12 +3,13 @@ import 'package:get/get.dart';
 import 'package:new_trip_start/components/app_round_button.dart';
 import 'package:new_trip_start/constants.dart';
 import 'package:new_trip_start/controllers/onboarding_ctrl.dart';
+import 'package:new_trip_start/screens/auth/auth.dart';
 import 'package:new_trip_start/screens/onboarding/indicator.dart';
 import 'package:new_trip_start/screens/onboarding/onboarding_info.dart';
 // import 'package:new_trip_start/screens/subscription/page.dart';
-import 'package:new_trip_start/screens/tab_navigator/tabs.dart';
 // import 'package:new_trip_start/screens/tab_navigator/tabs.dart';
 import 'package:new_trip_start/services/index.dart';
+import 'package:new_trip_start/services/local_storage.service.dart';
 import 'package:new_trip_start/size_config.dart';
 import 'package:new_trip_start/utils/app_bg.dart';
 
@@ -17,6 +18,7 @@ class OnBoarding extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    srvLocalStorage.set(onBoardingScreenShown, true);
     OnBoardingController onBoardingCtrl = Get.put(OnBoardingController());
     final PageController controller = PageController();
     return Scaffold(
@@ -39,6 +41,7 @@ class OnBoarding extends StatelessWidget {
                   child: PageView.builder(
                     controller: controller,
                     itemCount: onBoardingCtrl.onboadings.length,
+                    physics: const ClampingScrollPhysics(),
                     onPageChanged: (idx) {
                       onBoardingCtrl.updateIndex(idx);
                     },
@@ -79,7 +82,7 @@ class OnBoarding extends StatelessWidget {
                                 context,
                                 // srvUser.user.isSubscribed == true
                                 //     ?
-                                const Tabs()
+                                const AuthScreen()
                                 // : const SubscriptionPage());
                                 // : const SubscriptionPage()
                                 );

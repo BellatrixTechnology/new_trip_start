@@ -1,10 +1,13 @@
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:new_trip_start/constants.dart';
+import 'package:new_trip_start/controllers/map_ctrl.dart';
 import 'package:new_trip_start/controllers/subscription.controller.dart';
 import 'package:new_trip_start/services/index.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'dart:io' show Platform;
+
+import 'package:purchases_ui_flutter/purchases_ui_flutter.dart';
 
 class RevenueCatSubscriptionService {
   List<Package> products = [];
@@ -28,12 +31,14 @@ class RevenueCatSubscriptionService {
           PurchasesConfiguration("appl_hUPXcbRjXVrdFEJxvmtgbfcPQwL");
     }
     configuration.appUserID = srvUser.user.id.toString();
-    await Purchases.configure(configuration);
-    getOffers();
+    await Purchases.configure(configuration).then((b) {});
+    await getOffers();
+    print("products --> $products");
     checkSubStatus();
+    return;
   }
 
-  getOffers() async {
+  Future getOffers() async {
     try {
       Offerings offerings = await Purchases.getOfferings();
       if (offerings.current != null &&
@@ -46,7 +51,7 @@ class RevenueCatSubscriptionService {
       // optional error handling
 
       // ignore: avoid_print
-      print(e);
+      print("e on getOffers -> ${e.message}");
     }
   }
 
@@ -60,18 +65,12 @@ class RevenueCatSubscriptionService {
           // srvUser.user.isSubscribed = true;
           srvUser.user.isSubscribe = true;
           srvUser.user.subscriptionId = data.productIdentifier;
-          // srvFirebase.updateUser({
-          //   "isSubscribed": true,
-          //   "productId": data.productIdentifier,
-          //   "originalPurchaseDate": data.originalPurchaseDate,
-          //   "latestPurchaseDate": data.latestPurchaseDate,
-          // }).then((value) {
+
           subscriptionController.toggleLoader(false, true);
+          Get.put(MapController()).updateUser();
           srvToastAlert
               .toast("You are pro user now. enjoy the access of full app.");
           Get.close(0);
-          // });
-          // Unlock that great "pro" content
         }
       }).catchError((e) {
         subscriptionController.toggleLoader(false, true);
@@ -105,19 +104,29 @@ class RevenueCatSubscriptionService {
           ? "bompengeappen_sub_id_2:yearly-base-id-2"
           : "bompengeappen_sub_id_2"));
 
-  Package getMonthly() => products.firstWhere((element) =>
-      element.storeProduct.identifier ==
-      (isAndroid
-          ? "bompengeappen_sub_id_1:monthly-base-id-1"
-          : "bompengeappen_sub_id_1"));
+  Package getMonthly() {
+    try {
+      return products.firstWhere((element) =>
+          element.storeProduct.identifier ==
+          (isAndroid
+              ? "bompengeappen_sub_id_1:monthly-base-id-1"
+              : "bompengeappen_sub_id_1"));
+    } catch (e) {
+      Get.back();
+      srvToastAlert.toast("purchase_get_error".tr);
+      throw Exception();
+    }
+  }
 
   restorePurchase() async {
     try {
       CustomerInfo customerInfo = await Purchases.restorePurchases();
+      // ignore: unused_local_variable
       Map<String, EntitlementInfo> data = customerInfo.entitlements.all;
       srvUser.user.isSubscribe = true;
       // srvUser.user.subscriptionId = data.;
       subscriptionController.toggleLoader(false, true);
+      Get.put(MapController()).updateUser();
       srvToastAlert.toast("Your purcahase has been restored successfully.");
       Get.close(0);
 
@@ -144,6 +153,7 @@ class RevenueCatSubscriptionService {
       if (data == null) return;
       srvUser.user.isSubscribe = true;
       srvUser.user.subscriptionId = data.productIdentifier;
+      Get.put(MapController()).updateUser();
       if (shouldGoBack == true) {
         subscriptionController.toggleLoader(false, true);
         srvToastAlert
@@ -169,5 +179,9 @@ class RevenueCatSubscriptionService {
     //   Get.close(0);
 
     // });
+  }
+
+  presentPaywall() async {
+    await RevenueCatUI.presentPaywall(displayCloseButton: true);
   }
 }

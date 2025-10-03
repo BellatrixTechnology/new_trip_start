@@ -8,14 +8,15 @@ import 'package:new_trip_start/screens/profile/profile.dart';
 // import 'package:new_trip_start/screens/subscription/page.dart';
 import 'package:new_trip_start/screens/tab_navigator/home/home.dart';
 import 'package:new_trip_start/screens/tab_navigator/my-vehicles/my_vehicles.dart';
+
 import 'package:new_trip_start/services/index.dart';
 
 class BottomTabController extends GetxController {
   List<Widget> page = const <Widget>[HomePage(), MyVehicles(), ProfilePage()];
 
   RxList languages = RxList([
-    {"text": "English", "isSelected": true},
-    {"text": "Norwegian", "isSelected": false},
+    {"text": "English", "isSelected": false},
+    {"text": "Norwegian", "isSelected": true},
   ]);
 
   RxList<Vehicle> myVehicles = RxList([]);
@@ -24,8 +25,8 @@ class BottomTabController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    getVehicles();
     srvAnalytics.inituser();
+    getVehicles();
   }
 
   final selectedTabIndex = 1.obs;
@@ -66,9 +67,9 @@ class BottomTabController extends GetxController {
         }
 
         if (myVehicles.isNotEmpty) {
-          selectedVeh = Rx(myVehicles[getSelectedVehicle()]);
+          selectedVeh = Rx(myVehicles[getSelectedVehicleIndex()]);
           // if (selectedVeh.value.docId != null) {
-          Get.find<MapController>().carData = selectedVeh;
+          Get.put(MapController()).carData = selectedVeh;
           // }
         }
         myVehicles.refresh();
@@ -79,10 +80,11 @@ class BottomTabController extends GetxController {
   }
 
   addVehicleToList(Vehicle v, BuildContext context) {
-    myVehicles.addIf(!myVehicles.contains(v), v);
-    makeSelectedCar(myVehicles.length - 1, context);
+    // myVehicles.addIf(!myVehicles.contains(v), v);
+    myVehicles.insert(0, v);
     myVehicles.refresh();
     update();
+    // makeSelectedCar(myVehicles.length - 1, context);
   }
 
   removeSingleVehicleFromArray(String id) {
@@ -124,12 +126,14 @@ class BottomTabController extends GetxController {
     // srvFirebase.updateVehicle(myVehicles[index].docId!, data);
   }
 
-  int getSelectedVehicle() {
+  int getSelectedVehicleIndex() {
     int index = myVehicles.indexWhere((element) => element.isSelected == true);
     return index;
   }
 
   makeSelectedCar(int index, BuildContext context) {
+    debugPrint("myVehicles[index].isSelected ${myVehicles[index].isSelected}");
+    // if (myVehicles[index].isSelected == true) return;
     srvToastAlert.confirmNativeAlert(
         context,
         "Are you sure you want to make this your selected Car?".tr,

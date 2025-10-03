@@ -29,7 +29,7 @@ class VechicleItem extends StatelessWidget {
         },
         child: Container(
           padding: const EdgeInsets.all(5),
-          margin: const EdgeInsets.only(top: 20),
+          margin: EdgeInsets.only(top: index == 0 ? 10 : 20),
           decoration: BoxDecoration(
             color: kBgLightColor,
             boxShadow: boxShadow(0.3),
@@ -91,7 +91,7 @@ class VechicleItem extends StatelessWidget {
                       borderRadius: BorderRadius.circular(50)),
                   child: AppText(
                     text:
-                        '${(double.tryParse(vehicle.vehFuelCmp!))!.toStringAsFixed(2)} Liter per 100 km',
+                        '${(double.tryParse(vehicle.vehFuelCmp!))?.toStringAsFixed(2)} Liter per 100 km',
                     fontSize: 12,
                     color: const Color(0xFF387C37),
                   ),

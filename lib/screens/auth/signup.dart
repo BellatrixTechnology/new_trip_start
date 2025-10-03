@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:new_trip_start/components/app_button.dart';
 import 'package:new_trip_start/components/app_input.dart';
-import 'package:new_trip_start/components/app_underline_text.dart';
 import 'package:new_trip_start/components/custom_spacer.dart';
 import 'package:new_trip_start/components/custom_surfix_icon.dart';
 import 'package:new_trip_start/constants.dart';
@@ -20,8 +19,8 @@ class Singup extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const CustomSpacer(spaceValue: 20),
-                  UnderlineText(text: 'Sign Up'.tr),
+                  // const CustomSpacer(spaceValue: 20),
+                  // UnderlineText(text: 'Sign Up'.tr),
                   const CustomSpacer(spaceValue: 20),
                   AppInput(
                     controller: controller.nameCtrl,
@@ -98,6 +97,7 @@ class Singup extends StatelessWidget {
                     hintText: 'Confirm Password'.tr,
                     controller: controller.confirmPassword,
                     obscureText: controller.obscureText.value,
+                    textInputType: TextInputType.visiblePassword,
                     icon: const Center(
                       child: CustomSurffixIcon(
                         svgIcon: 'assets/icons/password.svg',
@@ -125,6 +125,7 @@ class Singup extends StatelessWidget {
                     text: 'Sign Up'.tr,
                     width: SizeConfig.screenWidth,
                     showLoader: controller.isLoading.value,
+                    isDisable: controller.isSkipping.isTrue,
                     press: () {
                       controller.onSignUp(context);
                     },

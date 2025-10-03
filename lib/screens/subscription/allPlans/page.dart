@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:new_trip_start/components/app_text.dart';
 import 'package:new_trip_start/components/custom_spacer.dart';
 import 'package:new_trip_start/constants.dart';
+import 'package:new_trip_start/controllers/subscription.controller.dart';
 // import 'package:new_trip_start/screens/subscription/allPlans/components/offers.dart';
 import 'package:new_trip_start/screens/subscription/allPlans/components/subscription.dart';
 import 'package:new_trip_start/services/index.dart';
@@ -13,6 +14,7 @@ class ViewAllPlansPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(SubscriptionController());
     return Scaffold(
       body: AppGradientBg(
           padding: 0,

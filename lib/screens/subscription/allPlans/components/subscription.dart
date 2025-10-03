@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:new_trip_start/components/app_text.dart';
 import 'package:new_trip_start/components/custom_spacer.dart';
 import 'package:new_trip_start/constants.dart';
+import 'package:new_trip_start/controllers/subscription.controller.dart';
+
 import 'package:new_trip_start/services/index.dart';
 import 'package:new_trip_start/size_config.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
@@ -14,7 +16,7 @@ class SubscriptionTypes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(srvRevenueCatSub.products[0].storeProduct.identifier);
+    Get.put(SubscriptionController());
     var monthly = srvRevenueCatSub.getMonthly();
     var yearly = srvRevenueCatSub.getYearly();
 

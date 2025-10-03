@@ -26,8 +26,8 @@ class RatingService {
         count = count! + 1;
       } else {
         print("in else");
-        count = 0;
-        count = count! + 1;
+        // count = 0;
+        count = (count ?? 0) + 1;
         try {
           inAppReview.requestReview();
         } catch (e) {

@@ -3,10 +3,12 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:new_trip_start/constants.dart';
 import 'package:new_trip_start/models/users.model.dart';
-import 'package:new_trip_start/screens/onboarding/onboarding.dart';
+import 'package:new_trip_start/screens/tab_navigator/tabs.dart';
 import 'package:new_trip_start/services/index.dart';
 import 'package:new_trip_start/utils/email_validator.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 
 class AuthController extends GetxController {
   RxString view = 'LOGIN'.obs; //SIGN_UP
@@ -30,6 +32,7 @@ class AuthController extends GetxController {
   var obscureText = true.obs;
 
   var isLoading = false.obs;
+  var isSkipping = false.obs;
 
   onViewChange({String? newView}) {
     view = newView != null
@@ -44,6 +47,7 @@ class AuthController extends GetxController {
   }
 
   onSignUp(BuildContext context) async {
+    if (isSkipping.isTrue || isLoading.isTrue) return;
     if (nameCtrl.text.isEmpty) {
       srvToastAlert.toast('Please enter your Full Name');
 
@@ -60,16 +64,17 @@ class AuthController extends GetxController {
       try {
         updateLoader();
         var resp = await srvApi.post(concaturl: "register", data: {
-          "email": emailCtrl.text,
+          "email": emailCtrl.text.toLowerCase(),
           "password": password.text,
           "name": nameCtrl.text,
         });
         print("resp $resp");
-        updateLoader();
+        // updateLoader();
         if (resp.statusCode == 200) {
           if (resp.data['status'] == true) {
             goToOnBoarding(resp.data);
           } else {
+            updateLoader();
             srvToastAlert
                 .toast(resp.data['message'] ?? "something_went_wrong_text".tr);
           }
@@ -93,6 +98,7 @@ class AuthController extends GetxController {
   }
 
   onSignIn(BuildContext context) async {
+    if (isSkipping.isTrue || isLoading.isTrue) return;
     if (!EmailValidator()
         .isValidEmail(emailCtrl.text.isEmpty ? '' : emailCtrl.text)) {
       srvToastAlert.toast('Please enter valid Email Address');
@@ -102,15 +108,16 @@ class AuthController extends GetxController {
       try {
         updateLoader();
         var resp = await srvApi.post(concaturl: "login", data: {
-          "email": emailCtrl.text,
+          "email": emailCtrl.text.toLowerCase(),
           "password": password.text,
         });
         print("resp -> $resp");
-        updateLoader();
+        // updateLoader();
         if (resp.statusCode == 200) {
           if (resp.data['status'] == true) {
             goToOnBoarding(resp.data);
           } else {
+            updateLoader();
             srvToastAlert
                 .toast(resp.data['message'] ?? "something_went_wrong_text".tr);
           }
@@ -119,22 +126,21 @@ class AuthController extends GetxController {
               .toast(resp.data['message'] ?? "something_went_wrong_text".tr);
         }
       } on DioException catch (e) {
-        print(e);
+        var msg = e.message;
+        if (e.response != null) {
+          msg = e.response!.data['message'];
+        }
+        // print(e.error);
+        // print(e.response);
+        // print(e.me);
         updateLoader();
-        srvToastAlert.toast(e.message ?? "something_went_wrong_text".tr);
+        srvToastAlert.toast(msg ?? "something_went_wrong_text".tr);
       }
-
-      // srvFirebase.signInWithEmailPass(emailCtrl.text, password.text, (resp) {
-      //   if (resp != null) {
-      //     // srvFirebase.saveUserInFirestore(resp.user!);
-      //     srvFirebase.getUserFromFirestore(resp.user);
-      //     srvPageRoute.goToNextAndRemoved(context, const OnBoarding());
-      //   } else {}
-      // });
     }
   }
 
   facebookLogin(BuildContext context) {
+    if (isSkipping.isTrue || isLoading.isTrue) return;
     srvFirebase.signInWithFacebook().then((value) {
       print(value.user!);
       // srvFirebase.getUserFromFirestore(value.user!);
@@ -145,6 +151,7 @@ class AuthController extends GetxController {
   }
 
   googleLogin(BuildContext context) {
+    if (isSkipping.isTrue || isLoading.isTrue) return;
     try {
       srvFirebase.signInWithGoogle().then((value) async {
         if (value == null) {
@@ -161,20 +168,31 @@ class AuthController extends GetxController {
           srvShared.printWrapped("resp $resp");
           if (resp.data['status'] == true) {
             goToOnBoarding(resp.data);
+            updateLoader();
+          } else {
+            updateLoader();
           }
-          updateLoader();
         } on DioException catch (e) {
           srvShared.printWrapped(e.message ?? "something_went_wrong_text".tr);
         }
       });
     } on DioException catch (e) {
       updateLoader();
-      srvToastAlert.toast(e.message ?? "");
+      var msg = e.message;
+      if (e.response != null) {
+        msg = e.response!.data['message'];
+      }
+      // print(e.error);
+      // print(e.response);
+      // print(e.me);
+      updateLoader();
+      srvToastAlert.toast(msg ?? "something_went_wrong_text".tr);
       print(e);
     }
   }
 
   appleLogin(BuildContext context) {
+    if (isSkipping.isTrue || isLoading.isTrue) return;
     srvFirebase.signInWithApple().then((credential) async {
       log(credential.identityToken.toString());
       try {
@@ -187,11 +205,21 @@ class AuthController extends GetxController {
         srvShared.printWrapped("resp $resp");
         if (resp.data['status'] == true) {
           goToOnBoarding(resp.data);
+          updateLoader();
+        } else {
+          updateLoader();
         }
-        updateLoader();
       } on DioException catch (e) {
         updateLoader();
-        srvShared.printWrapped(e.message ?? "something_went_wrong_text".tr);
+        var msg = e.message;
+        if (e.response != null) {
+          msg = e.response!.data['message'];
+        }
+        // print(e.error);
+        // print(e.response);
+        // print(e.me);
+        updateLoader();
+        srvToastAlert.toast(msg ?? "something_went_wrong_text".tr);
       }
       // log(credential.authorizationCode);
       // log(credential.email.toString());
@@ -231,17 +259,23 @@ class AuthController extends GetxController {
     });
   }
 
-  goToOnBoarding(data) {
-    srvToastAlert.toast(data['message']);
+  goToOnBoarding(data) async {
     srvLocalStorage.setUser(data['data']);
     srvUser.initUser(NewUserModel.fromMap(data['data']));
-    srvPageRoute.goNextWithGetxAndRemovedAll(const OnBoarding());
-    srvRevenueCatSub.initPlatformState();
-    // updateLoader();
+    await srvRevenueCatSub.initPlatformState();
+    srvToastAlert.toast(data['message']);
+    Get.deleteAll();
+    srvPageRoute.goNextWithGetxAndRemovedAll(const Tabs());
+    updateLoader();
   }
 
   updateLoader() {
     isLoading.toggle();
+    update();
+  }
+
+  updateSkipLoader(bool val) {
+    isSkipping(val);
     update();
   }
 
@@ -266,10 +300,13 @@ class AuthController extends GetxController {
     updatefPLoading(true);
     var resp = await srvApi
         .post(concaturl: "forgot-password", data: {"email": fPemailCtrl.text});
+    log("resp of forgetPasswordReq $resp");
     updatefPLoading(false);
     if (resp.statusCode == 200) {
       if (resp.data['message'] != null) {
         srvToastAlert.toast(resp.data['message']);
+        if (resp.data['message'].toString().toLowerCase() ==
+            "Invalid Email".toLowerCase()) return;
         changeFPView(count: 2);
       } else {
         srvToastAlert
@@ -282,27 +319,32 @@ class AuthController extends GetxController {
   }
 
   forgetPasswordVerifyCode() async {
-    updatefPLoading(true);
-    var resp = await srvApi.post(
-      concaturl: "verify/forgot-password",
-      data: {
-        "email": fPemailCtrl.text,
-        "code": fPcodeCtrl.text,
-      },
-    );
-    updatefPLoading(false);
-    if (resp.statusCode == 200) {
-      if (resp.data['status'] == true) {
-        secretKey = resp.data['data']['secret'];
-        srvToastAlert.toast(resp.data['message']);
-        changeFPView(count: 3);
+    try {
+      updatefPLoading(true);
+      var resp = await srvApi.post(
+        concaturl: "verify/forgot-password",
+        data: {
+          "email": fPemailCtrl.text,
+          "code": fPcodeCtrl.text,
+        },
+      );
+      updatefPLoading(false);
+      if (resp.statusCode == 200) {
+        if (resp.data['status'] == true) {
+          secretKey = resp.data['data']['secret'];
+          srvToastAlert.toast(resp.data['message']);
+          changeFPView(count: 3);
+        } else {
+          srvToastAlert
+              .toast(resp.data['message'] ?? "something_went_wrong_text".tr);
+        }
       } else {
         srvToastAlert
             .toast(resp.data['message'] ?? "something_went_wrong_text".tr);
       }
-    } else {
-      srvToastAlert
-          .toast(resp.data['message'] ?? "something_went_wrong_text".tr);
+    } on DioException catch (e) {
+      updatefPLoading(false);
+      srvToastAlert.toast(e.message ?? "something_went_wrong_text".tr);
     }
   }
 
@@ -336,5 +378,57 @@ class AuthController extends GetxController {
   updatefPLoading(bool val) {
     isfPLoading.value = val;
     update();
+  }
+
+  onSkip() async {
+    if (isSkipping.isTrue || isLoading.isTrue) return;
+    String deviceId = await getDeviceInfo();
+    try {
+      updateSkipLoader(true);
+
+      var resp = await srvApi.post(concaturl: "login/skip", data: {
+        "uuid": deviceId,
+      });
+      print("resp of skip $resp");
+      // updateLoader();
+      if (resp.statusCode == 200) {
+        if (resp.data['status'] == true) {
+          goToOnBoarding(resp.data);
+        } else {
+          // updateLoader();
+          srvToastAlert
+              .toast(resp.data['message'] ?? "something_went_wrong_text".tr);
+        }
+      } else {
+        srvToastAlert
+            .toast(resp.data['message'] ?? "something_went_wrong_text".tr);
+      }
+    } on DioException catch (e) {
+      print("resp of skip $e");
+      var msg = e.message;
+      if (e.response != null) {
+        msg = e.response!.data['message'];
+      }
+      // print(e.error);
+      // print(e.response);
+      // print(e.me);
+      // updateLoader();
+      srvToastAlert.toast(msg ?? "something_went_wrong_text".tr);
+    } finally {
+      updateSkipLoader(false);
+    }
+  }
+
+  Future<String> getDeviceInfo() async {
+    final deviceInfoPlugin = DeviceInfoPlugin();
+    final deviceInfo = await deviceInfoPlugin.deviceInfo;
+    final allInfo = deviceInfo.data;
+    return isAndroid ? allInfo['id'] : allInfo['identifierForVendor'];
+  }
+
+  resetFPViews() {
+    changeFPView(count: 1);
+    fPemailCtrl.clear();
+    updatefPLoading(false);
   }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_workers/utils/debouncer.dart';
 import 'package:new_trip_start/components/app_input.dart';
@@ -39,6 +38,7 @@ class SearchDestPage extends StatelessWidget {
                   AppInput(
                     hintText: "Search Place Here...".tr,
                     onChanged: (e) async {
+                      debugPrint("onChanged value is $e");
                       debouncer.call(() {
                         placeCtrl.getSearchResult(e);
                         if (e.isEmpty) {
