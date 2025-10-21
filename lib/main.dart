@@ -51,7 +51,7 @@ void main() async {
   Get.lazyPut(() => BottomTabController());
   Get.lazyPut(() => SubscriptionController());
   Get.put(AdController());
-  srvTiktok.init();
+  await srvTiktok.init();
 
   // final config = QonversionConfigBuilder('UXhA__7E9XnhUW7nf6YwjGAUZae260Zc',
   //         QLaunchMode.subscriptionManagement)

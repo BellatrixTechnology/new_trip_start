@@ -463,10 +463,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_uxcam
-      sha256: "1493ea72f1983133b629ac158a2726f26e9c7254c09659315a5f15fb8b96c343"
+      sha256: "0d474371aba9aca6dec255595bd4c32ea91601e557d8f7ebcd3e68a5e9d9e141"
       url: "https://pub.dev"
     source: hosted
-    version: "2.5.8"
+    version: "2.7.1"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
