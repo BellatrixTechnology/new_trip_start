@@ -54,3 +54,6 @@ android/key.properties
 android/app/google-services.json
 ios/Runner/GoogleService-Info.plist
 lib/firebase_options.dart
+
+# Large SDK files (HERE SDK)
+plugins/here_sdk/
