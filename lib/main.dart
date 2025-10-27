@@ -25,6 +25,8 @@ import 'package:new_trip_start/screens/splash/splash.dart';
 import 'package:new_trip_start/services/index.dart';
 import 'package:new_trip_start/utils/translations/translations.dart';
 import 'package:flutter_uxcam/flutter_uxcam.dart';
+import 'package:applovin_max/applovin_max.dart';
+import 'package:new_trip_start/config/applovin_config.dart';
 
 // import 'package:device_preview/device_preview.dart';
 
@@ -52,6 +54,29 @@ void main() async {
   Get.lazyPut(() => SubscriptionController());
   Get.put(AdController());
   await srvTiktok.init();
+
+  // AppLovin MAX initialization (Feature flag controlled)
+  if (AppLovinConfig.enableAppLovin) {
+    // Set privacy consent BEFORE initialization (required for iOS)
+    AppLovinMAX.setHasUserConsent(true);
+    AppLovinMAX.setDoNotSell(false);
+    debugPrint('✅ AppLovin privacy consent set');
+
+    await AppLovinMAX.initialize(AppLovinConfig.sdkKey);
+    debugPrint('✅ AppLovin MAX SDK initialized');
+
+    // Initialize AppLovin service (this will trigger banner loading)
+    Get.put(srvAppLovin);
+    debugPrint('✅ AppLovin Service registered');
+
+    // Enable test mode if configured
+    if (AppLovinConfig.testMode) {
+      AppLovinMAX.showMediationDebugger();
+      debugPrint('⚠️ AppLovin Test Mode ENABLED');
+    }
+  } else {
+    debugPrint('⚠️ AppLovin DISABLED - Using AdMob only');
+  }
 
   // final config = QonversionConfigBuilder('UXhA__7E9XnhUW7nf6YwjGAUZae260Zc',
   //         QLaunchMode.subscriptionManagement)
@@ -138,7 +163,12 @@ class MyApp extends StatelessWidget {
               selectionHandleColor: kPrimaryColor,
             ),
             appBarTheme: const AppBarTheme(
-                iconTheme: IconThemeData(color: kBgLightColor)),
+              iconTheme: IconThemeData(color: kBgLightColor),
+              // Add top padding for AppLovin banner (standard banner height ~50-60px)
+              toolbarHeight: kToolbarHeight, // Keep default height
+              titleSpacing: 0,
+              // Note: padding is applied via Scaffold's body, not here
+            ),
             colorScheme: ColorScheme.fromSeed(seedColor: kPrimaryColor),
             fontFamily: 'Sarabun'),
         builder: (context, child) {
@@ -149,6 +179,7 @@ class MyApp extends StatelessWidget {
             minScaleFactor: 1.0, // Minimum scale factor allowed.
             maxScaleFactor: 1.3, // Maximum scale factor allowed.
           );
+
           return MediaQuery(
             // Copy the original MediaQueryData and replace the textScaler with the calculated scale.
             data: mediaQueryData.copyWith(textScaler: scale),

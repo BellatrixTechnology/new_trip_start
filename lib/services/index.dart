@@ -14,6 +14,7 @@ import 'package:new_trip_start/services/shared.service.dart';
 import 'package:new_trip_start/services/titktok_sdk.dart';
 import 'package:new_trip_start/services/toast_alert.service.dart';
 import 'package:new_trip_start/services/user.service.dart';
+import 'package:new_trip_start/services/applovin_max.service.dart';
 
 PageRoute srvPageRoute = PageRoute();
 FirebaseService srvFirebase = FirebaseService();
@@ -36,3 +37,5 @@ LocalStorage srvLocalStorage = LocalStorage();
 GoogleAdMobService srvAdmob = GoogleAdMobService();
 
 TikTokService srvTiktok = TikTokService();
+
+AppLovinMaxService srvAppLovin = AppLovinMaxService();

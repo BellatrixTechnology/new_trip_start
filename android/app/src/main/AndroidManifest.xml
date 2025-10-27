@@ -9,7 +9,7 @@
    <application
         android:label="Bompenge Appen"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <provider
             android:name="com.here.sdk.engine.InitProvider"
             android:authorities="com.here.sdk.engine.InitProvider"
@@ -48,6 +48,10 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3165620212348966~4400278118"/>
+        <!-- AppLovin SDK Key -->
+        <meta-data
+            android:name="applovin.sdk.key"
+            android:value="HxG0kwNPZLu9fZGFTsyH3adwu6MhD5nxd56xOeBUveZcyo7qWT4TbyUE3uwWhzekaE4EFEVlJGvqJNDwtyrB_o"/>
 <!--        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>-->
 <!--        <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>-->
 
