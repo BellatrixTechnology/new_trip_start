@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:new_trip_start/components/app_text.dart';
 import 'package:new_trip_start/components/custom_spacer.dart';
 import 'package:new_trip_start/components/custom_surfix_icon.dart';
+import 'package:new_trip_start/constants.dart';
 // import 'package:new_trip_start/constants.dart';
 import 'package:new_trip_start/controllers/map_ctrl.dart';
 
@@ -104,8 +105,7 @@ class ProfileBody extends StatelessWidget {
                 showsuffixIcon: true,
                 text: 'privacy_policy'.tr,
                 onPress: () {
-                  srvShared.lauchUrl(
-                      "https://www.privacypolicygenerator.info/live.php?token=5JA0iHT81FqJ8Wtz4nsV3UqTmZrxoiKs");
+                  srvShared.lauchUrl(privacyPolicy);
                   // srvPageRoute.goToNext(context, const SubscriptionPage());
                 },
               ),

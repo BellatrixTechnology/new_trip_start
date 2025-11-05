@@ -192,6 +192,9 @@ const ktollMarker =
 const url =
     "https://nvdbapiles-v3.atlas.vegvesen.no/vegobjekter/45?inkluder=alle";
 
+const privacyPolicy =
+    "https://bellatrixtechnology.github.io/new_trip_start/privacy-policy/";
+
 //lottiee json path
 const travelIsFun = "assets/lottie-jsons/42070-travel-is-fun.json";
 

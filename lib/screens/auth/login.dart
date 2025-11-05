@@ -89,8 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         text: "Terms & conditions",
                         fontWeight: FontWeight.bold,
                         onTap: () {
-                          srvShared.lauchUrl(
-                              "https://www.privacypolicygenerator.info/live.php?token=5JA0iHT81FqJ8Wtz4nsV3UqTmZrxoiKs");
+                          srvShared.lauchUrl(privacyPolicy);
                         },
                         textDecoration: TextDecoration.underline,
                       ),

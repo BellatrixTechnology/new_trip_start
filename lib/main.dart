@@ -39,7 +39,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Load environment variables
-  await EnvConfig.load();
+  // await EnvConfig.load();
 
   MobileAds.instance.initialize();
   HttpOverrides.global = MyHttpOverrides();
@@ -57,13 +57,27 @@ void main() async {
 
   // AppLovin MAX initialization (Feature flag controlled)
   if (AppLovinConfig.enableAppLovin) {
+    // Enable Terms & Privacy Flow (handles ATT automatically for iOS)
+    // AppLovinMAX.setTermsAndPrivacyPolicyFlowEnabled(true);
+    // AppLovinMAX.setPrivacyPolicyUrl(
+    //   'https://www.privacypolicygenerator.info/live.php?token=5JA0iHT81FqJ8Wtz4nsV3UqTmZrxoiKs'
+    // );
+    // debugPrint('✅ AppLovin Terms & Privacy Flow enabled');
+
     // Set privacy consent BEFORE initialization (required for iOS)
     AppLovinMAX.setHasUserConsent(true);
     AppLovinMAX.setDoNotSell(false);
     debugPrint('✅ AppLovin privacy consent set');
 
+    // Initialize SDK - ATT prompt will show automatically on first launch
+    // MaxConfiguration? config = await AppLovinMAX.initialize(AppLovinConfig.sdkKey);
     await AppLovinMAX.initialize(AppLovinConfig.sdkKey);
     debugPrint('✅ AppLovin MAX SDK initialized');
+
+    // Check consent status after initialization
+    // if (config != null) {
+    //   debugPrint('✅ Consent flow geography: ${config.consentFlowUserGeography}');
+    // }
 
     // Initialize AppLovin service (this will trigger banner loading)
     Get.put(srvAppLovin);

@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
 # for ios shorebird version is 19.0.0+202409050 and for android 19.0.0+202409051 
-version: 19.0.7+202510250
+version: 19.0.8+202511040
 
 environment:
   sdk: '>=2.18.4 <3.0.0'
@@ -123,7 +123,6 @@ flutter:
     - assets/lottie-jsons/
     - assets/icons/subsScreenIcons/
     - shorebird.yaml
-    - .env
     # - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
